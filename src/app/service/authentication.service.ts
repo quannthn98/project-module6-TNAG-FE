@@ -3,8 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {UserToken} from '../model/userToken';
+import {environment} from '../../environments/environment';
 
-const API_URL_LOGIN = `http://localhost:8080/login`;
+const API_URL_LOGIN = `${environment.apiUrl}` + '/login';
 
 @Injectable({
   providedIn: 'root'
