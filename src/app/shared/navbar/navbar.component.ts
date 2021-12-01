@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserToken} from '../../model/userToken';
+import {AuthenticationService} from '../../service/authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  currentUser: UserToken = {};
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router) {
+    this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/']);
+  }
 }

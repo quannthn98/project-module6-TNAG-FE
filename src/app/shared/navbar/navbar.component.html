@@ -8,11 +8,24 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/">Trang chủ <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/" style="font-size: 18px">Trang chủ <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Đăng ký <span class="sr-only"></span></a>
-        </li>
+        <ng-container *ngIf="currentUser == null">
+          <li class="nav-item">
+            <a class="nav-link" style="color: black;font-size: 18px" routerLink="/register">Đăng ký <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color: black;font-size: 18px" routerLink="/login">Đăng nhập <span class="sr-only"></span></a>
+          </li>
+        </ng-container>
+       <ng-container *ngIf="currentUser">
+         <li class="nav-item">
+           <a class="nav-link" routerLink="#" style="color: black;font-size: 18px;">{{currentUser.username}}<span class="sr-only"></span></a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" (click)="logout()" style="color: black;font-size: 18px;">Đăng xuất<span class="sr-only"></span></a>
+         </li>
+       </ng-container>
 <!--        <li class="nav-item dropdown dropdown-cart">-->
 <!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"-->
 <!--             aria-haspopup="true" aria-expanded="false">-->
