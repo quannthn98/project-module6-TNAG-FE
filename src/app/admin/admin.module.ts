@@ -2,10 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { MerchantListComponent } from './merchant-list/merchant-list.component';
+import { MerchantDetailComponent } from './merchant-detail/merchant-detail.component';
+import { MerchantPendingComponent } from './merchant-pending/merchant-pending.component';
+import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
+import { StatusUpdateComponent } from './status-update/status-update.component';
+import { ApproveComponent } from './approve/approve.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MerchantListComponent, MerchantDetailComponent, MerchantPendingComponent, MerchantEditComponent, StatusUpdateComponent, ApproveComponent],
   imports: [
     CommonModule,
     AdminRoutingModule

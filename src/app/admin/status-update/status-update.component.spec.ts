@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderHistoryComponent } from './order-history.component';
+import { StatusUpdateComponent } from './status-update.component';
 
-describe('OrderHistoryComponent', () => {
-  let component: OrderHistoryComponent;
-  let fixture: ComponentFixture<OrderHistoryComponent>;
+describe('StatusUpdateComponent', () => {
+  let component: StatusUpdateComponent;
+  let fixture: ComponentFixture<StatusUpdateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderHistoryComponent ]
+      declarations: [ StatusUpdateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrderHistoryComponent);
+    fixture = TestBed.createComponent(StatusUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

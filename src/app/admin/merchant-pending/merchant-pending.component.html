@@ -1,0 +1,18 @@
+<h1>Pending list</h1>
+<table class="table table-striped">
+  <tr>
+    <td>#</td>
+    <td>Name</td>
+    <td>Address</td>
+    <td>Address</td>
+    <td>Address</td>
+    <td>Address</td>
+  </tr>
+  <tr *ngFor="let merchant of merchants; index as i">
+    <td>{{i + 1}}</td>
+    <td><a routerLink="/merchant/details/{{merchant.id}}">{{merchant.merchantProfile.name}}</a></td>
+    <td>{{merchant.address}}</td>
+    <td><a routerLink="/merchant/edit/{{merchant.id}}">Edit</a></td>
+    <td><a routerLink="/merchant/delete/{{merchant.id}}">Delete</a></td>
+  </tr>
+</table>

@@ -31,14 +31,14 @@ export class MerchantsDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMerchant(id) {
+  getMerchant(id: number) {
     this.userService.getMerchantById(id).subscribe(merchant => {
       this.detailMerchantForm = new FormGroup({
         id: new FormControl(merchant.id),
         name: new FormControl(merchant.name),
         address: new FormControl(merchant.address),
         hotline: new FormControl(merchant.hotline),
-        openHours: new FormControl(merchant.openHours),
+        openHours: new FormControl(merchant.openHours)
       });
     });
   }
