@@ -21,6 +21,6 @@ export class HomeComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
-    window.location.href = '/';
+    this.router.navigate(['/login']);
   }
 }
