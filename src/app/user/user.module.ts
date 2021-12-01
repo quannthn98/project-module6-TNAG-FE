@@ -8,13 +8,15 @@ import { MerchantsDetailComponent } from './merchants-detail/merchants-detail.co
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, OrderHistoryComponent, CheckoutComponent, CartComponent],
-  imports: [
-    CommonModule,
-    UserRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        SharedModule
+    ]
 })
 export class UserModule { }
