@@ -9,6 +9,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import {SharedModule} from '../shared/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {SharedModule} from '../shared/shared.module';
     imports: [
         CommonModule,
         UserRoutingModule,
-        SharedModule
+        SharedModule,
+        ReactiveFormsModule
     ]
 })
 export class UserModule { }
