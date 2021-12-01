@@ -9,10 +9,11 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import {SharedModule} from '../shared/shared.module';
+import { UpdateStatusComponent } from './update-status/update-status.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, OrderHistoryComponent, CheckoutComponent, CartComponent],
+  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, OrderHistoryComponent, CheckoutComponent, CartComponent, UpdateStatusComponent],
     imports: [
         CommonModule,
         UserRoutingModule,
