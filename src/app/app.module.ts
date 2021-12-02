@@ -6,8 +6,9 @@ import {AuthModule} from './auth/auth.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ErrorInterceptor} from './auth/helper/error-interceptor';
 import {JwtInterceptor} from './auth/helper/jwt-Interceptor';
-import {AdminModule} from './admin/admin.module';
 import {MerchantModule} from './merchant/merchant.module';
+import {LayoutModule} from './layout/layout.module';
+import {AdminModule} from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,9 @@ import {MerchantModule} from './merchant/merchant.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule,
+    MerchantModule,
+    LayoutModule,
     AdminModule,
     MerchantModule,
     AuthModule
