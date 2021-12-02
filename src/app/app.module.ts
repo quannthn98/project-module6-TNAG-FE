@@ -8,6 +8,7 @@ import {ErrorInterceptor} from './auth/helper/error-interceptor';
 import {JwtInterceptor} from './auth/helper/jwt-Interceptor';
 import {MerchantModule} from './merchant/merchant.module';
 import {LayoutModule} from './layout/layout.module';
+import {AdminModule} from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,10 @@ import {LayoutModule} from './layout/layout.module';
     HttpClientModule,
     AuthModule,
     MerchantModule,
-    LayoutModule
+    LayoutModule,
+    AdminModule,
+    MerchantModule,
+    AuthModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

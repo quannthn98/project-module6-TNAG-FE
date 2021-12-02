@@ -1,44 +1,41 @@
 import {Component, OnInit} from '@angular/core';
-import {Merchant} from '../../model/merchant';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-merchants-detail',
-  templateUrl: './merchants-detail.component.html',
-  styleUrls: ['./merchants-detail.component.css']
+  selector: 'app-status-update',
+  templateUrl: './status-update.component.html',
+  styleUrls: ['./status-update.component.css']
 })
-export class MerchantsDetailComponent implements OnInit {
-  merchant: Merchant = {};
+export class StatusUpdateComponent implements OnInit {
+  currentStatus: string;
   id: number;
-  detailMerchantForm: FormGroup = new FormGroup({
+  updateStatusForm: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl(),
-    address: new FormControl(),
-    hotline: new FormControl(),
-    openHours: new FormControl(),
+    status: new FormControl()
   });
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
-      this.getMerchant(this.id);
+      this.getMerchantStatus(this.id);
     });
   }
 
   ngOnInit() {
   }
 
-  getMerchant(id: number) {
+  getMerchantStatus(id: number) {
     this.userService.getMerchantById(id).subscribe(merchant => {
-      this.detailMerchantForm = new FormGroup({
+      this.updateStatusForm = new FormGroup({
         id: new FormControl(merchant.id),
         name: new FormControl(merchant.name),
         address: new FormControl(merchant.address),
         hotline: new FormControl(merchant.hotline),
-        openHours: new FormControl(merchant.openHours)
+        openHours: new FormControl(merchant.openHours),
       });
     });
   }
