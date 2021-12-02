@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
-// import {MerchantModule} from './merchant/merchant.module';
+import {LayoutMerchantComponent} from './layout/layout-merchant/layout-merchant.component';
 
 const routes: Routes = [
   {
@@ -19,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'merchant',
+    component: LayoutMerchantComponent,
     loadChildren: () => import('./merchant/merchant.module').then(module => module.MerchantModule)
   }
 ];

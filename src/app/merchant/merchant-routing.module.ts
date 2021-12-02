@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {MerchantHomeComponent} from './merchant-home/merchant-home.component';
+import {DishListComponent} from './dish-list/dish-list.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: MerchantHomeComponent
+    component: DishListComponent
   }
 ];
 
