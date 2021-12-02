@@ -2,17 +2,64 @@
 <table class="table table-striped">
   <tr>
     <td>#</td>
-    <td>Name</td>
-    <td>Address</td>
-    <td>Address</td>
-    <td>Address</td>
-    <td>Address</td>
+    <td>Tên chủ cửa hàng</td>
+    <td>Tên cửa hàng</td>
+    <td>Trạng thái</td>
+    <td>Xét duyệt</td>
+    <td></td>
   </tr>
   <tr *ngFor="let merchant of merchants; index as i">
     <td>{{i + 1}}</td>
-    <td><a routerLink="/merchant/details/{{merchant.id}}">{{merchant.merchantProfile.name}}</a></td>
-    <td>{{merchant.address}}</td>
-    <td><a routerLink="/merchant/edit/{{merchant.id}}">Edit</a></td>
-    <td><a routerLink="/merchant/delete/{{merchant.id}}">Delete</a></td>
+    <td>{{merchant.username}}</td>
+    <td>{{merchant.merchantProfile.name}}</td>
+    <td>{{merchant.userStatus.name}}</td>
+    <td>
+      <button type="button" (mousedown)="getId(merchant.id)" class="btn btn-info" data-toggle="modal"
+              data-target="#exampleModal">
+        Xác nhận
+      </button>
+    </td>
   </tr>
 </table>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết của hàng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="ownerName">Owner name</label>
+            <p class="form-control" id="ownerName">{{approvingMerchant.username}}</p>
+          </div>
+          <div class="form-group">
+            <label for="ownerEmail">Email</label>
+            <p class="form-control" id="ownerEmail">{{approvingMerchant.email}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantName">Merchant name</label>
+            <p class="form-control" id="merchantName">{{approvingMerchant.merchantProfile.name}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantAddress">Merchant address</label>
+            <p class="form-control" id="merchantAddress">{{approvingMerchant.merchantProfile.address}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantHotline">Merchant hotline</label>
+            <p class="form-control" id="merchantHotline">{{approvingMerchant.merchantProfile.hotline}}</p>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="approvalMerchant()">Accept</button>
+        <button class="btn secondary" (click)="blockMerchant()">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>

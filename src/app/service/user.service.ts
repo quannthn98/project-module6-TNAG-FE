@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
 import {Merchant} from '../model/merchant';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Dish} from '../model/dish';
 import {User} from '../model/user';
 
-const API_URL = `http://localhost:8080`;
+const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,9 @@ export class UserService {
   }
   approvalMerchant(id: number): Observable<Merchant> {
     return this.http.get<Merchant>(`${API_URL}/merchants/updateStatus/${id}/approved`);
+  }
+  blockMerchant(id: number): Observable<Merchant> {
+    return this.http.get<Merchant>(`${API_URL}/merchants/updateStatus/${id}/block`);
   }
 
 
