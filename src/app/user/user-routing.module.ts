@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {MerchantsComponent} from './merchant-list/merchants.component';
-import {MerchantsDetailComponent} from "./merchants-detail/merchants-detail.component";
+import {MerchantsDetailComponent} from './merchants-detail/merchants-detail.component';
+import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
 
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'merchant/register',
-    component: MerchantsComponent
+    component: MerchantRegisterComponent
   },
   {
     path: 'merchant/:id',
