@@ -1,5 +1,3 @@
-import {User} from "./user";
-
 export interface Dish {
   id?: number;
   name?: string;
