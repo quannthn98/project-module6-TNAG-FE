@@ -7,10 +7,6 @@ import {MerchantRegisterComponent} from './merchant-register/merchant-register.c
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent
-  },
-  {
     path: 'merchant/register',
     component: MerchantRegisterComponent
   },
