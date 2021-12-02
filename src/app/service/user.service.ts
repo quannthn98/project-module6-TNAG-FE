@@ -26,10 +26,13 @@ export class UserService {
     return this.http.get<Merchant>(`${API_URL}/updateStatus/${id}/${statusName}`);
   }
   getMerchantById(id: number): Observable<Merchant> {
-    return this.http.get<Merchant>(`${API_URL}/updateStatus/${id}`);
+    return this.http.get<Merchant>(`${API_URL}/merchants/${id}`);
   }
   approvalMerchant(id: number): Observable<Merchant> {
     return this.http.get<Merchant>(`${API_URL}/merchants/updateStatus/${id}/approved`);
+  }
+  blockMerchant(id: number): Observable<Merchant> {
+    return this.http.get<Merchant>(`${API_URL}/merchants/updateStatus/${id}/block`);
   }
 
 }
