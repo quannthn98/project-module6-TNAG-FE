@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'merchant',
     component: MerchantsComponent
   },
+  {
+    path: 'merchant/register',
+    component: MerchantsComponent
+  }
 ];
 
 @NgModule({
