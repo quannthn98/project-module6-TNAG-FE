@@ -7,10 +7,6 @@ import {LayoutAdminComponent} from './layout/layout-admin/layout-admin.component
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./user/user.module').then(module => module.UserModule)
-  },
-  {
     path: 'login',
     component: LoginComponent
   },
@@ -27,6 +23,10 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutAdminComponent,
     loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./user/user.module').then(module => module.UserModule)
   }
 ];
 
