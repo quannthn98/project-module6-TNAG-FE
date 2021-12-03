@@ -6,6 +6,7 @@ import {User} from '../../model/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {MerchantProfile} from '../../model/merchant-profile';
+import Swal from 'sweetalert2';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -59,6 +60,7 @@ export class MerchantInfoEditComponent implements OnInit {
     this.merchantInfo.categories = array;
     this.merchantService.updateMerchantProfile(this.user.merchantProfile.id, this.merchantInfo).subscribe(() => {
       this.router.navigate([`/merchant/${this.id}`]);
+      this.alertSuccess();
     });
   }
 
@@ -69,5 +71,16 @@ export class MerchantInfoEditComponent implements OnInit {
       this.categoryList.push(id);
     }
     this.merchantInfo.categories = this.categoryList;
+  }
+
+  alertSuccess() {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: 'Cập nhật thành công',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }

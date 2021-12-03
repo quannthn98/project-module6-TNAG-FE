@@ -1,0 +1,110 @@
+<div class="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0">Quản lý cửa hàng</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">Quản lý cửa hàng</a></li>
+        <li class="breadcrumb-item active">Cập nhật thông tin cửa hàng</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-body table-responsive p-0">
+          <div class="card-body">
+            <div class="card">
+              <form #formCreateDish="ngForm"
+                    (ngSubmit)="formCreateDish.valid && submitCreateDish(formCreateDish)">
+                <div class="card-header">
+                  <h5 class="card-title" id="staticBackdropLabel">Chi tiết cửa hàng</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label for="nameDish" class="form-label">Tên món ăn:</label>
+                        <input type="text" #name="ngModel" id="nameDish" [ngModel]="dish?.name"
+                               name="name"
+                               [ngClass]="[(name.valid && (name.touched || name.dirty)) ? 'form-control is-valid' :((name.dirty || name.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               required>
+                        <ng-container
+                          *ngIf="name.invalid && (name.dirty || name.touched || formCreateDish.submitted)">
+                          <p *ngIf="name.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="mb-3">
+                        <label for="price" class="form-label">Giá:</label>
+                        <input type="text" #price="ngModel" class="form-control" id="price"
+                               [ngModel]="dish?.price"
+                               [ngClass]="[(price.valid && (price.touched || price.dirty)) ? 'form-control is-valid' :((price.dirty || price.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               name="price" required>
+                        <ng-container
+                          *ngIf="price.invalid && (price.dirty || price.touched || formCreateDish.submitted)">
+                          <p *ngIf="price.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Mô tả:</label>
+                        <input #description="ngModel"
+                               type="text" id="description"
+                               [ngModel]="dish?.description"
+                               [ngClass]="[(description.valid && (description.touched || description.dirty)) ? 'form-control is-valid' :((description.dirty || description.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               name="description"
+                               required>
+                        <ng-container
+                          *ngIf="description.invalid && (description.dirty || description.touched || formCreateDish.submitted)">
+                          <p *ngIf="description.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="mb-3">
+                        <label for="image" class="form-label">Ảnh:</label>
+                        <input #image="ngModel"
+                               type="file" id="image"
+                               [ngModel]="dish?.image"
+                               [ngClass]="[(image.valid && (image.touched || image.dirty)) ? 'form-control is-valid' :((image.dirty || image.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               name="image"
+                               required
+                               (change)="handleFileInput($event)">
+                        <ng-container
+                          *ngIf="image.invalid && (image.dirty || image.touched || formCreateDish.submitted)">
+                          <p *ngIf="image.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-secondary mr-2"
+                          routerLink="/merchant">
+                    Quay Lại
+                  </button>
+                  <button type="submit" class="btn btn-success">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+
+
+

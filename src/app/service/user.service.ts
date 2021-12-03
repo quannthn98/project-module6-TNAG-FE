@@ -46,9 +46,9 @@ export class UserService {
 
   getAllDishByMerchant(id: number, name?: string): Observable<Dish[]> {
     if (name == null || name === '') {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}`);
+      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant`);
     } else {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}/?q=${name}`);
+      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant?q=${name}`);
     }
 
   }
