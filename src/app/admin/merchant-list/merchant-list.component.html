@@ -1,8 +1,6 @@
 <div class="topnav">
   <a>Danh sách cửa hàng</a>
-  <form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
-    <input type="text" placeholder="Search..">
-  </form>
+    <input #searchValue type="text" placeholder="Search.." (input)="search(searchValue.value)">
 </div>
 <table class="table table-striped">
   <tr>

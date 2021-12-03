@@ -17,6 +17,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {
   }
+
   getAllMerchant(): Observable<User[]> {
     return this.http.get<User[]>(API_URL + '/merchants');
   }
@@ -28,22 +29,30 @@ export class UserService {
   updateStatusMerchant(id: number, statusName: string): Observable<MerchantProfile> {
     return this.http.get<MerchantProfile>(`${API_URL}/merchants/updateStatus/${id}/${statusName}`);
   }
+
   approvalMerchant(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/merchants/updateStatus/${id}/approved`);
   }
+
   blockMerchant(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/merchants/updateStatus/${id}/block`);
   }
 
 
   getAllDishByMerchant(id: number): Observable<Dish[]> {
-    return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}` );
+    return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}`);
   }
+
   getMerchantById(id: number): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/merchants/${id}`);
   }
+
   getAllStatus(): Observable<any> {
     return this.http.get<any>(API_URL + '/status');
+  }
+
+  findAllMerchantByName(searchValue: string): Observable<User> {
+    return this.http.get(API_URL + '/merchants/search/' + searchValue);
   }
 
 }

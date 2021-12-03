@@ -54,7 +54,7 @@ export class MerchantListComponent implements OnInit {
 
 
   updateStatus(name: string, id: number) {
-    this.userService.updateStatusMerchant(id, name).subscribe( () => {
+    this.userService.updateStatusMerchant(id, name).subscribe(() => {
       this.getAllMerchant();
       this.sweetalert2();
     });
@@ -70,7 +70,16 @@ export class MerchantListComponent implements OnInit {
     });
   }
 
-  search(searchForm) {
-
+  search(searchValue: string) {
+    if (searchValue === '') {
+      this.getAllMerchant();
+    } else {
+      this.userService.findAllMerchantByName(searchValue).subscribe((data: any) => {
+        this.merchants = data.content;
+        console.log(this.statusList);
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 }
