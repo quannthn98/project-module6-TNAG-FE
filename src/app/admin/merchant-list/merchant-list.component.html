@@ -1,1 +1,39 @@
-<h1>merchant-list works!</h1>
+<table class="table table-striped table-valign-middle" style="color: #00a379">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Tên User</th>
+    <th>Email</th>
+    <th>Tên Quán Ăn</th>
+    <th>Địa Chỉ Quán</th>
+    <th>Tên Chủ Quán</th>
+    <th>SDT Chủ Quán</th>
+    <th>Ảnh</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let m of merchants; index as i">
+  <tr>
+    <td>{{i+1}}</td>
+    <td>{{m.username}}</td>
+    <td>{{m.email}}</td>
+    <td>{{m.merchantProfile.name}}</td>
+    <td>{{m.merchantProfile.address}}</td>
+    <td>{{m.userProfile.fullName}}</td>
+    <td>{{m.userProfile.phone}}</td>
+    <td><img src="{{m.userProfile.image}}"></td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+<!--export interface User {-->
+<!--id?: number;-->
+<!--username?: string;-->
+<!--password?: string;-->
+<!--email?: string;-->
+<!--roles?: any;-->
+<!--userProfile?: any;-->
+<!--merchantProfile?: any;-->
+<!--userStatus?: any;-->
+<!--}-->
