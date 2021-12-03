@@ -7,7 +7,7 @@ import { MerchantDetailComponent } from './merchant-detail/merchant-detail.compo
 import { MerchantPendingComponent } from './merchant-pending/merchant-pending.component';
 import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
 import { HomeComponent } from './home/home.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [MerchantListComponent, MerchantDetailComponent, MerchantPendingComponent, MerchantEditComponent, HomeComponent],
@@ -15,8 +15,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     AdminRoutingModule,
     CommonModule,
     AdminRoutingModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class AdminModule { }

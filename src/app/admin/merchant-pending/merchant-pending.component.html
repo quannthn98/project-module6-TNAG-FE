@@ -1,4 +1,4 @@
-<h1>Pending list</h1>
+<h1>Cửa hàng chờ xét duyệt</h1>
 <table class="table table-striped">
   <tr>
     <td>#</td>
@@ -14,7 +14,7 @@
     <td>{{merchant.merchantProfile.name}}</td>
     <td>{{merchant.userStatus.name}}</td>
     <td>
-      <button type="button" (mousedown)="getId(merchant.id)" class="btn btn-info" data-toggle="modal"
+      <button type="button" (mousedown)="getId(merchant.id)" class="btn btn-success" data-toggle="modal"
               data-target="#exampleModal">
         Xác nhận
       </button>
@@ -57,8 +57,8 @@
         <!-- /.card-body -->
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" (click)="approvalMerchant()">Accept</button>
-        <button class="btn secondary" (click)="blockMerchant()">Reject</button>
+        <button class="btn btn-success" (click)="approvalMerchant()" data-dismiss="modal">Accept</button>
+        <button class="btn btn-primary" (click)="blockMerchant()" data-dismiss="modal">Reject</button>
       </div>
     </div>
   </div>

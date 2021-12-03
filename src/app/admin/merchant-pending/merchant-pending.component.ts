@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Merchant} from '../../model/merchant';
 import {UserService} from '../../service/user.service';
-import {Router} from '@angular/router';
+import {MerchantProfile} from '../../model/merchant-profile';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-merchant-pending',
@@ -11,11 +11,10 @@ import {Router} from '@angular/router';
 export class MerchantPendingComponent implements OnInit {
   id: number;
   idUpdate: number;
-  merchants: Merchant[] = [];
+  merchants: MerchantProfile[] = [];
   approvingMerchant: any;
 
-  constructor(private userService: UserService,
-              private router: Router) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -25,7 +24,6 @@ export class MerchantPendingComponent implements OnInit {
   getMerchantPending() {
     this.userService.getPendingMerchant().subscribe((data: any) => {
       this.merchants = data.content;
-      console.log(data.content);
     }, error => {
       console.log(error);
     });
@@ -38,20 +36,31 @@ export class MerchantPendingComponent implements OnInit {
 
   getMerchantById(id: number) {
     this.userService.getMerchantById(id).subscribe((user: any) => {
-      console.log(user);
       this.approvingMerchant = user;
     });
   }
 
   approvalMerchant() {
-    this.userService.approvalMerchant(this.id).subscribe(data => {
-      this.router.navigate(['/admin/pending']);
+    this.userService.approvalMerchant(this.id).subscribe(() => {
+      // this.router.navigate(['/admin/pending']);
+      this.getMerchantPending();
+      this.sweetalert2();
     });
   }
 
   blockMerchant() {
-    this.userService.blockMerchant(this.id).subscribe(data => {
-      this.router.navigate(['/admin/pending']);
+    this.userService.blockMerchant(this.id).subscribe(() => {
+      this.getMerchantPending();
+      this.sweetalert2();
+    });
+  }
+  sweetalert2() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Thay đổi đã được lưu',
+      showConfirmButton: false,
+      timer: 1000
     });
   }
 }
