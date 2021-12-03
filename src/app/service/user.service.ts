@@ -51,6 +51,10 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/merchants/${id}`);
   }
 
+  registerMerchant(id: number, merchantProfile: MerchantProfile): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/merchants/${id}`, merchantProfile);
+  }
+
   getAllStatus(): Observable<any> {
     return this.http.get<any>(API_URL + '/status');
   }
