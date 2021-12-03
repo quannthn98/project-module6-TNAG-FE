@@ -52,8 +52,8 @@
 <!--                <td>{{d.merchant.username}}</td>-->
                 <td >{{d.status == true ? "Còn hàng": "Hết hàng"}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="editDishById(d.id)">Sửa</button>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="deleteDishById(d.id)">Xóa</button>
+                  <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="editDishById(d.id)">Sửa</button>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="deleteDishById(d.id)">Xóa</button>
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)">Chi Tiết</button>
                 </td>
               </tr>
