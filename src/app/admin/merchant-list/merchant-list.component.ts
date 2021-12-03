@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MerchantProfile} from '../../model/merchant-profile';
 import {UserService} from '../../service/user.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-merchant-list',
@@ -76,7 +76,6 @@ export class MerchantListComponent implements OnInit {
     } else {
       this.userService.findAllMerchantByName(searchValue).subscribe((data: any) => {
         this.merchants = data.content;
-        console.log(this.statusList);
       }, error => {
         console.log(error);
       });

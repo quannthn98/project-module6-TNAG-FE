@@ -9,23 +9,23 @@ import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'merchant',
     component: MerchantListComponent
   },
   {
-    path: 'edit/:id',
+    path: 'merchant/edit/:id',
     component: MerchantEditComponent
   },
   {
-    path: 'detail/:id',
+    path: 'merchant/detail/:id',
     component: MerchantDetailComponent
   },
   {
-    path: 'pending',
+    path: 'merchant/pending',
     component: MerchantPendingComponent
   },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   }
 ];

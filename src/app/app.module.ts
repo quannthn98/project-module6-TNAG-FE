@@ -9,6 +9,7 @@ import {JwtInterceptor} from './auth/helper/jwt-Interceptor';
 import {MerchantModule} from './merchant/merchant.module';
 import {LayoutModule} from './layout/layout.module';
 import {AdminModule} from './admin/admin.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AdminModule} from './admin/admin.module';
     LayoutModule,
     AdminModule,
     MerchantModule,
-    AuthModule
+    AuthModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

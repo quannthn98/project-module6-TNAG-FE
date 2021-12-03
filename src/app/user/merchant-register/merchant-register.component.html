@@ -1,1 +1,64 @@
-<p>merchant-register works!</p>
+<app-navbar></app-navbar>
+<div class="bg-white">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
+                <h3 class="login-heading mb-4">Đăng ký thành viên nhận ngay ưu đãi!</h3>
+                <form>
+                  <div class="form-label-group">
+                    <input type="text" id="merchant-name" class="form-control"
+                           placeholder="Tên cửa hàng">
+                    <label for="merchant-name">Tên Cửa hàng</label>
+                  </div>
+                  <div class="form-label-group">
+                    <input type="text" id="address" class="form-control"
+                           placeholder="Địa chỉ">
+                    <label for="address">Địa chỉ</label>
+                  </div>
+                  <div class="form-label-group">
+                    <input type="number" id="hotline" class="form-control"
+                           placeholder="Hotline">
+                    <label for="hotline">Hotline</label>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-label-group">
+                        <input type="number" id="start-hour" min="0" class="form-control"
+                               placeholder="Giờ mở cửa" max="24">
+                        <label for="start-hour">Giờ mở cửa</label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-label-group">
+                        <input type="number" id="end-hour" max="24" min="0" class="form-control"
+                               placeholder="Giờ đóng cửa">
+                        <label for="end-hour">Giờ đóng cửa</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-label-group">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <input type="email" id="inputEmail" class="form-control"
+                           placeholder="Email address">
+                    <label for="inputEmail">Email address / Mobile</label>
+                  </div>
+                  <a href="index.html"
+                     class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Đăng nhập</a>
+                  <div class="text-center pt-3">
+                    Bạn đã có tài khoản? <a class="font-weight-bold" href="login.html">Đăng nhập ngay</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

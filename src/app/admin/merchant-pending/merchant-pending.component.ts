@@ -63,4 +63,16 @@ export class MerchantPendingComponent implements OnInit {
       timer: 1000
     });
   }
+
+  search(searchValue: string) {
+    if (searchValue === '') {
+      this.getMerchantPending();
+    } else {
+      this.userService.findAllMerchantByName(searchValue).subscribe((data: any) => {
+        this.merchants = data.content;
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
 }
