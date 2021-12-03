@@ -60,4 +60,7 @@ export class UserService {
   getOneMerchant(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/merchants/${id}`);
   }
+  getDishById(id: number): Observable<Dish>{
+    return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
+  }
 }
