@@ -10,14 +10,16 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import {SharedModule} from '../shared/shared.module';
 import { MerchantRegisterComponent } from './merchant-register/merchant-register.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, OrderHistoryComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    SharedModule,
+    ReactiveFormsModule
+  ]
 })
 export class UserModule { }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Dish} from "../../model/dish";
-import {UserService} from "../../service/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Dish} from '../../model/dish';
+import {UserService} from '../../service/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-dish-list',
@@ -16,11 +16,7 @@ export class DishListComponent implements OnInit {
   id: number;
 
   constructor(private userService: UserService, private router: Router) {
-    //
     this.id = JSON.parse(localStorage.user).id;
-    console.log(this.id);
-    // this.id =  localStorage.user.id;
-    // this.id = +paraMap.get('id');
     this.getMerchantById();
     this.getAllDishByMerchant();
   }
