@@ -24,7 +24,7 @@ export class MerchantInfoDetailComponent implements OnInit {
   }
 
   getMerchant() {
-    this.userService.getOneMerchant(this.id).subscribe(data => {
+    this.userService.getMerchantById(this.id).subscribe(data => {
       this.user = data;
     });
   }

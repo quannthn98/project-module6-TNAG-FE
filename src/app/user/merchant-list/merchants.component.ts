@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Merchant} from '../../model/merchant';
 import {UserService} from '../../service/user.service';
+import {MerchantProfile} from '../../model/merchant-profile';
 
 @Component({
   selector: 'app-merchants',
@@ -8,7 +8,7 @@ import {UserService} from '../../service/user.service';
   styleUrls: ['./merchants.component.css']
 })
 export class MerchantsComponent implements OnInit {
-  merchants: Merchant[] = [];
+  merchants: MerchantProfile[] = [];
 
   constructor(private userService: UserService) {
   }
