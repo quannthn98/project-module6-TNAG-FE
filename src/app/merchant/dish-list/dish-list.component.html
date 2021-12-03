@@ -25,11 +25,10 @@
            </div>
           </div>
           <div class="card-body table-responsive p-0">
-            <table class="table table-hover table-bordered" style="border-color: black">
+            <table class="table table-hover table-bordered">
               <thead>
               <tr>
                 <th scope="col">STT</th>
-                <th scope="col">ID</th>
                 <th scope="col">Tên Món Ăn</th>
                 <th scope="col">Mô Tả</th>
                 <th scope="col">Trạng Thái</th>
@@ -39,7 +38,6 @@
               <tbody>
               <tr *ngFor="let d of dishes; index as i">
                 <th scope="row">{{i}}</th>
-                <td>{{d.id}}</td>
                 <td>{{d.name}}</td>
                 <td>{{d.description}}</td>
                 <td >{{d.status == true ? "Còn hàng": "Hết hàng"}}</td>

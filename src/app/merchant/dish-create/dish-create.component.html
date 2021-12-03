@@ -31,11 +31,15 @@
                         <input type="text" #name="ngModel" id="nameDish" [ngModel]="dish?.name"
                                name="name"
                                [ngClass]="[(name.valid && (name.touched || name.dirty)) ? 'form-control is-valid' :((name.dirty || name.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
-                               required>
+                               required
+                               minlength="4">
                         <ng-container
                           *ngIf="name.invalid && (name.dirty || name.touched || formCreateDish.submitted)">
                           <p *ngIf="name.errors?.required" class="invalid-feedback">
                             Trường này không được để trống
+                          </p>
+                          <p *ngIf="name.errors?.minlength" class="invalid-feedback">
+                            Trường này phải ít nhất 4 ký tự
                           </p>
                         </ng-container>
                       </div>

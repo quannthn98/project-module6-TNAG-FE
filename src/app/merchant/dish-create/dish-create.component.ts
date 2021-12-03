@@ -5,7 +5,8 @@ import {CategoryService} from '../../service/category.service';
 import {DishService} from '../../service/dish.service';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
-import {Merchant} from '../../model/merchant';
+import {MerchantProfile} from '../../model/merchant-profile';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dish-create',
@@ -17,7 +18,7 @@ export class DishCreateComponent implements OnInit {
   categories: Category[] = [];
   image;
   id;
-  merchant: Merchant = {};
+  merchant: MerchantProfile = {};
 
   constructor(private categoryService: CategoryService,
               private dishService: DishService,
@@ -43,10 +44,22 @@ export class DishCreateComponent implements OnInit {
     formData.append('image', this.image);
     this.dishService.create(formData).subscribe(() => {
       this.router.navigate(['/merchant']);
+      this.alertSuccess();
     });
   }
 
   handleFileInput(event) {
     this.image = (event.target).files[0];
+  }
+
+  alertSuccess() {
+    Swal.fire({
+      toast: true,
+      position: 'top-end',
+      icon: 'success',
+      title: 'Thêm mới thành công',
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }
