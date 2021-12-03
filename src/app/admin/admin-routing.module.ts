@@ -4,29 +4,29 @@ import {MerchantListComponent} from './merchant-list/merchant-list.component';
 import {MerchantEditComponent} from './merchant-edit/merchant-edit.component';
 import {MerchantDetailComponent} from './merchant-detail/merchant-detail.component';
 import {MerchantPendingComponent} from './merchant-pending/merchant-pending.component';
-import {ApproveComponent} from './approve/approve.component';
+import {HomeComponent} from './home/home.component';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'merchant',
     component: MerchantListComponent
   },
   {
-    path: 'edit/:id',
+    path: 'merchant/edit/:id',
     component: MerchantEditComponent
   },
   {
-    path: 'detail/:id',
+    path: 'merchant/detail/:id',
     component: MerchantDetailComponent
   },
   {
-    path: 'pending',
+    path: 'merchant/pending',
     component: MerchantPendingComponent
   },
   {
-    path: 'approve/:id',
-    component: ApproveComponent
+    path: '',
+    component: HomeComponent
   }
 ];
 

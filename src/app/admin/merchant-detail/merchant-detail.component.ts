@@ -32,7 +32,7 @@ export class MerchantDetailComponent implements OnInit {
   }
 
   getMerchant(id) {
-    this.userService.getMerchantById(id).subscribe(merchant => {
+    this.userService.getMerchantById(id).subscribe((merchant: any) => {
       this.detailMerchantForm = new FormGroup({
         id: new FormControl(merchant.id),
         name: new FormControl(merchant.name),

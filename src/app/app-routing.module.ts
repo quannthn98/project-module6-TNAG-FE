@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./user/user.module').then(module => module.UserModule)
+<<<<<<< HEAD
   },
+=======
+  }
+>>>>>>> 044337d9c025201775446313ed9f2df1003117c8
 ];
 
 @NgModule({
