@@ -4,6 +4,7 @@ import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {LayoutMerchantComponent} from './layout/layout-merchant/layout-merchant.component';
 import {LayoutAdminComponent} from './layout/layout-admin/layout-admin.component';
+import {AuthGuard} from './auth/helper/auth-guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   {
     path: 'merchant',
     component: LayoutMerchantComponent,
+    canActivate: [AuthGuard],
     loadChildren: () => import('./merchant/merchant.module').then(module => module.MerchantModule)
   },
   {

@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {MerchantProfile} from '../../model/merchant-profile';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 @Component({
   selector: 'app-merchant-info-edit',
   templateUrl: './merchant-info-edit.component.html',
@@ -17,6 +19,9 @@ export class MerchantInfoEditComponent implements OnInit {
   user: User = {};
   id;
   merchantInfo: MerchantProfile = {};
+  categoryList: any[] = [];
+  categoryArray: any[] = [];
+  searchText;
 
   constructor(private userService: UserService,
               private merchantService: MerchantService,
@@ -31,6 +36,8 @@ export class MerchantInfoEditComponent implements OnInit {
   getMerchant() {
     this.userService.getOneMerchant(this.id).subscribe(data => {
       this.user = data;
+      data.merchantProfile.categories.forEach(x => this.categoryArray.push(x.id));
+      this.categoryList = this.categoryList.concat(this.categoryArray);
     });
   }
 
@@ -47,11 +54,20 @@ export class MerchantInfoEditComponent implements OnInit {
 
   submitEditMerchantProfile(formEditMerchantProfile) {
     this.merchantInfo = formEditMerchantProfile.value;
-    this.merchantInfo.categories = {
-      id: this.merchantInfo.categories
-    };
+    let array = [];
+    this.categoryList.forEach(x => array.push({id: x}));
+    this.merchantInfo.categories = array;
     this.merchantService.updateMerchantProfile(this.user.merchantProfile.id, this.merchantInfo).subscribe(() => {
-      this.router.navigate(['/merchant']);
+      this.router.navigate([`/merchant/${this.id}`]);
     });
+  }
+
+  inputIdCategory(id) {
+    if (this.categoryList.includes(id)) {
+      this.categoryList = this.categoryList.filter(x => x !== id);
+    } else {
+      this.categoryList.push(id);
+    }
+    this.merchantInfo.categories = this.categoryList;
   }
 }
