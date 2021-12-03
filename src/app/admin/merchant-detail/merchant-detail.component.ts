@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Merchant} from '../../model/merchant';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {MerchantProfile} from '../../model/merchant-profile';
 
 @Component({
   selector: 'app-merchant-detail',
@@ -10,12 +10,12 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   styleUrls: ['./merchant-detail.component.css']
 })
 export class MerchantDetailComponent implements OnInit {
-  merchant: Merchant = {};
+  merchant: MerchantProfile = {};
   id: number;
   detailMerchantForm: FormGroup = new FormGroup({
     id: new FormControl(),
     name: new FormControl(),
-    address: new FormControl(),
+    email: new FormControl(),
     hotline: new FormControl(),
     openHours: new FormControl(),
   });
@@ -32,14 +32,15 @@ export class MerchantDetailComponent implements OnInit {
   }
 
   getMerchant(id) {
-    this.userService.getMerchantById(id).subscribe((merchant: any) => {
+    this.userService.getMerchantById(id).subscribe((user: any) => {
       this.detailMerchantForm = new FormGroup({
-        id: new FormControl(merchant.id),
-        name: new FormControl(merchant.name),
-        address: new FormControl(merchant.address),
-        hotline: new FormControl(merchant.hotline),
-        openHours: new FormControl(merchant.openHours),
+        id: new FormControl(user.id),
+        name: new FormControl(user.name),
+        email: new FormControl(user.email),
+        hotline: new FormControl(user.hotline),
+        openHours: new FormControl(user.openHours),
       });
+      console.log(user);
     });
   }
 }
