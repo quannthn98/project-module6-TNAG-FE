@@ -1,39 +1,75 @@
-<table class="table table-striped table-valign-middle" style="color: #00a379">
-  <thead>
+<div class="topnav">
+  <a>Danh sách cửa hàng</a>
+    <input #searchValue type="text" placeholder="Search.." (input)="search(searchValue.value)">
+</div>
+<table class="table table-striped">
   <tr>
-    <th>STT</th>
-    <th>Tên User</th>
-    <th>Email</th>
-    <th>Tên Quán Ăn</th>
-    <th>Địa Chỉ Quán</th>
-    <th>Tên Chủ Quán</th>
-    <th>SDT Chủ Quán</th>
-    <th>Ảnh</th>
+    <td>#</td>
+    <td>Tên cửa hàng</td>
+    <td>Địa chỉ</td>
+    <td>Trạng thái</td>
+    <td>Thông tin</td>
   </tr>
-  </thead>
-  <tbody *ngFor="let m of merchants; index as i">
-  <tr>
-    <td>{{i+1}}</td>
-    <td>{{m.username}}</td>
-    <td>{{m.email}}</td>
-    <td>{{m.merchantProfile.name}}</td>
-    <td>{{m.merchantProfile.address}}</td>
-    <td>{{m.userProfile.fullName}}</td>
-    <td>{{m.userProfile.phone}}</td>
-    <td><img src="{{m.userProfile.image}}"></td>
+  <tr *ngFor="let merchant of merchants; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{merchant.merchantProfile.name}}</td>
+    <td>{{merchant.merchantProfile.address}}</td>
+    <td>{{merchant.userStatus.name}}</td>
+    <td>
+      <button class="btn btn-success" (mousedown)="getId(merchant.id)" data-toggle="modal"
+              data-target="#infoModal">Chi tiết
+      </button>
+    </td>
   </tr>
-  </tbody>
 </table>
-
-
-
-<!--export interface User {-->
-<!--id?: number;-->
-<!--username?: string;-->
-<!--password?: string;-->
-<!--email?: string;-->
-<!--roles?: any;-->
-<!--userProfile?: any;-->
-<!--merchantProfile?: any;-->
-<!--userStatus?: any;-->
-<!--}-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết của hàng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <!--          <img src="{{pickedMerchant.userprofile.avatar}}" alt="">-->
+          <div class="form-group">
+            <label for="ownerName">Owner name</label>
+            <p class="form-control" id="ownerName">{{pickedMerchant?.username}}</p>
+          </div>
+          <div class="form-group">
+            <label for="ownerEmail">Email</label>
+            <p class="form-control" id="ownerEmail">{{pickedMerchant?.email}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantName">Merchant name</label>
+            <p class="form-control" id="merchantName">{{pickedMerchant?.merchantProfile?.name}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantAddress">Merchant address</label>
+            <p class="form-control" id="merchantAddress">{{pickedMerchant?.merchantProfile?.address}}</p>
+          </div>
+          <div class="form-group">
+            <label for="merchantHotline">Merchant hotline</label>
+            <p class="form-control" id="merchantHotline">{{pickedMerchant?.merchantProfile?.hotline}}</p>
+          </div>
+          <div>
+            <label for="status">Thay đổi trạng thái cửa hàng</label><br>
+            <select id="status" #element>
+              <option *ngFor="let status of statusList"
+                      [selected]="status.name === pickedMerchant?.userStatus?.name" value="{{status.name}}">{{status.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="updateStatus(element.value, pickedMerchant.id)"
+                data-dismiss="modal">Accept
+        </button>
+        <button class="btn btn-primary" data-dismiss="modal">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
