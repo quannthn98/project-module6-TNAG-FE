@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
-import {error} from 'protractor';
 
 @Component({
   selector: 'app-login',
