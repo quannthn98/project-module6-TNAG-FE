@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {MerchantsDetailComponent} from './merchants-detail/merchants-detail.component';
 import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
+import {CheckoutComponent} from './checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -11,8 +12,12 @@ const routes: Routes = [
     component: MerchantRegisterComponent
   },
   {
-    path: 'merchant/:id',
+    path: 'user/merchant/:id',
     component: MerchantsDetailComponent
+  },
+  {
+    path: 'checkout/:id',
+    component: CheckoutComponent
   },
   {
     path: '',

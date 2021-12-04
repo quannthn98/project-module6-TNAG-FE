@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Dish} from '../model/dish';
 import {User} from '../model/user';
 import {MerchantProfile} from '../model/merchant-profile';
+import {UserAddress} from '../model/user-address';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -61,6 +62,10 @@ export class UserService {
 
   findAllMerchantByName(searchValue: string): Observable<User> {
     return this.http.get(API_URL + '/merchants/search/' + searchValue);
+  }
+
+  getAllDeliverAddressByUser(): Observable<UserAddress[]> {
+    return this.http.get<UserAddress[]>(`${API_URL}/users/address`);
   }
 
 }

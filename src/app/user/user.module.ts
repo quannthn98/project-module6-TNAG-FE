@@ -10,7 +10,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import {SharedModule} from '../shared/shared.module';
 import { MerchantRegisterComponent } from './merchant-register/merchant-register.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     UserRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    FormsModule
   ]
 })
 export class UserModule { }

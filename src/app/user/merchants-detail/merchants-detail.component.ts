@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Dish} from '../../model/dish';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Cart} from '../../model/cart';
+import {CartDetail} from '../../model/cart-detail';
+import {CartService} from '../../service/cart.service';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -10,14 +13,21 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MerchantsDetailComponent implements OnInit {
   merchant;
+  cart: Cart;
+  cartDetails: CartDetail[] = [];
   dishes: Dish[] = [];
   id: number;
+  estimatePayment = 0;
 
-  constructor(private userService: UserService, private router: Router, private activeRoute: ActivatedRoute) {
+  constructor(private userService: UserService,
+              private router: Router,
+              private activeRoute: ActivatedRoute,
+              private cartService: CartService) {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
       this.getAllDishByMerchant();
+      this.getCartByMerchant();
     });
   }
 
@@ -26,13 +36,30 @@ export class MerchantsDetailComponent implements OnInit {
 
   getAllDishByMerchant() {
     this.userService.getAllDishByMerchant(this.id).subscribe((data: any) => {
-        console.log(data.content);
         this.dishes = data.content;
       }, error => {
         console.log(error);
         alert(error);
       }
     );
+  }
+
+  getCartByMerchant() {
+    this.cartService.getCartByMerchant(this.id).subscribe(data => {
+      this.cart = data;
+      this.cartDetails = data.cartDetails;
+      this.estimatePayment = 0;
+      for (let i = 0; i < this.cartDetails.length; i++) {
+        this.estimatePayment += this.cartDetails[i].price * this.cartDetails[i].quantity;
+      }
+      console.log('my Cart: ' + data.cartDetails[0].dish.name);
+    });
+  }
+
+  addDishToCart(dishId: number, direction: string) {
+    this.cartService.addToCart(dishId, direction).subscribe(data => {
+      this.getCartByMerchant();
+    });
   }
 
   private getMerchantById() {
