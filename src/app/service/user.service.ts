@@ -58,5 +58,8 @@ export class UserService {
   findAllMerchantByName(searchValue: string): Observable<User> {
     return this.http.get(API_URL + '/merchants/search/' + searchValue);
   }
+  getUserById(id: number): Observable<User> {
+    return this.http.get(API_URL + '/user/' + id);
+  }
 
 }

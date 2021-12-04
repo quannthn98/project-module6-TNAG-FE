@@ -1,0 +1,78 @@
+.dropdown:hover .dropdown-menu {
+  display: block;
+  visibility: visible;
+  opacity:1;
+  transform: translateY(0px);
+  transition:.5s ease all;
+}
+.dropdown-menu {
+  display: block;
+  visibility: hidden;
+  opacity:0;
+  transform: translateY(50px);
+  transition:.5s ease all;
+}
+.dropdown-menu.show {
+  display: block;
+  visibility: visible;
+  opacity:1;
+  transform: translateY(0px);
+  transition:.5s ease all;
+}
+.osahan-nav {
+  background: #fff none repeat scroll 0 0 !important;
+  padding: 0;
+  z-index: 9;
+}
+.osahan-nav .nav-link {
+  font-weight: 600;
+  padding: 28px 0px !important;
+  margin: 0 0 0 31px;
+}
+.nav-osahan-pic {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 3px #ccc;
+  position: relative;
+  margin: -8px 5px -6px 0;
+  vertical-align: text-top;
+}
+.dropdown-cart-top {
+  border-top: 2px solid #dd646e;
+  min-width: 250px;
+}
+.dropdown-cart-top-header {
+  min-height: 107px;
+}
+.dropdown-cart-top-header .img-fluid {
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  float: left;
+  height: 59px;
+  padding: 3px;
+  width: 59px;
+}
+.dropdown-cart-top-header p.text-secondary {
+  font-size: 11px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.dropdown-cart-top-header h6 {
+  font-size: 14px;
+}
+.food-item {
+  border: 1px solid;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 6px;
+  height: 13px;
+  line-height: 12px;
+  text-align: center;
+  width: 13px;
+}
+.dropdown-cart-top-body .food-item {
+  float: left;
+  margin: 4px 10px 0 0;
+}
+
