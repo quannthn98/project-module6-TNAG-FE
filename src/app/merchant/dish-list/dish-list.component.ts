@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class DishListComponent implements OnInit {
   searchText: string;
   merchant;
+  dish: Dish;
   dishes: Dish[] = [];
   id: number;
 
@@ -43,4 +44,12 @@ export class DishListComponent implements OnInit {
     );
   }
 
+  findDishById(id) {
+    this.userService.getDishById(id).subscribe( (data:any) => {
+      console.log(data);
+      this.dish = data;
+    }, error=> {
+      console.log(error);
+    });
+  }
 }
