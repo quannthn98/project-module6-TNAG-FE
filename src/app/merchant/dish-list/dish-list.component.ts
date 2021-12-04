@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Dish} from '../../model/dish';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MerchantProfile} from '../../model/merchant-profile';
 
 @Component({
   selector: 'app-dish-list',
@@ -10,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class DishListComponent implements OnInit {
   searchText: string;
-  merchant;
+  merchant: MerchantProfile = {};
   dishes: Dish[] = [];
   id: number;
 
