@@ -18,10 +18,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status === 401) {
+        if (err.status === 1000) {
           this.authenticationService.logout();
           this.router.navigate(['/login']);
-        } else if (err.status === 403) {
+        } else if (err.status === 1000) {
           this.router.navigate(['/login']);
         }
       }

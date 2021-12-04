@@ -20,6 +20,7 @@ import {FormsModule} from '@angular/forms';
     UserRoutingModule,
     SharedModule,
     FormsModule
+
   ]
 })
 export class UserModule { }

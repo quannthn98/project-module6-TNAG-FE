@@ -17,4 +17,8 @@ export class DishService {
   create(formData: FormData): Observable<Dish> {
     return this.http.post<Dish>(`${API_URL}/dishes`, formData);
   }
+
+  delete(id: number) {
+    return this.http.delete(`${API_URL}/dishes/${id}`);
+  }
 }

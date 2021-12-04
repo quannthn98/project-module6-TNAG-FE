@@ -68,4 +68,7 @@ export class UserService {
     return this.http.get<UserAddress[]>(`${API_URL}/users/address`);
   }
 
+  getDishById(id: number): Observable<Dish> {
+    return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
+  }
 }
