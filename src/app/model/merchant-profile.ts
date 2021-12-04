@@ -4,5 +4,6 @@ export interface MerchantProfile {
   address?: string;
   categories?: any;
   hotline?: string;
+  description?: string;
   openHours?: any;
 }

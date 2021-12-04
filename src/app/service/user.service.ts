@@ -41,14 +41,18 @@ export class UserService {
 
   getAllDishByMerchant(id: number, name?: string): Observable<Dish[]> {
     if (name == null || name === '') {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}`);
+      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant`);
     } else {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/merchant/${id}/?q=${name}`);
+      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant?q=${name}`);
     }
   }
 
   getMerchantById(id: number): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/merchants/${id}`);
+  }
+
+  registerMerchant(id: number, merchantProfile: MerchantProfile): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/merchants/${id}`, merchantProfile);
   }
 
   getAllStatus(): Observable<any> {
@@ -62,4 +66,7 @@ export class UserService {
     return this.http.get(API_URL + '/user/' + id);
   }
 
+  getDishById(id: number): Observable<Dish>{
+    return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
+  }
 }

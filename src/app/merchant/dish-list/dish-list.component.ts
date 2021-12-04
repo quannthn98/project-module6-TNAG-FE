@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Dish} from "../../model/dish";
-import {UserService} from "../../service/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Dish} from '../../model/dish';
+import {UserService} from '../../service/user.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-dish-list',
@@ -11,15 +11,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class DishListComponent implements OnInit {
   searchText: string;
   merchant;
+  dish: Dish;
   dishes: Dish[] = [];
   id: number;
 
   constructor(private userService: UserService, private router: Router) {
-    //
     this.id = JSON.parse(localStorage.user).id;
-    console.log(this.id);
-    // this.id =  localStorage.user.id;
-    // this.id = +paraMap.get('id');
     this.getMerchantById();
     this.getAllDishByMerchant();
   }
@@ -28,7 +25,7 @@ export class DishListComponent implements OnInit {
   }
 
   getAllDishByMerchant() {
-    this.userService.getAllDishByMerchant(this.id,this.searchText).subscribe((data: any) => {
+    this.userService.getAllDishByMerchant(this.id, this.searchText).subscribe((data: any) => {
         console.log(data.content);
         this.dishes = data.content;
       }, error => {
@@ -47,4 +44,12 @@ export class DishListComponent implements OnInit {
     );
   }
 
+  findDishById(id) {
+    this.userService.getDishById(id).subscribe( (data:any) => {
+      console.log(data);
+      this.dish = data;
+    }, error=> {
+      console.log(error);
+    });
+  }
 }
