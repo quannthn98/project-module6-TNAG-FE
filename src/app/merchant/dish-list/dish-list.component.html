@@ -37,7 +37,7 @@
               </thead>
               <tbody>
               <tr *ngFor="let d of dishes; index as i">
-                <th scope="row">{{i}}</th>
+                <th scope="row">{{i + 1}}</th>
                 <td>{{d.name}}</td>
                 <td>{{d.description}}</td>
                 <td >{{d.status == true ? "Còn hàng": "Hết hàng"}}</td>
@@ -68,7 +68,7 @@
       </div>
       <div *ngIf="dish" class="modal-body">
         <h5>Tên Món: {{dish.name}}</h5>
-        <h6>Hình Ảnh: <img src="{{dish.image}}" alt="Ảnh món"> </h6>
+        <h6>Hình Ảnh: <img style="width: 100px; height: 100px" src="http://localhost:8080/{{dish.image}}" alt="Ảnh món"> </h6>
         <h6>Mô tả: {{dish.description}}</h6>
         <h6>Quán Ăn: {{dish.merchant.merchantProfile.name}} </h6>
         <h6>Tình Trạng: {{dish.status == true ? "Còn hàng" : "Hết hàng"}} </h6>

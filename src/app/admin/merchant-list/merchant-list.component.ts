@@ -63,8 +63,10 @@ export class MerchantListComponent implements OnInit {
   sweetalert2() {
     Swal.fire({
       position: 'top-end',
+      width: 300,
       icon: 'success',
-      title: 'Thay đổi đã được lưu',
+      toast: true,
+      text: 'Thay đổi đã được lưu',
       showConfirmButton: false,
       timer: 1000
     });

@@ -64,6 +64,7 @@
     </div>
   </div>
 </section>
+
 <section class="offer-dedicated-body pt-2 pb-2 mt-4 mb-4">
   <div class="container">
     <div class="row">
@@ -177,13 +178,20 @@
                   <div class="bg-white rounded border shadow-sm mb-4">
                     <div class="menu-list p-3 border-bottom" *ngFor="let d of dishes; index as i">
                                                 <span class="count-number float-right">
+                                                  <ng-container *ngIf="d.status == true">
                                                     <button (click)="addDishToCart(d.id, '-')"
                                                             class="btn btn-outline-secondary btn-sm left dec"> <i
                                                       class="icofont-minus"></i> </button>
                                                     <input class="count-number-input" type="text" value="1" readonly="">
                                                     <button (click)="addDishToCart(d.id, '+')"
                                                             class="btn btn-outline-secondary btn-sm right inc"> <i
-                                                      class="icofont-plus"></i> </button>
+                                                      class="icofont-plus"></i>
+                                                    </button>
+                                                  </ng-container>
+                                                    <ng-container *ngIf="d.status == false">
+                                                        Hết hàng
+                                                    </ng-container>
+
                                                 </span>
                       <div class="media">
 
@@ -582,13 +590,19 @@
             <div class="gold-members p-2 border-bottom">
               <p class="text-gray mb-0 float-right ml-2">{{c.price}}</p>
               <span class="count-number float-right">
-                                    <button (click)="addDishToCart(c.dish.id, '-')"
-                                            class="btn btn-outline-secondary  btn-sm left dec"> <i
-                                      class="icofont-minus"></i> </button>
+                <ng-container *ngIf="c.dish.status == true">
+                  <button (click)="addDishToCart(c.dish.id, '-')"
+                          class="btn btn-outline-secondary  btn-sm left dec"> <i
+                    class="icofont-minus"></i> </button>
                                     <input class="count-number-input" type="text" [value]="c.quantity" readonly="">
                                     <button (click)="addDishToCart(c.dish.id, '+')"
                                             class="btn btn-outline-secondary btn-sm right inc"> <i
                                       class="icofont-plus"></i> </button>
+                </ng-container>
+                <ng-container *ngIf="c.dish.status == false">
+                      Hết hàng
+                </ng-container>
+
                                 </span>
               <div class="media">
                 <div class="mr-2"><i class="icofont-ui-press text-danger food-item"></i></div>
