@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {Dish} from '../model/dish';
 import {User} from '../model/user';
 import {MerchantProfile} from '../model/merchant-profile';
+import {UserAddress} from '../model/user-address';
+import {UserProfile} from '../model/user-profile';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -62,11 +64,24 @@ export class UserService {
   findAllMerchantByName(searchValue: string): Observable<User> {
     return this.http.get(API_URL + '/merchants/search/' + searchValue);
   }
+
   getUserById(id: number): Observable<User> {
     return this.http.get(API_URL + '/user/' + id);
   }
 
   getDishById(id: number): Observable<Dish> {
     return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
+  }
+
+  updateUserProfile(profile): Observable<UserProfile> {
+    return this.http.put<UserProfile>(`${API_URL}/users/profile`, profile);
+  }
+
+  updateAvatar(avatar: FormData): Observable<UserProfile> {
+    return this.http.put<UserProfile>(`${API_URL}/users/profile/avatar`, avatar);
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(API_URL + '/users/create', user);
   }
 }

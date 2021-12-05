@@ -18,7 +18,6 @@ const routes: Routes = [
   {
     path: 'merchant',
     component: LayoutMerchantComponent,
-    canActivate: [AuthGuard],
     loadChildren: () => import('./merchant/merchant.module').then(module => module.MerchantModule)
   },
   {

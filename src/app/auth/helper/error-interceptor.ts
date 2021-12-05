@@ -4,11 +4,13 @@ import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthenticationService} from '../../service/authentication.service';
+import {AlertService} from '../../service/alert.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,9 +22,9 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.authenticationService.logout();
-          this.router.navigate(['/login']);
+          this.alertService.alertError('Bạn cần đăng nhập trước khi tiếp tục');
         } else if (err.status === 403) {
-          this.router.navigate(['/login']);
+          this.alertService.alertError('Bạn không có quyền truy cập vào trang này');
         }
       }
     }));

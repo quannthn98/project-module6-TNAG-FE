@@ -4,4 +4,9 @@ export interface UserToken {
   password?: string;
   roles?: any;
   token?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  sex?: string;
+  avatar?: string;
 }
