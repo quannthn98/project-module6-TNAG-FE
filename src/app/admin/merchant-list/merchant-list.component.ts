@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MerchantProfile} from '../../model/merchant-profile';
 import {UserService} from '../../service/user.service';
 import Swal from 'sweetalert2';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-merchant-list',
@@ -54,6 +55,13 @@ export class MerchantListComponent implements OnInit {
 
 
   updateStatus(name: string, id: number) {
+    if (name === 'Chờ xét duyệt') {
+      name = 'pending';
+    } else if (name === 'Đang hoạt động') {
+      name = 'approved';
+    } else if (name === 'Đang bị khoá') {
+      name = 'blocked';
+    }
     this.userService.updateStatusMerchant(id, name).subscribe(() => {
       this.getAllMerchant();
       this.sweetalert2();

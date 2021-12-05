@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CartService} from '../../service/cart.service';
 import {UserService} from '../../service/user.service';
 import {Cart} from '../../model/cart';
@@ -7,6 +7,7 @@ import {CartDetail} from '../../model/cart-detail';
 import {UserAddress} from '../../model/user-address';
 import {NgForm} from '@angular/forms';
 import {OrderService} from '../../service/order.service';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-checkout',
@@ -26,7 +27,9 @@ export class CheckoutComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
               private userService: UserService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private alertService: AlertService,
+              private router: Router) {
     this.activatedRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -95,6 +98,8 @@ export class CheckoutComponent implements OnInit {
       note: checkoutForm.value.note
     }, this.id).subscribe(data => {
       console.log(data);
+      this.alertService.alertSuccess('Tạo đơn hàng mới thành công');
+      this.router.navigateByUrl('');
     });
   }
 

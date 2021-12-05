@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light osahan-nav shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand ms-5 ml-auto" routerLink="/"><img class="mx-auto" alt="logo" src="assets/static/img/logo.png"></a>
+    <a class="navbar-brand" style="margin-left: 10%" routerLink="/"><img class="mx-auto" alt="logo" src="assets/static/img/logo.png"></a>
 <!--    <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"-->
 <!--            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
 <!--      <span class="navbar-toggler-icon"></span>-->
@@ -13,12 +13,13 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ml-auto mx-auto">
+      <ul class="navbar-nav" style="margin-left: 45%">
         <ng-container *ngIf="currentUser != null">
           <li class="nav-item dropdown dropdown-cart">
             <a class="nav-link" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-              <img style="height: 35px; width: 35px" src="https://i.pinimg.com/736x/b6/bb/1f/b6bb1f98d48a1402a1b33c6a6da0c276.jpg">  {{  currentUser.username}}
+              <img class="rounded-pill" style="height: 35px; width: 35px" src="https://i.pinimg.com/736x/b6/bb/1f/b6bb1f98d48a1402a1b33c6a6da0c276.jpg">
+              <span class="m-2"> {{  currentUser.username}} </span>
               <!--          <span class="badge badge-success">5</span>-->
             </a>
             <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-left shadow-sm border-0" >

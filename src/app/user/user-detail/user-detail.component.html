@@ -94,9 +94,9 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label>Giới tính</label>
-                                  <select ngModel name="sex"  class="form-select" >
-                                    <option [selected]="currentUser.sex == 'Nam'" value="Nam">Nam</option>
-                                    <option [selected]="currentUser.sex == 'Nữ'" value="Nữ" >Nữ</option>
+                                  <select ngModel="{{sex.value}}" name="sex" class="form-select" #sex >
+                                    <option [selected]="currentUser.sex === 'Nam'" value="Nam">Nam</option>
+                                    <option [selected]="currentUser.sex === 'Nữ'"  value="Nữ" >Nữ</option>
                                   </select>
                                 </div>
                               </div>

@@ -29,11 +29,11 @@ export class UserService {
   }
 
   updateStatusMerchant(id: number, statusName: string): Observable<MerchantProfile> {
-    return this.http.get<MerchantProfile>(`${API_URL}/merchants/updateStatus/${id}/${statusName}`);
+    return this.http.put<MerchantProfile>(`${API_URL}/merchants/updateStatus/${id}/${statusName}`, null);
   }
 
   approvalMerchant(id: number): Observable<User> {
-    return this.http.get<User>(`${API_URL}/merchants/updateStatus/${id}/approved`);
+    return this.http.put<User>(`${API_URL}/merchants/updateStatus/${id}/approved`, null);
   }
 
   blockMerchant(id: number): Observable<User> {
