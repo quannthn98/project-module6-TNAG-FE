@@ -18,7 +18,7 @@ export class MerchantService {
     return this.http.put<MerchantProfile>(`${API_URL}/merchants/${id}`, merchantProfile);
   }
 
-  register(id: number, merchantProfile: MerchantProfile): Observable<MerchantProfile> {
-    return this.http.post(`${API_URL}/merchants/${id}/register`, merchantProfile);
+  register(id: number, formData: FormData): Observable<MerchantProfile> {
+    return this.http.post<MerchantProfile>(`${API_URL}/merchants/${id}/register`, formData);
   }
 }

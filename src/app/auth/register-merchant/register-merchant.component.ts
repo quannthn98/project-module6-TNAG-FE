@@ -20,6 +20,9 @@ export class RegisterMerchantComponent implements OnInit {
   categoryList: any[] = [];
   merchantInfo: MerchantProfile = {};
   user: User = {};
+  avatar: any;
+  cover: any;
+  thumbnail: any;
 
   constructor(private categoryService: CategoryService,
               private merchantService: MerchantService,
@@ -40,10 +43,25 @@ export class RegisterMerchantComponent implements OnInit {
 
   submitRegisterMerchant(formRegisterMerchant) {
     this.merchantInfo = formRegisterMerchant.value;
-    let array = [];
+    const array = [];
     this.categoryList.forEach(x => array.push({id: x}));
     this.merchantInfo.categories = array;
-    this.merchantService.register(this.user.id, formRegisterMerchant.value).subscribe(() => {
+    const formData = new FormData();
+    formData.append('name', this.merchantInfo.name);
+    formData.append('address', this.merchantInfo.address);
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.merchantInfo.categories.length; i++) {
+      formData.append('categories', this.merchantInfo.categories[i].id);
+    }
+    formData.append('hotline', this.merchantInfo.hotline);
+    formData.append('description', this.merchantInfo.description);
+    formData.append('openHours', this.merchantInfo.openHours);
+    formData.append('avatar', this.avatar);
+    formData.append('cover', this.cover);
+    formData.append('thumbnail', this.thumbnail);
+    console.log(this.merchantInfo);
+    console.log(JSON.stringify(this.merchantInfo.categories));
+    this.merchantService.register(this.user.id, formData).subscribe(() => {
       this.router.navigate(['/']);
     });
   }
@@ -55,5 +73,17 @@ export class RegisterMerchantComponent implements OnInit {
       this.categoryList.push(id);
     }
     this.merchantInfo.categories = this.categoryList;
+  }
+
+  handleAvatarInput(event) {
+    this.avatar = (event.target).files[0];
+  }
+
+  handleCoverInput(event) {
+    this.cover = (event.target).files[0];
+  }
+
+  handleThumbnailInput(event) {
+    this.thumbnail = (event.target).files[0];
   }
 }
