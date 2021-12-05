@@ -4,9 +4,9 @@ import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
-import {User} from '../../model/user';
-import {UserService} from '../../service/user.service';
-import Swal from 'sweetalert2';
+import {User} from "../../model/user";
+import {UserService} from "../../service/user.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-navbar',
@@ -63,7 +63,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
     this.sweetalert2();
   }
-
   getCurrentUserDetail() {
     this.userService.getUserById(this.currentUser.id).subscribe(user => {
       this.currentUserDetail = user;
@@ -72,7 +71,6 @@ export class NavbarComponent implements OnInit {
       console.log(error);
     });
   }
-
   sweetalert2() {
     Swal.fire({
       position: 'top-end',

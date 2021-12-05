@@ -8,6 +8,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarMerchantComponent } from './navbar-merchant/navbar-merchant.component';
 import { FooterMerchantComponent } from './footer-merchant/footer-merchant.component';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

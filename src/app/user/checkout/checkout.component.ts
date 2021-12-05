@@ -6,7 +6,6 @@ import {Cart} from '../../model/cart';
 import {CartDetail} from '../../model/cart-detail';
 import {UserAddress} from '../../model/user-address';
 import {NgForm} from '@angular/forms';
-import {Order} from '../../model/order';
 import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
 
@@ -35,7 +34,7 @@ export class CheckoutComponent implements OnInit {
       this.id = +paraMap.get('id');
       this.getMerchantById();
       this.getCartByMerchant();
-      this.getUserDeliverAddress();
+      // this.getUserDeliverAddress();
     });
   }
 
@@ -72,21 +71,21 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  getUserDeliverAddress() {
-    this.userService.getAllDeliverAddressByUser().subscribe(data => {
-      this.addresses = data;
-      if (this.addresses.length < 3) {
-        this.rowLoop.push(1);
-      } else {
-        for (let i = 0; i < this.addresses.length; i++) {
-          if (i % 2 === 0) {
-            this.rowLoop.push(1);
-          }
-        }
-      }
-      console.log(data);
-    });
-  }
+  // getUserDeliverAddress() {
+  //   this.userService.getAllDeliverAddressByUser().subscribe(data => {
+  //     this.addresses = data;
+  //     if (this.addresses.length < 3) {
+  //       this.rowLoop.push(1);
+  //     } else {
+  //       for (let i = 0; i < this.addresses.length; i++) {
+  //         if (i % 2 === 0) {
+  //           this.rowLoop.push(1);
+  //         }
+  //       }
+  //     }
+  //     console.log(data);
+  //   });
+  // }
 
   createNewOrder(checkoutForm: NgForm) {
     this.orderService.createNewOrder({
