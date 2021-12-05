@@ -4,9 +4,9 @@ import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
 import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
-import {User} from "../../model/user";
-import {UserService} from "../../service/user.service";
-import Swal from "sweetalert2";
+import {User} from '../../model/user';
+import {UserService} from '../../service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   currentUser: UserToken = {};
   categories: Category[] = [];
   currentUserDetail: User = {};
+  currentUserRoles: any[];
 
   constructor(private authenticationService: AuthenticationService,
               private categoryService: CategoryService,
@@ -43,14 +44,17 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/']);
     this.sweetalert2();
   }
+
   getCurrentUserDetail() {
     this.userService.getUserById(this.currentUser.id).subscribe(user => {
       this.currentUserDetail = user;
-      console.log(this.currentUserDetail);
+      this.currentUserRoles = user.roles;
+      console.log(this.currentUserRoles);
     }, error => {
       console.log(error);
     });
   }
+
   sweetalert2() {
     Swal.fire({
       position: 'top-end',
@@ -62,4 +66,14 @@ export class NavbarComponent implements OnInit {
       timer: 1000
     });
   }
+  checkRole(role: string) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.currentUserRoles.length; i++) {
+      if (this.currentUserRoles[i] === role) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

@@ -35,7 +35,7 @@
                   src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/30/000000/external-user-interface-kiranshastry-gradient-kiranshastry.png"/>
                   Cập nhật tài khoản</a>
               </div>
-              <ng-container *ngIf="currentUser.roles[0].authority == 'ROLE_MERCHANT'">
+              <ng-container *ngIf="checkRole('ROLE_MERCHANT')">
                 <div class="dropdown-cart-top-body border-top p-4">
                   <a routerLink="/admin" class="my-2"><img
                     src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/30/000000/external-store-supermarket-flatart-icons-flat-flatarticons.png"/>
