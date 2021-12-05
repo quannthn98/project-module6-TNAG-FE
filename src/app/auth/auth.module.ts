@@ -6,15 +6,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
+import { RegisterMerchantComponent } from './register-merchant/register-merchant.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    SharedModule,
-    FormsModule
-  ]
+  declarations: [LoginComponent, RegisterComponent, RegisterMerchantComponent],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        SharedModule,
+        FormsModule,
+        Ng2SearchPipeModule
+    ]
 })
 export class AuthModule { }

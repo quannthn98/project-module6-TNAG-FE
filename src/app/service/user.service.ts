@@ -15,7 +15,6 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class UserService {
   merchants: MerchantProfile[] = [];
-  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
   }
@@ -43,18 +42,18 @@ export class UserService {
 
   getAllDishByMerchant(id: number, name?: string): Observable<Dish[]> {
     if (name == null || name === '') {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant`);
+      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant`);
     } else {
-      return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant?q=${name}`);
+      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant?q=${name}`);
     }
   }
 
   getMerchantById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/merchants/${id}`);
+    return this.http.get<User>(`${API_URL}/merchants/${id}`);
   }
 
   registerMerchant(id: number, merchantProfile: MerchantProfile): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/merchants/${id}`, merchantProfile);
+    return this.http.post<User>(`${API_URL}/merchants/${id}`, merchantProfile);
   }
 
   getAllStatus(): Observable<any> {

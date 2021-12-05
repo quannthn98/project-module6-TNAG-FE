@@ -5,6 +5,7 @@ import {RegisterComponent} from './auth/register/register.component';
 import {LayoutMerchantComponent} from './layout/layout-merchant/layout-merchant.component';
 import {LayoutAdminComponent} from './layout/layout-admin/layout-admin.component';
 import {AuthGuard} from './auth/helper/auth-guard';
+import {RegisterMerchantComponent} from './auth/register-merchant/register-merchant.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'register-merchant',
+    component: RegisterMerchantComponent
   },
   {
     path: 'merchant',

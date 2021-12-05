@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+<div class="bg-white">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+      <div class="col-md-8 col-lg-6">
+        <div class="login d-flex align-items-center py-5">
+          <div class="container">
+              <h3 class="login-heading mb-4 text-center">Đăng ký cửa hàng nhận ngay ưu đãi!</h3>
+            <form #formRegisterMerchant="ngForm" (ngSubmit)="submitRegisterMerchant(formRegisterMerchant)">
+              <div class="row">
+                <div class="col-md-6 col-lg-6 mx-auto pl-5 pr-5">
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="name" class="form-control"
+                           placeholder="Tên cửa hàng" [ngModel]="merchantInfo.name" name="name">
+                    <label for="name">Tên cửa hàng</label>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="hotline" class="form-control" [ngModel]="merchantInfo.hotline"
+                           name="hotline" placeholder="Hotline">
+                    <label for="hotline">Hotline</label>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="address" class="form-control"
+                           placeholder="Địa chỉ" [ngModel]="merchantInfo.address" name="address">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="openHours" class="form-control" [ngModel]="merchantInfo.openHours"
+                           name="openHours" placeholder="Giờ mở cửa">
+                    <label for="openHours">Giờ mở cửa</label>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="description" class="form-control" [ngModel]="merchantInfo.description"
+                           name="description" placeholder="Description">
+                    <label for="description">Mô tả cửa hàng</label>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 mx-auto pl-5 pr-5">
+                  <div class="form-label mb-4">
+                    <label class="form-label-group" for="avatar">Ảnh đại diện cửa hàng</label>
+                    <input type="file" id="avatar" class="form-control" [ngModel]="merchantInfo.avatar"
+                           name="avatar" placeholder="Ảnh đại diện cửa hàng"
+                           (change)="handleAvatarInput($event)">
+                  </div>
+                  <div class="form-label mb-4">
+                    <label class="form-label-group" for="cover">Ảnh bìa cửa hàng</label>
+                    <input type="file" id="cover" class="form-control" [ngModel]="merchantInfo.cover"
+                           name="cover" placeholder="Ảnh bìa cửa hàng"
+                           (change)="handleCoverInput($event)">
+                  </div>
+                  <div class="form-label mb-4">
+                    <label class="form-label-group" for="thumbnail">Ảnh thumbnail cửa hàng</label>
+                    <input type="file" id="thumbnail" class="form-control" [ngModel]="merchantInfo.thumbnail"
+                           name="thumbnail" placeholder="Ảnh thumbnail cửa hàng"
+                           (change)="handleThumbnailInput($event)">
+                  </div>
+                  <div>
+                    <label class="form-label">Danh mục sản phẩm:</label>
+<!--                    <input type="search" class="form-control" style="max-width: 300px" [(ngModel)]="searchText"-->
+<!--                           name="searchText" autocomplete="off" placeholder="Tìm kiếm danh mục sản phẩm">-->
+<!--                    <hr>-->
+                    <div class="overflow-auto" style="max-height: 100px">
+                      <div class="form-check" *ngFor="let c of categories">
+                        <input type="checkbox" class="form-check-input" [value]="c.id"
+                               [checked]="categoryArray.includes(c.id)" [id]="c.id"
+                               name="categories" (change)="inputIdCategory(c.id)">
+                        <label class="form-check-label" [htmlFor]="c.id">{{c.name}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                  <button type="submit"
+                          class="btn btn-lg text-center btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">
+                    Đăng Ký Cửa hàng
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="text-center pt-3">
+              Bạn đã có tài khoản? <a class="font-weight-bold" href="login.html">Đăng nhập ngay</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+

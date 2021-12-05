@@ -37,10 +37,10 @@
               </thead>
               <tbody>
               <tr *ngFor="let d of dishes; index as i">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{d.name}}</td>
-                <td>{{d.description}}</td>
-                <td >{{d.status == true ? "Còn hàng": "Hết hàng"}}</td>
+                <th scope="row">{{i}}</th>
+                <td>{{d?.name}}</td>
+                <td>{{d?.description}}</td>
+                <td >{{d?.status == true ? "Còn hàng": "Hết hàng"}}</td>
                 <td>
                   <button type="button" class="btn btn-warning ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="editDishById(d.id)">Sửa</button>
                   <button type="button" class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)">Xóa</button>
@@ -66,12 +66,12 @@
         <h5 class="modal-title" id="exampleModalLabel3">Thông Tin Món Ăn</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div *ngIf="dish" class="modal-body">
-        <h5>Tên Món: {{dish.name}}</h5>
-        <h6>Hình Ảnh: <img style="width: 100px; height: 100px" src="http://localhost:8080/{{dish.image}}" alt="Ảnh món"> </h6>
-        <h6>Mô tả: {{dish.description}}</h6>
-        <h6>Quán Ăn: {{dish.merchant.merchantProfile.name}} </h6>
-        <h6>Tình Trạng: {{dish.status == true ? "Còn hàng" : "Hết hàng"}} </h6>
+      <div class="modal-body">
+        <h5>Tên Món: {{dish?.name}}</h5>
+        <h6>Hình Ảnh: <img src="{{dish?.image}}" alt="Ảnh món"> </h6>
+        <h6>Mô tả: {{dish?.description}}</h6>
+        <h6>Quán Ăn: {{dish?.merchant?.merchantProfile?.name}} </h6>
+        <h6>Tình Trạng: {{dish?.status == true ? "Còn hàng" : "Hết hàng"}} </h6>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
