@@ -40,7 +40,6 @@ export class UserService {
     return this.http.get<User>(`${API_URL}/merchants/updateStatus/${id}/block`);
   }
 
-
   getAllDishByMerchant(id: number, name?: string): Observable<Dish[]> {
     if (name == null || name === '') {
       return this.http.get<Dish[]>(`${this.baseUrl}/dishes/${id}/merchant`);
@@ -66,7 +65,7 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get(API_URL + '/user/' + id);
+    return this.http.get(API_URL + '/users/' + id);
   }
 
   getAllDeliverAddressByUser(): Observable<UserAddress[]> {

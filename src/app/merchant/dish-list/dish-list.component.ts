@@ -3,6 +3,7 @@ import {Dish} from '../../model/dish';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DishService} from '../../service/dish.service';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-dish-list',
@@ -19,7 +20,8 @@ export class DishListComponent implements OnInit {
 
   constructor(private userService: UserService,
               private router: Router,
-              private dishService: DishService) {
+              private dishService: DishService,
+              private alertService: AlertService) {
     this.id = JSON.parse(localStorage.user).id;
     this.getMerchantById();
     this.getAllDishByMerchant();
@@ -64,6 +66,7 @@ export class DishListComponent implements OnInit {
   deleteDish() {
     this.dishService.delete(this.deleteId).subscribe( (data: any) => {
       this.getAllDishByMerchant();
+      this.alertService.alertSuccess('Xoá món ăn thành công');
     });
   }
 }

@@ -30,7 +30,7 @@
                         <label for="nameDish" class="form-label">Tên món ăn:</label>
                         <input type="text" #name="ngModel" id="nameDish" [ngModel]="dish?.name"
                                name="name"
-                               [ngClass]="[(name.valid && (name.touched || name.dirty)) ? 'form-control is-valid' :((name.dirty || name.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               [ngClass]="[(name.valid) ? 'form-control is-valid' :((name.dirty || name.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
                                required
                                minlength="4">
                         <ng-container
@@ -47,7 +47,7 @@
                         <label for="price" class="form-label">Giá:</label>
                         <input type="text" #price="ngModel" class="form-control" id="price"
                                [ngModel]="dish?.price"
-                               [ngClass]="[(price.valid && (price.touched || price.dirty)) ? 'form-control is-valid' :((price.dirty || price.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               [ngClass]="[(price.valid) ? 'form-control is-valid' :((price.dirty || price.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
                                name="price" required>
                         <ng-container
                           *ngIf="price.invalid && (price.dirty || price.touched || formCreateDish.submitted)">
@@ -63,7 +63,7 @@
                         <input #description="ngModel"
                                type="text" id="description"
                                [ngModel]="dish?.description"
-                               [ngClass]="[(description.valid && (description.touched || description.dirty)) ? 'form-control is-valid' :((description.dirty || description.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               [ngClass]="[(description.valid) ? 'form-control is-valid' :((description.dirty || description.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
                                name="description"
                                required>
                         <ng-container
@@ -78,7 +78,7 @@
                         <input #image="ngModel"
                                type="file" id="image"
                                [ngModel]="dish?.image"
-                               [ngClass]="[(image.valid && (image.touched || image.dirty)) ? 'form-control is-valid' :((image.dirty || image.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
+                               [ngClass]="[(image.valid) ? 'form-control is-valid' :((image.dirty || image.touched || formCreateDish.submitted)? 'form-control is-invalid':'form-control')]"
                                name="image"
                                required
                                (change)="handleFileInput($event)">

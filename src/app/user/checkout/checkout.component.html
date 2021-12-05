@@ -114,18 +114,19 @@
                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                        aria-orientation="vertical">
                     <label for="paymentMethod">
-                      <a class="nav-link active" id="v-pills-cash-tab" data-toggle="pill"
-                         href="#v-pills-cash" role="tab" aria-controls="v-pills-cash"
+                      <a class="nav-link active" id="v-pills-cash-tab"
+                          role="tab" aria-controls="v-pills-cash"
                          aria-selected="false"><i class="icofont-money"></i> COD</a>
                     </label>
-                    <input id="paymentMethod" type="radio" ngModel value="1" name="paymentMethod">
-                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill"
-                       href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                       aria-selected="true"><i class="icofont-credit-card"></i> Credit/Debit
-                      Cards</a>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"
-                       href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
-                       aria-selected="false"><i class="icofont-bank-alt"></i> Netbanking</a>
+                    <input #paymentMethod id="paymentMethod" type="radio" [ngModel]="paymentMethod.value" value="1" name="paymentMethod" hidden>
+                    <!--                    <a class="nav-link" id="v-pills-home-tab" data-toggle="pill"-->
+<!--                       href="#v-pills-home" role="tab" aria-controls="v-pills-home"-->
+<!--                       aria-selected="true"><i class="icofont-credit-card"></i> Credit/Debit-->
+<!--                      Cards</a>-->
+
+<!--                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill"-->
+<!--                       href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"-->
+<!--                       aria-selected="false"><i class="icofont-bank-alt"></i> Netbanking</a>-->
                   </div>
                 </div>
                 <div class="col-sm-8 pl-0">
@@ -142,11 +143,11 @@
                           </div>
                           <div class="form-group col-md-12">
                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input"
-                                     id="customCheck1">
-                              <label class="custom-control-label"
-                                     for="customCheck1">Securely save this card for a faster
-                                checkout next time.</label>
+<!--                              <input type="checkbox" class="custom-control-input"-->
+<!--                                     id="customCheck1">-->
+<!--                              <label class="custom-control-label"-->
+<!--                                     for="customCheck1">Securely save this card for a faster-->
+<!--                                checkout next time.</label>-->
                             </div>
                           </div>
                         </div>

@@ -9,7 +9,7 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
 
 const routes: Routes = [
   {
-    path: 'merchant/register',
+    path: 'register/merchant',
     component: MerchantRegisterComponent
   },
   {

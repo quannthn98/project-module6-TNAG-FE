@@ -23,6 +23,7 @@ export class MerchantPendingComponent implements OnInit {
 
   getMerchantPending() {
     this.userService.getPendingMerchant().subscribe((data: any) => {
+      console.log(data.content);
       this.merchants = data.content;
     }, error => {
       console.log(error);

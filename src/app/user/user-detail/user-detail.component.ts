@@ -52,12 +52,14 @@ export class UserDetailComponent implements OnInit {
       this.currentUser.avatar = data.avatar;
       localStorage.setItem('user', JSON.stringify(this.currentUser));
       this.authenticationService.currentUserSubject.next(this.currentUser);
+      document.getElementById("fileName").setAttribute('hidden', '');
     });
   }
 
   handleFileInput(event) {
     this.image = (event.target).files[0];
+    document.getElementById("fileName").removeAttribute('hidden');
+    document.getElementById("fileName").innerText = 'Ảnh đã chọn: ' + this.image.name;
+    console.log(this.image.name);
   }
-
-
 }

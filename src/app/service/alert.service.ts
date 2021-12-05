@@ -15,8 +15,9 @@ export class AlertService {
       position: 'top-end',
       icon: 'success',
       title: message,
+      timerProgressBar: true,
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000
     });
   }
 
@@ -27,7 +28,8 @@ export class AlertService {
       icon: 'error',
       title: message,
       showConfirmButton: false,
-      timer: 1500
+      timerProgressBar: true,
+      timer: 2000
     });
   }
 }

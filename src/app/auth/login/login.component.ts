@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Router} from '@angular/router';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private authentication: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   login(formLogin) {
     this.authentication.login(formLogin.value.username, formLogin.value.password).subscribe(() => {
       this.router.navigate(['/']);
+      this.alertService.alertSuccess(`Chào mừng ${this.authentication.currentUserValue.name} đã trở lại`);
     }, () => {
       document.getElementById('errorsLogin').innerHTML = 'Sai tên tài khoản hoặc mật khẩu !';
     })

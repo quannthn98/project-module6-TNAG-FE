@@ -7,14 +7,14 @@
         <div class="e-navlist e-navlist--active-lg">
           <ul class="nav">
 
-            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i
-              class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i>
+              <span>Thông tin cá nhân</span></a></li>
 
-            <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users"
-                                    target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
-            <li class="nav-item"><a class="nav-link px-2"
-                                    href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i
-              class="fa fa-fw fa-cog mr-1"></i><span>Thông tin cá nhân</span></a></li>
+            <li class="nav-item"><a class="nav-link px-2" target="__blank"><i class="fa fa-fw fa-th mr-1"></i>
+              <span>Lịch sử đơn hàng</span></a></li>
+
+            <li class="nav-item"><a class="nav-link px-2"><i class="fa fa-fw fa-cog mr-1"></i>
+              <span>Địa chỉ giao hàng</span></a></li>
           </ul>
         </div>
       </div>
@@ -31,20 +31,32 @@
                     <div class="mx-auto" style="width: 140px;">
                       <div class="d-flex justify-content-center align-items-center rounded"
                            style="height: 140px; background-color: rgb(233, 236, 239);">
-                        <img src="http://localhost:8080/{{currentUser.avatar}}" style="width: 140px; height: 140px" alt="">
+                        <img src="http://localhost:8080/{{currentUser.avatar}}" style="width: 140px; height: 140px"
+                             alt="">
                       </div>
                     </div>
                   </div>
                   <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                     <div class=" text-sm-left mb-2 mb-sm-0">
-                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{currentUser.name}}</h4>
+                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Thay đổi ảnh đại diện</h4>
                       <div class="mt-2">
-                        <form #updateAvatar = "ngForm" (ngSubmit)="changeAvatar(updateAvatar)">
-                          <input class="form-control" type="file" name="avatar" [ngModel]="currentUser?.avatar" (change)="handleFileInput($event)">
+                        <form #updateAvatar="ngForm" (ngSubmit)="changeAvatar(updateAvatar)">
+                          <div class="row">
+                            <div class="col-auto">
+                              <label class="btn btn-outline-primary" for="avatar">
+                                Chọn ảnh từ máy tính
+                              </label>
+                            </div>
+                            <div class="col">
+                              <span id="fileName"></span>
+                            </div>
+                          </div>
                           <button class="btn btn-primary mt-3" type="submit">
                             <i class="fa fa-fw fa-camera"></i>
                             <span>Tải ảnh lên</span>
                           </button>
+                          <input hidden id="avatar" type="file" name="avatar" [ngModel]="currentUser?.avatar"
+                                 (change)="handleFileInput($event)">
                         </form>
                       </div>
                     </div>
@@ -52,100 +64,131 @@
                 </div>
                 <hr>
                 <ul class="nav nav-tabs">
-                  <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                  <li class="nav-item"><a href="" class="active nav-link">Cập nhật thông tin cá nhân</a></li>
                 </ul>
                 <div class="tab-content pt-3">
                   <div class="tab-pane active">
-                      <div class="row">
+                    <div class="row">
+                      <div class="col">
                         <div class="col">
                           <div class="col">
+                            <div class="form-group">
+                              <label>Username</label>
+                              <div class="form-control" readonly>{{currentUser.username}}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <div class="form-control" readonly>{{currentUser.email}}
+                              </div>
+                            </div>
+                          </div>
+                          <form #updateInfo="ngForm" (ngSubmit)="updateInfo.valid && updateInformation(updateInfo)">
                             <div class="col">
                               <div class="form-group">
-                                <label>Username</label>
-                                <div class="form-control" readonly>{{currentUser.username}}
-                                </div>
+                                <label>Họ và tên</label>
+                                <input #fullName="ngModel"
+                                       [ngModel]="currentUser.name"
+                                       [ngClass]="[(fullName.valid) ? 'form-control is-valid' :((fullName.dirty || fullName.touched || updateInfo.submitted)? 'form-control is-invalid':'form-control')]"
+                                       type="text" name="fullName" placeholder="Nhập ít nhất 4 - 20 ký tự"
+                                       required
+                                       minlength="4"
+                                       maxlength="20"
+                                       value="{{currentUser.name}}">
+                                <ng-container
+                                  *ngIf="fullName.invalid && (fullName.dirty || fullName.touched || updateInfo.submitted)">
+                                  <p *ngIf="fullName.errors?.required" class="invalid-feedback">
+                                    Trường này không được để trống
+                                  </p>
+                                  <p *ngIf="fullName.errors?.minlength || fullName.errors?.maxlength"
+                                     class="invalid-feedback">
+                                    Trường này có độ dài từ 4 - 20 ký tự
+                                  </p>
+                                </ng-container>
                               </div>
                             </div>
                             <div class="col">
                               <div class="form-group">
-                                <label>Email</label>
-                                <div class="form-control" readonly>{{currentUser.email}}
-                                </div>
+                                <label>Số điện thoại</label>
+                                <input
+                                  #phone="ngModel"
+                                  [ngClass]="[(phone.valid) ? 'form-control is-valid' :((phone.dirty || phone.touched || updateInfo.submitted)? 'form-control is-invalid':'form-control')]"
+                                  type="text"
+                                  [ngModel]="currentUser.phone"
+                                  name="phone"
+                                  required
+                                  minlength="9"
+                                  maxlength="11"
+                                  value="{{currentUser.phone}}">
+                                <ng-container
+                                  *ngIf="phone.invalid && (phone.dirty || phone.touched || updateInfo.submitted)">
+                                  <p *ngIf="phone.errors?.required" class="invalid-feedback">
+                                    Trường này không được để trống
+                                  </p>
+                                  <p *ngIf="phone.errors?.minlength || phone.errors?.maxlength" class="invalid-feedback">
+                                    Trường này phải ít nhất 9-11 ký tự
+                                  </p>
+                                </ng-container>
                               </div>
-                            </div>
-                            <form #updateInfo = "ngForm" (ngSubmit)="updateInformation(updateInfo)">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Họ và tên</label>
-                                  <input class="form-control" type="text" [ngModel]="currentUser.name" name="fullName" placeholder="John Smith"
-                                         value="{{currentUser.name}}">
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Số điện thoại</label>
-                                  <input class="form-control"
-                                         type="number"
-                                         [ngModel]="currentUser.phone"
-                                         name="phone"
-                                         value="{{currentUser.phone}}" >
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Giới tính</label>
-                                  <select ngModel="{{sex.value}}" name="sex" class="form-select" #sex >
-                                    <option [selected]="currentUser.sex === 'Nam'" value="Nam">Nam</option>
-                                    <option [selected]="currentUser.sex === 'Nữ'"  value="Nữ" >Nữ</option>
-                                  </select>
-                                </div>
-                              </div>
-                                <div class="mb-3 col d-flex justify-content-end">
-                                  <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
-                                </div>
-                            </form>
 
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-12 col-sm-6 mb-3">
-                            <ul class="nav nav-tabs">
-                              <li class="nav-item"><a href="" class="active nav-link">Đổi mật khẩu</a></li>
-                            </ul>
-                            <div class="row mt-2">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Mật khẩu hiện tại</label>
-                                  <input class="form-control" type="password" placeholder="••••••">
-                                </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Giới tính</label>
+                                <select ngModel="{{sex.value}}" name="sex" class="form-select" #sex>
+                                  <option [selected]="currentUser.sex === 'Nam'" value="Nam">Nam</option>
+                                  <option [selected]="currentUser.sex === 'Nữ'" value="Nữ">Nữ</option>
+                                </select>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Mật khẩu mới</label>
-                                  <input class="form-control" type="password" placeholder="••••••">
-                                </div>
-                              </div>
+                            <div class="mb-3 col d-flex justify-content-end">
+                              <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
                             </div>
-                            <div class="row">
-                              <div class="col">
-                                <div class="form-group">
-                                  <label>Nhập lại <span class="d-none d-xl-inline">mật khẩu</span></label>
-                                  <input class="form-control" type="password" placeholder="••••••"></div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
-                          </div>
+                          </form>
+
                         </div>
                       </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                          <ul class="nav nav-tabs">
+                            <li class="nav-item"><a href="" class="active nav-link">Đổi mật khẩu</a></li>
+                          </ul>
+                          <div class="row mt-2">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Mật khẩu hiện tại</label>
+                                <input class="form-control" type="password" placeholder="••••••">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <input class="form-control" type="password" placeholder="••••••">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Nhập lại <span class="d-none d-xl-inline">mật khẩu</span></label>
+                                <input class="form-control" type="password" placeholder="••••••"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col d-flex justify-content-end">
+                          <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+                        </div>
+                      </div>
+                    </div>
 
 
                   </div>
@@ -161,7 +204,7 @@
               <div class="px-xl-3">
                 <button class="btn btn-block btn-secondary">
                   <i class="fa fa-sign-out"></i>
-                  <span>Logout</span>
+                  <span (click)="authenticationService.logout()">Đăng xuất</span>
                 </button>
               </div>
             </div>

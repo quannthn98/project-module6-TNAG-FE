@@ -99,7 +99,7 @@ export class CheckoutComponent implements OnInit {
       note: checkoutForm.value.note
     }, this.id).subscribe(data => {
       console.log(data);
-      this.alertService.alertSuccess('Tạo đơn hàng mới thành công');
+      this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');
       this.router.navigateByUrl('');
     });
   }
