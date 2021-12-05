@@ -2,14 +2,17 @@
   <a>Danh sách cửa hàng</a>
     <input #searchValue type="text" placeholder="Tìm kiếm.." (input)="search(searchValue.value)">
 </div>
-<table class="table table-striped">
+<table class="table table-hover table-bordered">
+  <thead>
   <tr>
-    <td>#</td>
-    <td>Tên cửa hàng</td>
-    <td>Địa chỉ</td>
-    <td>Trạng thái</td>
-    <td>Thông tin</td>
+    <th scope="col">#</th>
+    <th scope="col">Tên cửa hàng</th>
+    <th scope="col">Địa chỉ</th>
+    <th scope="col">Trạng thái</th>
+    <th scope="col">Thông tin</th>
   </tr>
+  </thead>
+  <tbody>
   <tr *ngFor="let merchant of merchants; index as i">
     <td>{{i + 1}}</td>
     <td>{{merchant.merchantProfile.name}}</td>
@@ -21,6 +24,7 @@
       </button>
     </td>
   </tr>
+  </tbody>
 </table>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -57,7 +61,7 @@
           </div>
           <div>
             <label for="status">Thay đổi trạng thái cửa hàng</label><br>
-            <select id="status" #element>
+            <select class="form-select" id="status" #element>
               <option *ngFor="let status of statusList"
                       [selected]="status.name === pickedMerchant?.userStatus?.name" value="{{status.name}}">{{status.name}}</option>
             </select>
@@ -66,9 +70,9 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-success" (click)="updateStatus(element.value, pickedMerchant.id)"
-                data-dismiss="modal">Accept
+                data-dismiss="modal">Lưu thay đổi
         </button>
-        <button class="btn btn-primary" data-dismiss="modal">Back</button>
+        <button class="btn btn-primary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>

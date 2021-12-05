@@ -9,6 +9,7 @@ import {MerchantProfile} from '../../model/merchant-profile';
 import Swal from 'sweetalert2';
 
 import 'react-toastify/dist/ReactToastify.css';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-merchant-info-edit',
@@ -28,7 +29,8 @@ export class MerchantInfoEditComponent implements OnInit {
               private merchantService: MerchantService,
               private categoryService: CategoryService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private alertService: AlertService) {
     activatedRoute.paramMap.subscribe(param => {
       this.id = +param.get('id');
     });
