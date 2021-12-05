@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {MerchantsDetailComponent} from './merchants-detail/merchants-detail.component';
 import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
 import {CheckoutComponent} from './checkout/checkout.component';
+import {UserDetailComponent} from './user-detail/user-detail.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'checkout/:id',
     component: CheckoutComponent
+  },
+  {
+    path: 'detail',
+    component: UserDetailComponent
   },
   {
     path: '',
