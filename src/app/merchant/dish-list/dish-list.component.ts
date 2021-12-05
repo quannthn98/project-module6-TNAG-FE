@@ -11,6 +11,7 @@ import {MerchantProfile} from '../../model/merchant-profile';
 })
 export class DishListComponent implements OnInit {
   searchText: string;
+  dish: Dish;
   merchant: MerchantProfile = {};
   dishes: Dish[] = [];
   id: number;
@@ -44,4 +45,20 @@ export class DishListComponent implements OnInit {
     );
   }
 
+  findDishById(id) {
+    this.userService.getDishById(id).subscribe((data: any) => {
+      console.log(data);
+      this.dish = data;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  deleteDishById(id) {
+
+  }
+
+  editDishById(id) {
+
+  }
 }
