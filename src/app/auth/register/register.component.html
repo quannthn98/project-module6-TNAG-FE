@@ -7,58 +7,96 @@
         <div class="login d-flex align-items-center py-5">
           <div class="container">
             <div class="row">
-                <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
-                  <h3 class="login-heading mb-4">Đăng ký thành viên nhận ngay ưu đãi!</h3>
-                  <form #createUserForm="ngForm" (ngSubmit)="createUserForm.invalid && submitUser(createUserForm)">
-                    <p *ngIf="createUserForm.invalid">Thông tin không hợp lệ, vui lòng nhập lại</p>
-                    <div class="form-label-group">
-                      <input type="text" id="inputUsername" required class="form-control" ngModel #username="ngModel"
-                             name="username"
-                             placeholder="Tên đăng nhập">
-                      <label for="inputUsername">Tên đăng nhập</label>
-                      <ng-container *ngIf="username.invalid && username.dirty">
-                        <p *ngIf="username.errors?.required">Tên bắt buộc phải nhập</p>
-                      </ng-container>
-                    </div>
-                    <div class="form-label-group">
-                      <input type="password" id="inputPassword" required class="form-control" ngModel
-                             #password="ngModel" name="password"
-                             placeholder="Mật khẩu">
-                      <label for="inputPassword">Mật khẩu</label>
-                      <ng-container *ngIf="password.invalid && password.dirty">
-                        <p *ngIf="password.errors?.required">Mật khẩu bắt buộc phải nhập</p>
-                      </ng-container>
-                    </div>
-                    <div class="form-label-group">
-                      <input type="email" id="inputEmail" required class="form-control" ngModel name="email" #email="ngModel"
-                             placeholder="Email">
-                      <label for="inputEmail">Email đăng ký</label>
-                      <ng-container *ngIf="email.invalid && email.dirty">
-                        <p *ngIf="email.errors?.required">Mật khẩu bắt buộc phải nhập</p>
-                      </ng-container>
-                    </div>
-                    <!--                  <div class="form-label-group mb-4">-->
-                    <!--                    <input type="text" id="fullName" class="form-control" placeholder="Họ tên đầy đủ">-->
-                    <!--                    <label for="fullName">Họ tên đầy đủ</label>-->
-                    <!--                  </div>-->
-                    <!--                  <div class="form-label-group mb-4">-->
-                    <!--                    <input type="text" id="phoneNumber" class="form-control" placeholder="Số điện thoại">-->
-                    <!--                    <label for="phoneNumber">Số điện thoại liên lạc</label>-->
-                    <!--                  </div>-->
-                    <!--                  <div class="form-label-group mb-4">-->
-                    <!--                    <h6>Giới tính</h6>-->
-                    <!--                    <select type="text" id="gender" class="form-control">-->
-                    <!--                      <option>Nam</option>-->
-                    <!--                      <option>Nữ</option>-->
-                    <!--                      <option>Khác...</option>-->
-                    <!--                    </select>-->
-                    <!--                  </div>-->
-                    <button>Đăng ký</button>
-                    <div class="text-center pt-3">
-                      Bạn đã có tài khoản? <a class="font-weight-bold" routerLink="/login">Đăng nhập ngay</a>
-                    </div>
-                  </form>
-                </div>
+              <div class="col-md-9 col-lg-8 mx-auto pl-5 pr-5">
+                <h3 class="login-heading mb-4">Đăng ký thành viên nhận ngay ưu đãi!</h3>
+                <form #createUserForm="ngForm" (ngSubmit)="submitUser(createUserForm)">
+                  <p *ngIf="createUserForm.invalid">Thông tin không hợp lệ, vui lòng nhập lại</p>
+                  <div class="form-label-group">
+                    <input type="text" id="inputUsername" ngModel
+                           #username="ngModel"
+                           [ngClass]="[(username.valid && (username.touched || username.dirty)) ? 'form-control is-valid' :((username.dirty || username.touched || createUserForm.submitted)? 'form-control is-invalid':'form-control')]"
+                           required
+                           name="username"
+                           minlength="4"
+                           maxlength="20">
+                    <label for="inputUsername">Tên đăng nhập</label>
+                    <ng-container
+                      *ngIf="username.invalid && (username.dirty || username.touched || createUserForm.submitted)">
+                      <p *ngIf="username.errors?.required" class="invalid-feedback">Tên không được để trống</p>
+                      <p *ngIf="username.errors?.minlength" class="invalid-feedback">Tên phải có ít nhất 5 ký tự</p>
+                      <p *ngIf="username.errors?.maxlength" class="invalid-feedback">Tên có tối đa 20 ký tự</p>
+                    </ng-container>
+                  </div>
+                  <div class="form-label-group">
+                    <input type="password" id="inputPassword" required class="form-control" ngModel
+                           #password="ngModel" name="password"
+                           [ngClass]="[(password.valid && (password.touched || password.dirty)) ? 'form-control is-valid' :((password.dirty || password.touched || createUserForm.submitted)? 'form-control is-invalid':'form-control')]">
+                    <label for="inputPassword">Mật khẩu</label>
+                    <ng-container
+                      *ngIf="password.invalid && (password.dirty || password.touched || createUserForm.submitted)">
+                      <p *ngIf="password.errors?.required" class="invalid-feedback">Mật khẩu bắt buộc phải nhập</p>
+                    </ng-container>
+                  </div>
+                  <div class="form-label-group">
+                    <input type="email" id="inputEmail" required class="form-control" ngModel name="email"
+                           #email="ngModel"
+                           [ngClass]="[(email.valid && (email.touched || email.dirty)) ? 'form-control is-valid' :((email.dirty || email.touched || createUserForm.submitted)? 'form-control is-invalid':'form-control')]">
+                    <label for="inputEmail" aria-disabled="false">Email đăng ký</label>
+                    <ng-container *ngIf="email.invalid && (email.dirty || email.touched || createUserForm.submitted)">
+                      <p *ngIf="email.errors?.required" class="invalid-feedback">Mật khẩu bắt buộc phải nhập</p>
+                    </ng-container>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="fullName" ngModel
+                           #fullName="ngModel"
+                           [ngClass]="[(fullName.valid && (fullName.touched || fullName.dirty)) ? 'form-control is-valid' :((fullName.dirty || fullName.touched || createUserForm.submitted)? 'form-control is-invalid':'form-control')]"
+                           required
+                           name="fullName"
+                           minlength="8"
+                           maxlength="20">
+                    <label for="fullName">Họ tên đầy đủ</label>
+                    <ng-container
+                      *ngIf="fullName.invalid && (fullName.dirty || fullName.touched || createUserForm.submitted)">
+                      <p *ngIf="fullName.errors?.required" class="invalid-feedback">Họ tên bắt buộc phải nhập</p>
+                      <p *ngIf="fullName.errors?.minlength" class="invalid-feedback">Tên phải có ít nhất 8 ký tự</p>
+                      <p *ngIf="fullName.errors?.maxlength" class="invalid-feedback">Tên có tối đa 20 ký tự</p>
+                    </ng-container>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <input type="text" id="phoneNumber" class="form-control"
+                           required ngModel
+                           name="phoneNumber"
+                           #phoneNumber="ngModel"
+                           [ngClass]="[(phoneNumber.valid && (phoneNumber.touched || phoneNumber.dirty)) ? 'form-control is-valid' :((phoneNumber.dirty || phoneNumber.touched || createUserForm.submitted)? 'form-control is-invalid':'form-control')]"
+                           minlength="9"
+                           maxlength="11">
+                    <label for="phoneNumber">Số điện thoại liên lạc</label>
+                    <ng-container
+                      *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched || createUserForm.submitted)">
+                      <p *ngIf="phoneNumber.errors?.required" class="invalid-feedback">Số điện thoại bắt buộc phải
+                        nhập</p>
+                      <p *ngIf="phoneNumber.errors?.minlength" class="invalid-feedback">Số điện thoại phải có ít nhất 9
+                        ký
+                        tự</p>
+                      <p *ngIf="phoneNumber.errors?.maxlength" class="invalid-feedback">Số điện thoại có tối đa 11 ký
+                        tự</p>
+                    </ng-container>
+                  </div>
+                  <div class="form-label-group mb-4">
+                    <h6>Giới tính</h6>
+                    <select id="sex" class="form-control" #sex="ngModel" ngModel name="sex">
+                      <option value="" selected disabled hidden>Chọn giới tính</option>
+                      <option>Nam</option>
+                      <option>Nữ</option>
+                      <option>Khác...</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-lg btn-outline-primary btn-block btn-login text-uppercase font-weight-bold mb-2">Đăng ký</button>
+                  <div class="text-center pt-3">
+                    Bạn đã có tài khoản? <a class="font-weight-bold" routerLink="/login">Đăng nhập ngay</a>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

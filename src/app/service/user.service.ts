@@ -7,6 +7,7 @@ import {User} from '../model/user';
 import {MerchantProfile} from '../model/merchant-profile';
 import {UserAddress} from '../model/user-address';
 import {UserProfile} from '../model/user-profile';
+import {UserForm} from '../model/user-form';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -81,7 +82,7 @@ export class UserService {
     return this.http.put<UserProfile>(`${API_URL}/users/profile/avatar`, avatar);
   }
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(API_URL + '/users/create', user);
+  createUser(formData: FormData): Observable<UserForm> {
+    return this.http.post<UserForm>(API_URL + '/register', formData);
   }
 }
