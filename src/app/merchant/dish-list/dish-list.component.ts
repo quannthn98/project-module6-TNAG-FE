@@ -3,6 +3,7 @@ import {Dish} from '../../model/dish';
 import {UserService} from '../../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MerchantProfile} from '../../model/merchant-profile';
+import {DishService} from '../../service/dish.service';
 
 @Component({
   selector: 'app-dish-list',
@@ -15,8 +16,11 @@ export class DishListComponent implements OnInit {
   merchant: MerchantProfile = {};
   dishes: Dish[] = [];
   id: number;
+  deleteId: number;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService,
+              private router: Router,
+              private dishService: DishService) {
     this.id = JSON.parse(localStorage.user).id;
     this.getMerchantById();
     this.getAllDishByMerchant();
@@ -54,11 +58,13 @@ export class DishListComponent implements OnInit {
     });
   }
 
-  deleteDishById(id) {
-
+  showConfirmDelete(id: number) {
+    this.deleteId = id;
   }
 
-  editDishById(id) {
-
+  deleteDish() {
+    this.dishService.delete(this.deleteId).subscribe( (data: any) => {
+      this.getAllDishByMerchant();
+    });
   }
 }

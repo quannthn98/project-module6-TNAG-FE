@@ -2,15 +2,18 @@
   <a>Cửa hàng chờ xét duyệt</a>
   <input #searchValue type="text" placeholder="Tìm kiếm.." (input)="search(searchValue.value)">
 </div>
-<table class="table table-striped">
+<table class="table table-hover table-bordered">
+  <thead>
   <tr>
-    <td>#</td>
-    <td>Tên chủ cửa hàng</td>
-    <td>Tên cửa hàng</td>
-    <td>Trạng thái</td>
-    <td>Xét duyệt</td>
-    <td></td>
+    <th>#</th>
+    <th>Tên chủ cửa hàng</th>
+    <th>Tên cửa hàng</th>
+    <th>Trạng thái</th>
+    <th>Xét duyệt</th>
+    <th></th>
   </tr>
+  </thead>
+  <tbody>
   <tr *ngFor="let merchant of merchants; index as i">
     <td>{{i + 1}}</td>
     <td>{{merchant.username}}</td>
@@ -23,6 +26,7 @@
       </button>
     </td>
   </tr>
+  </tbody>
 </table>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">

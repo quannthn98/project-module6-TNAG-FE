@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
 import {MerchantProfile} from '../../model/merchant-profile';
 import Swal from 'sweetalert2';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-dish-create',
@@ -22,6 +23,7 @@ export class DishCreateComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private dishService: DishService,
+              private alertService: AlertService,
               private router: Router,
               private authenticationService: AuthenticationService) {
     this.id = this.authenticationService.currentUserValue.id;
@@ -44,22 +46,13 @@ export class DishCreateComponent implements OnInit {
     formData.append('image', this.image);
     this.dishService.create(formData).subscribe(() => {
       this.router.navigate(['/merchant']);
-      this.alertSuccess();
+      this.alertService.alertSuccess('Thêm mới thành công');
+    }, error => {
+      this.alertService.alertError('Thêm mới không thành công');
     });
   }
 
   handleFileInput(event) {
     this.image = (event.target).files[0];
-  }
-
-  alertSuccess() {
-    Swal.fire({
-      toast: true,
-      position: 'top-end',
-      icon: 'success',
-      title: 'Thêm mới thành công',
-      showConfirmButton: false,
-      timer: 1500
-    });
   }
 }

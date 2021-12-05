@@ -1,0 +1,182 @@
+<app-navbar></app-navbar>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mt-4">
+  <div class="row flex-lg-nowrap">
+    <div class="col-12 col-lg-auto mb-3" style="width: 250px;">
+      <div class="card p-3">
+        <div class="e-navlist e-navlist--active-lg">
+          <ul class="nav">
+
+            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i
+              class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+
+            <li class="nav-item"><a class="nav-link px-2" href="https://www.bootdey.com/snippets/view/bs4-crud-users"
+                                    target="__blank"><i class="fa fa-fw fa-th mr-1"></i><span>CRUD</span></a></li>
+            <li class="nav-item"><a class="nav-link px-2"
+                                    href="https://www.bootdey.com/snippets/view/bs4-edit-profile-page" target="__blank"><i
+              class="fa fa-fw fa-cog mr-1"></i><span>Thông tin cá nhân</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <div class="col mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-12 col-sm-auto mb-3">
+                    <div class="mx-auto" style="width: 140px;">
+                      <div class="d-flex justify-content-center align-items-center rounded"
+                           style="height: 140px; background-color: rgb(233, 236, 239);">
+                        <img src="http://localhost:8080/{{currentUser.avatar}}" style="width: 140px; height: 140px" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                    <div class=" text-sm-left mb-2 mb-sm-0">
+                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{currentUser.name}}</h4>
+                      <div class="mt-2">
+                        <form #updateAvatar = "ngForm" (ngSubmit)="changeAvatar(updateAvatar)">
+                          <input class="form-control" type="file" name="avatar" [ngModel]="currentUser?.avatar" (change)="handleFileInput($event)">
+                          <button class="btn btn-primary mt-3" type="submit">
+                            <i class="fa fa-fw fa-camera"></i>
+                            <span>Tải ảnh lên</span>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                </ul>
+                <div class="tab-content pt-3">
+                  <div class="tab-pane active">
+                      <div class="row">
+                        <div class="col">
+                          <div class="col">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Username</label>
+                                <div class="form-control" readonly>{{currentUser.username}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Email</label>
+                                <div class="form-control" readonly>{{currentUser.email}}
+                                </div>
+                              </div>
+                            </div>
+                            <form #updateInfo = "ngForm" (ngSubmit)="updateInformation(updateInfo)">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Họ và tên</label>
+                                  <input class="form-control" type="text" [ngModel]="currentUser.name" name="fullName" placeholder="John Smith"
+                                         value="{{currentUser.name}}">
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Số điện thoại</label>
+                                  <input class="form-control"
+                                         type="number"
+                                         [ngModel]="currentUser.phone"
+                                         name="phone"
+                                         value="{{currentUser.phone}}" >
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Giới tính</label>
+                                  <select ngModel="{{sex.value}}" name="sex" class="form-select" #sex >
+                                    <option [selected]="currentUser.sex === 'Nam'" value="Nam">Nam</option>
+                                    <option [selected]="currentUser.sex === 'Nữ'"  value="Nữ" >Nữ</option>
+                                  </select>
+                                </div>
+                              </div>
+                                <div class="mb-3 col d-flex justify-content-end">
+                                  <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                                </div>
+                            </form>
+
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-12 col-sm-6 mb-3">
+                            <ul class="nav nav-tabs">
+                              <li class="nav-item"><a href="" class="active nav-link">Đổi mật khẩu</a></li>
+                            </ul>
+                            <div class="row mt-2">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Mật khẩu hiện tại</label>
+                                  <input class="form-control" type="password" placeholder="••••••">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Mật khẩu mới</label>
+                                  <input class="form-control" type="password" placeholder="••••••">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Nhập lại <span class="d-none d-xl-inline">mật khẩu</span></label>
+                                  <input class="form-control" type="password" placeholder="••••••"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+                          </div>
+                        </div>
+                      </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 mb-3">
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="px-xl-3">
+                <button class="btn btn-block btn-secondary">
+                  <i class="fa fa-sign-out"></i>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h6 class="card-title font-weight-bold">Bạn cần hỗ trợ?</h6>
+              <p class="card-text">Gọi ngay đến tổng đài 0347002333 để được hỗ trợ nhanh nhất</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
