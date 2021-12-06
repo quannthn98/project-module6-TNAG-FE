@@ -6,4 +6,7 @@ export interface MerchantProfile {
   hotline?: string;
   description?: string;
   openHours?: any;
+  avatar?: any;
+  cover?: any;
+  thumbnail?: any;
 }

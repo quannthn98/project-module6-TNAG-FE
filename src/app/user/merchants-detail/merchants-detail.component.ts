@@ -39,7 +39,6 @@ export class MerchantsDetailComponent implements OnInit {
         this.dishes = data.content;
       }, error => {
         console.log(error);
-        alert(error);
       }
     );
   }
@@ -68,7 +67,6 @@ export class MerchantsDetailComponent implements OnInit {
         this.merchant = data;
       }, error => {
         console.log(error);
-        alert(error);
       }
     );
   }

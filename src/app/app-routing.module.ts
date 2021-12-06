@@ -5,6 +5,8 @@ import {RegisterComponent} from './auth/register/register.component';
 import {LayoutMerchantComponent} from './layout/layout-merchant/layout-merchant.component';
 import {LayoutAdminComponent} from './layout/layout-admin/layout-admin.component';
 import {AuthGuard} from './auth/helper/auth-guard';
+import {RegisterMerchantComponent} from './auth/register-merchant/register-merchant.component';
+import {MerchantGuard} from './auth/helper/merchant-guard';
 
 const routes: Routes = [
   {
@@ -16,13 +18,19 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'register/merchant',
+    component: RegisterMerchantComponent
+  },
+  {
     path: 'merchant',
     component: LayoutMerchantComponent,
+    canActivate: [MerchantGuard],
     loadChildren: () => import('./merchant/merchant.module').then(module => module.MerchantModule)
   },
   {
     path: 'admin',
     component: LayoutAdminComponent,
+    canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule)
   },
   {

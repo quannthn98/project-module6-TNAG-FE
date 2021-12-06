@@ -25,8 +25,14 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.alertService.alertError('Bạn cần đăng nhập trước khi tiếp tục');
         } else if (err.status === 403) {
           this.alertService.alertError('Bạn không có quyền truy cập vào trang này');
+        } else if (err.status === 500) {
+          this.alertService.alertError('Lỗi kết nối đến server, vui lòng thử lại trong ít phút');
+        } else if (err.status === 404) {
+          this.alertService.alertError('Không tìm thấy dữ liệu tương ứng');
+        } else if (err.status === 400) {
+          this.alertService.alertError('Dữ liệu đầu vào không hợp lệ, vui lòng kiểm tra lại');
         }
-      }
+       }
     }));
   }
 }

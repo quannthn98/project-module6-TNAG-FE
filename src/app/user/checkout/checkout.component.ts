@@ -6,7 +6,6 @@ import {Cart} from '../../model/cart';
 import {CartDetail} from '../../model/cart-detail';
 import {UserAddress} from '../../model/user-address';
 import {NgForm} from '@angular/forms';
-import {Order} from '../../model/order';
 import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
 
@@ -73,7 +72,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getUserDeliverAddress() {
-    this.userService.getAllDeliverAddressByUser().subscribe(data => {
+    this.userService.getAllDeliverAddressByUser().subscribe((data: any) => {
       this.addresses = data;
       if (this.addresses.length < 3) {
         this.rowLoop.push(1);
