@@ -21,4 +21,16 @@ export class DishService {
   delete(id: number) {
     return this.http.delete(`${API_URL}/dishes/${id}`);
   }
+
+  getAllDish(id: number, name?: string): Observable<Dish[]> {
+    if (name == null || name === '') {
+      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant`);
+    } else {
+      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant?q=${name}`);
+    }
+  }
+
+  getDishById(id: number): Observable<Dish> {
+    return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
+  }
 }

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Cart} from '../../model/cart';
 import {CartDetail} from '../../model/cart-detail';
 import {CartService} from '../../service/cart.service';
+import {DishService} from '../../service/dish.service';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -22,7 +23,8 @@ export class MerchantsDetailComponent implements OnInit {
   constructor(private userService: UserService,
               private router: Router,
               private activeRoute: ActivatedRoute,
-              private cartService: CartService) {
+              private cartService: CartService,
+              private dishService: DishService) {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -35,7 +37,7 @@ export class MerchantsDetailComponent implements OnInit {
   }
 
   getAllDishByMerchant() {
-    this.userService.getAllDishByMerchant(this.id).subscribe((data: any) => {
+    this.dishService.getAllDish(this.id).subscribe((data: any) => {
         this.dishes = data.content;
       }, error => {
         console.log(error);
