@@ -1,0 +1,100 @@
+<div class="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0">Quản lý cửa hàng {{merchant.name}}</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a [routerLink]="['/admin/merchant']">Quản lý cửa hàng</a></li>
+        <li class="breadcrumb-item active">Danh sách món ăn</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header border-0">
+            <h3 class="card-title">Danh sách món ăn</h3>
+            <div class="float-right">
+              <form>
+                <!--                <input (input)="getAllDishByMerchant()" name="q" class="form-control" type="search" style="max-width: 300px" [(ngModel)]="searchText" placeholder="Tìm Kiếm Món Ăn">-->
+              </form>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-hover table-bordered">
+              <caption></caption>
+              <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên Món Ăn</th>
+                <th scope="col">Mô Tả</th>
+                <th scope="col">Trạng Thái</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let d of dishes; index as i" data-bs-toggle="modal"
+                  data-bs-target="#modalDetailDish" (click)="findDishById(d?.id)">
+                <th scope="row">{{i}}</th>
+                <td>{{d?.name}}</td>
+                <td>{{d?.description}}</td>
+                <td>{{d?.status == true ? "Còn hàng" : "Hết hàng"}}</td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="4">
+                  <button type="button" class="btn btn-secondary" [routerLink]="['/admin/merchant']">Quay lại</button>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+<!-- Modal -->
+<div class="modal fade" id="modalDetailDish" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel3">Thông Tin Món Ăn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <img src="http://localhost:8080/{{dish?.image}}" class="img-thumbnail" alt="Ảnh món">
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Tên Món Ăn: </h6>
+                <p class="card-text">{{dish?.name}}</p>
+                <h6 class="card-title">Quán Ăn: </h6>
+                <p class="card-text">{{dish?.merchant?.merchantProfile?.name}}</p>
+                <h6 class="card-title">Giá :</h6>
+                <p class="card-text">{{dish?.price}} VNĐ</p>
+                <h6 class="card-title">Tình Trạng: </h6>
+                <p class="card-text">{{dish?.status == true ? "Còn hàng" : "Hết hàng"}}</p>
+                <h6 class="card-title">Mô tả: </h6>
+                <p class="card-text">{{dish?.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

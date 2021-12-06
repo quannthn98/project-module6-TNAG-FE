@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
     const currentUser = this.authenticationService.currentUserValue;
     const roles = currentUser.roles;
     for (let i = 0; i < roles.length; i++) {
-      console.log(roles[i].authority);
       if (roles[i].authority === 'ROLE_ADMIN') {
         this.isAdmin = true;
         break;
