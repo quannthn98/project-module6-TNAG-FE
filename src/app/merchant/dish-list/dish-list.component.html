@@ -42,9 +42,9 @@
                 <td>{{d?.description}}</td>
                 <td >{{d?.status == true ? "Còn hàng": "Hết hàng"}}</td>
                 <td>
-                  <button type="button" class="btn btn-warning ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="editDishById(d.id)">Sửa</button>
-                  <button type="button" class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)">Xóa</button>
-                  <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)">Chi Tiết</button>
+                  <button type="button" class="btn btn-outline-success ml-2" routerLink="dish/edit/{{d.id}}"><i class="far fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)"><i class="far fa-trash-alt"></i></button>
+                  <button type="button" class="btn btn-outline-info ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)"><i class="fas fa-info-circle"></i></button>
                 </td>
               </tr>
               </tbody>
@@ -75,24 +75,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Sửa Món Ăn</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Sửa</button>
       </div>
     </div>
   </div>
