@@ -571,17 +571,6 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="pb-2">
-          <div
-            class="bg-white rounded shadow-sm text-white mb-4 p-4 clearfix restaurant-detailed-earn-pts card-icon-overlap">
-            <img class="img-fluid float-left mr-3" src="img/earn-score-icon.png">
-            <h6 class="pt-0 text-primary mb-1 font-weight-bold">VSATTP</h6>
-            <p class="mb-0">Nhà hàng chứng nhận đảm bảo vệ sinh an toàn thực phẩm</p>
-            <div class="icon-overlap">
-              <i class="icofont-sale-discount"></i>
-            </div>
-          </div>
-        </div>
         <div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item">
           <h5 class="mb-1 text-white">Đặt hàng ngay</h5>
           <p class="mb-4 text-white">{{this.cartDetails.length}} sản phẩm</p>
@@ -623,7 +612,7 @@
             <p class="text-black mb-0 text-right">Tiết kiệm 30.000 vnđ</p>
           </div>
           <button routerLink="/checkout/{{id}}" class="btn btn-success btn-block btn-lg">
-            Checkout
+            Thanh toán
             <i class="icofont-long-arrow-right"></i>
           </button>
         </div>
@@ -631,23 +620,4 @@
     </div>
   </div>
 </section>
-<section class="section pt-5 pb-5 text-center bg-white">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h5 class="m-0">Operate food store or restaurants? <a href="login.html">Work With Us</a></h5>
-      </div>
-    </div>
-  </div>
-</section>
 <app-footer></app-footer>
-<tbody>
-<tr *ngFor="let d of dishes; index as i">
-  <td>{{i + 1}}</td>
-  <td>{{d.name}}</td>
-  <td>{{d.image}}</td>
-  <td>{{d.description}}</td>
-  <td>{{d.merchant.merchantProfile.name}}</td>
-</tr>
-</tbody>
-

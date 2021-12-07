@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   login(formLogin) {
     this.authentication.login(formLogin.value.username, formLogin.value.password).subscribe(() => {
       this.router.navigate(['/']);
-      this.alertService.alertSuccess(`Chào mừng ${this.authentication.currentUserValue.name} đã trở lại`);
     }, () => {
       document.getElementById('errorsLogin').innerHTML = 'Sai tên tài khoản hoặc mật khẩu !';
     })

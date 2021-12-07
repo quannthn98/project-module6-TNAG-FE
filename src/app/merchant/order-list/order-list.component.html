@@ -1,1 +1,83 @@
-<p>order-list works!</p>
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Thời gian đặt hàng</th>
+    <th scope="col">Người đặt hàng</th>
+    <th scope="col">Địa chỉ giao hàng</th>
+    <th scope="col">Trạng thái đơn hàng</th>
+    <th scope="col">Mô tả đơn hàng</th>
+    <th scope="col">Tổng giá trị đơn hàng</th>
+    <th scope="col" colspan="2">Chi tiết</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders; index as i" >
+    <td>{{i + 1}}</td>
+    <td>{{order?.orderTime}}</td>
+    <td>{{order?.address?.customerName}}</td>
+    <td>{{order?.address?.address}}</td>
+    <td>{{order?.orderStatus?.name}}</td>
+    <td>{{order?.note}}</td>
+    <td>{{order?.totalPayment}}</td>
+    <td><button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+      class="icofont-headphone-alt" (click)="getOrder(order?.id)"></i> Chi tiết</button></td>
+<!--    <td>{{order?.ordersStatus?}}</td>-->
+<!--    <td>-->
+<!--      <button class="btn btn-success" (mousedown)="getId(merchant.id)" data-toggle="modal"-->
+<!--              data-target="#infoModal">Chi tiết cửa hàng-->
+<!--      </button>-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      <button class="btn btn-success" routerLink="{{merchant.id}}/dish">Chi tiết món ăn</button>-->
+<!--    </td>-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Chi tiết đơn hàng</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Món ăn</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let od of infoOrder.orderDetail; index as i">
+                <td>{{i+1}}</td>
+                <td>{{od?.dish.name}}</td>
+                <td>{{od?.price}}</td>
+                <td>{{od?.quantity}}</td>
+                <td>{{od?.total}}</td>
+              </tr>
+              </tbody>
+              <tbody>
+              <tr>
+                <td colspan="4">Giảm giá</td>
+                <td> 0 </td>
+              </tr>
+              <tr>
+                <td colspan="4">Thanh toán</td>
+                <td> {{infoOrder.totalPayment}} </td>
+              </tr>
+              </tbody>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </tr>
+  </tbody>
+</table>

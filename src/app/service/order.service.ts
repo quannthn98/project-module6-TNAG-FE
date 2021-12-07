@@ -19,6 +19,14 @@ export class OrderService {
   }
 
   getOrderByMerchant(id: number): Observable<Order[]> {
-    return this.http.get<Order[]>(API_URL + '/orders/' + id);
+    return this.http.get<Order[]>(API_URL + '/orders/merchant/' + id);
+  }
+
+  getAllOrdersByUser(): Observable<Order> {
+    return this.http.get<Order>(`${API_URL}/orders/user`);
+  }
+
+  getOrderById(id: number): Observable<Order> {
+    return this.http.get<Order>(API_URL + '/orders/' + id);
   }
 }

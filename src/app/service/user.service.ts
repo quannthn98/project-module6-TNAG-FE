@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Dish} from '../model/dish';
 import {User} from '../model/user';
 import {MerchantProfile} from '../model/merchant-profile';
 import {UserAddress} from '../model/user-address';

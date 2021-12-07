@@ -9,18 +9,20 @@ import { NavbarMerchantComponent } from './navbar-merchant/navbar-merchant.compo
 import { FooterMerchantComponent } from './footer-merchant/footer-merchant.component';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SidebarUserComponent } from './sidebar-user/sidebar-user.component';
 
 
 @NgModule({
-  declarations: [FooterComponent, NavbarComponent, SidebarComponent, NavbarMerchantComponent, FooterMerchantComponent, SidebarAdminComponent],
-  exports: [
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    NavbarMerchantComponent,
-    FooterMerchantComponent,
-    SidebarAdminComponent
-  ],
+  declarations: [FooterComponent, NavbarComponent, SidebarComponent, NavbarMerchantComponent, FooterMerchantComponent, SidebarAdminComponent, SidebarUserComponent],
+    exports: [
+        FooterComponent,
+        NavbarComponent,
+        SidebarComponent,
+        NavbarMerchantComponent,
+        FooterMerchantComponent,
+        SidebarAdminComponent,
+        SidebarUserComponent
+    ],
   imports: [
     CommonModule,
     SharedRoutingModule,
