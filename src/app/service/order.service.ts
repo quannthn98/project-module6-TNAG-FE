@@ -20,4 +20,8 @@ export class OrderService {
   getAllOrdersByUser(): Observable<Order> {
     return this.http.get<Order>(`${API_URL}/orders/user`);
   }
+
+  getOrderById(id: number): Observable<Order> {
+    return this.http.get<Order>(`${API_URL}/orders/${id}`);
+  }
 }

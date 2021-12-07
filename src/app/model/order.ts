@@ -8,10 +8,10 @@ export interface Order {
   finishedTime?: any;
   address?: UserAddress;
   totalPayment?: number;
-  status?: any;
+  orderStatus?: any;
   coupon?: any;
   shipper?: any;
-  orderDetail?: OrderDetail[];
+  ordersDetails?: OrderDetail[];
   merchant?: User;
 
 }
