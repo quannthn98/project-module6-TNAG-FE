@@ -5,7 +5,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MerchantsComponent } from './merchant-list/merchants.component';
 import { MerchantsDetailComponent } from './merchants-detail/merchants-detail.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import {SharedModule} from '../shared/shared.module';
@@ -15,7 +14,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, OrderHistoryComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent],
+  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
