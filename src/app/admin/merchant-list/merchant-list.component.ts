@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MerchantProfile} from '../../model/merchant-profile';
 import {UserService} from '../../service/user.service';
 import Swal from 'sweetalert2';
-import {AlertService} from '../../service/alert.service';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-merchant-list',
@@ -10,7 +10,7 @@ import {AlertService} from '../../service/alert.service';
   styleUrls: ['./merchant-list.component.css']
 })
 export class MerchantListComponent implements OnInit {
-  merchants: MerchantProfile[] = [];
+  merchants: User[] = [];
   id: number;
   pickedMerchant: any;
   statusList: any;
@@ -46,7 +46,6 @@ export class MerchantListComponent implements OnInit {
   getAllStatus() {
     this.userService.getAllStatus().subscribe((data: any) => {
       this.statusList = data.content;
-      console.log(this.statusList);
     }, error => {
       console.log(error);
     });
