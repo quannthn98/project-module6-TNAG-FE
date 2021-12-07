@@ -11,6 +11,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {MerchantInfoDetailComponent} from './merchant-info-detail/merchant-info-detail.component';
 import {MerchantInfoEditComponent} from './merchant-info-edit/merchant-info-edit.component';
 import {DishCreateComponent} from './dish-create/dish-create.component';
+import { MerchantOrderComponent } from './merchant-order/merchant-order.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {DishCreateComponent} from './dish-create/dish-create.component';
     EditProfileComponent,
     MerchantInfoDetailComponent,
     MerchantInfoEditComponent,
-    DishCreateComponent
+    DishCreateComponent,
+    MerchantOrderComponent
   ],
   imports: [
     CommonModule,
