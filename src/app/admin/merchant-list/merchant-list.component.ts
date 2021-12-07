@@ -27,7 +27,6 @@ export class MerchantListComponent implements OnInit {
   getAllMerchant() {
     this.userService.getAllMerchant().subscribe((data: any) => {
       this.merchants = data.content;
-      console.log(this.merchants);
     }, error => {
       console.log(error);
     });
