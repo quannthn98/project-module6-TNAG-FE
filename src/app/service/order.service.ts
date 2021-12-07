@@ -21,7 +21,14 @@ export class OrderService {
     return this.http.get<Order>(`${API_URL}/orders/user`);
   }
 
-  getOrderById(id: number): Observable<Order> {
-    return this.http.get<Order>(`${API_URL}/orders/${id}`);
+  getOrderByIdMerchant(merchantId: number, orderId: number,phoneCustomer:string,nameCustomer: string): Observable<Order> {
+    if ((orderId && phoneCustomer && nameCustomer) == null || (( phoneCustomer==''&& nameCustomer=='') && orderId == null)){
+      return this.http.get<Order>(`${API_URL}/orders/merchant/${merchantId}`);
+    }else if(  !(orderId== null) &&( (phoneCustomer && nameCustomer)==null || (phoneCustomer && nameCustomer)==='' )   ) {
+      return this.http.get<Order>(`${API_URL}/orders/merchant/${merchantId}/${orderId}`);
+    }else {
+      alert("Vui lòng chỉ nhập 1 trường tìm kiếm");
+    }
+
   }
 }
