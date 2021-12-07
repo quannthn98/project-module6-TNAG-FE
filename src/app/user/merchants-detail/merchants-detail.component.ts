@@ -65,7 +65,6 @@ export class MerchantsDetailComponent implements OnInit {
 
   private getMerchantById() {
     this.userService.getMerchantById(this.id).subscribe(data => {
-        console.log(data.merchantProfile);
         this.merchant = data;
       }, error => {
         console.log(error);

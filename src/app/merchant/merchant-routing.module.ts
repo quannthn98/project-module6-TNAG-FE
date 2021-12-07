@@ -14,7 +14,7 @@ const routes: Routes = [
     component: DishCreateComponent
   },
   {
-    path: 'dish/edit',
+    path: 'dish/edit/:id',
     component: EditDishComponent
   },
   {

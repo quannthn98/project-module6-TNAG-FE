@@ -21,10 +21,6 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'detail',
-    component: UserDetailComponent
-  },
-  {
     path: '',
     component: HomeComponent
   }

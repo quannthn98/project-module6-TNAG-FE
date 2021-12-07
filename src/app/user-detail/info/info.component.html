@@ -1,0 +1,195 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<!--    <div class="col-12 col-lg-auto mb-3" style="width: 250px;">-->
+<!--      <div class="card p-3">-->
+<!--        <div class="e-navlist e-navlist&#45;&#45;active-lg">-->
+<!--          <ul class="nav">-->
+
+<!--            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i>-->
+<!--              <span>Thông tin cá nhân</span></a></li>-->
+
+<!--            <li class="nav-item"><a class="nav-link px-2" target="__blank"><i class="fa fa-fw fa-th mr-1"></i>-->
+<!--              <span>Lịch sử đơn hàng</span></a></li>-->
+
+<!--            <li class="nav-item"><a class="nav-link px-2"><i class="fa fa-fw fa-cog mr-1"></i>-->
+<!--              <span>Địa chỉ giao hàng</span></a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<div class="row">
+  <div class="col mb-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="e-profile">
+          <div class="row">
+            <!--                  <div class="col-12 col-sm-auto mb-3">-->
+            <!--                    <div class="mx-auto" style="width: 140px;">-->
+            <!--                      <div class="d-flex justify-content-center align-items-center rounded"-->
+            <!--                           style="height: 140px; background-color: rgb(233, 236, 239);">-->
+            <!--                        <img src="http://localhost:8080/{{currentUser.avatar}}" style="width: 140px; height: 140px"-->
+            <!--                             alt="">-->
+            <!--                      </div>-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+              <div class=" text-sm-left mb-2 mb-sm-0">
+                <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">Thay đổi ảnh đại diện</h4>
+                <div class="mt-2">
+                  <form #updateAvatar="ngForm" (ngSubmit)="changeAvatar(updateAvatar)">
+                    <div class="row">
+                      <div class="col-auto">
+                        <label class="btn btn-outline-primary" for="avatar">
+                          Chọn ảnh từ máy tính
+                        </label>
+                      </div>
+                      <div class="col">
+                        <span id="fileName"></span>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary mt-3" type="submit">
+                      <i class="fa fa-fw fa-camera"></i>
+                      <span>Tải ảnh lên</span>
+                    </button>
+                    <input hidden id="avatar" type="file" name="avatar" [ngModel]="currentUser?.avatar"
+                           (change)="handleFileInput($event)">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="active nav-link">Cập nhật thông tin cá nhân</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <div class="row">
+                    <div class="col">
+                      <div class="col">
+                        <form #updateInfo="ngForm" (ngSubmit)="updateInfo.valid && updateInformation(updateInfo)">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Họ và tên</label>
+                              <input #fullName="ngModel"
+                                     [ngModel]="currentUser.name"
+                                     [ngClass]="[(fullName.valid) ? 'form-control is-valid' :((fullName.dirty || fullName.touched || updateInfo.submitted)? 'form-control is-invalid':'form-control')]"
+                                     type="text" name="fullName" placeholder="Nhập ít nhất 4 - 20 ký tự"
+                                     required
+                                     minlength="4"
+                                     maxlength="20"
+                                     value="{{currentUser.name}}">
+                              <ng-container
+                                *ngIf="fullName.invalid && (fullName.dirty || fullName.touched || updateInfo.submitted)">
+                                <p *ngIf="fullName.errors?.required" class="invalid-feedback">
+                                  Trường này không được để trống
+                                </p>
+                                <p *ngIf="fullName.errors?.minlength || fullName.errors?.maxlength"
+                                   class="invalid-feedback">
+                                  Trường này có độ dài từ 4 - 20 ký tự
+                                </p>
+                              </ng-container>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Số điện thoại</label>
+                              <input
+                                #phone="ngModel"
+                                [ngClass]="[(phone.valid) ? 'form-control is-valid' :((phone.dirty || phone.touched || updateInfo.submitted)? 'form-control is-invalid':'form-control')]"
+                                type="text"
+                                [ngModel]="currentUser.phone"
+                                name="phone"
+                                required
+                                minlength="9"
+                                maxlength="11"
+                                value="{{currentUser.phone}}">
+                              <ng-container
+                                *ngIf="phone.invalid && (phone.dirty || phone.touched || updateInfo.submitted)">
+                                <p *ngIf="phone.errors?.required" class="invalid-feedback">
+                                  Trường này không được để trống
+                                </p>
+                                <p *ngIf="phone.errors?.minlength || phone.errors?.maxlength" class="invalid-feedback">
+                                  Trường này phải ít nhất 9-11 ký tự
+                                </p>
+                              </ng-container>
+                            </div>
+
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Giới tính</label>
+                              <select ngModel="{{sex.value}}" name="sex" class="form-select" #sex>
+                                <option [selected]="currentUser.sex === 'Nam'" value="Nam">Nam</option>
+                                <option [selected]="currentUser.sex === 'Nữ'" value="Nữ">Nữ</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="mb-3 col d-flex justify-content-end">
+                            <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="active nav-link">Đổi mật khẩu</a></li>
+              </ul>
+              <div class="row mt-3">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Mật khẩu hiện tại</label>
+                    <input class="form-control" type="password" placeholder="••••••">
+                  </div>
+                </div>
+              </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Mật khẩu mới</label>
+                    <input class="form-control" type="password" placeholder="••••••">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Nhập lại <span class="d-none d-xl-inline">mật khẩu</span></label>
+                    <input class="form-control" type="password" placeholder="••••••"></div>
+                </div>
+                <div class="col d-flex justify-content-end">
+                  <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+                </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--        <div class="col-12 col-md-3 mb-3">-->
+  <!--          <div class="card mb-3">-->
+  <!--            <div class="card-body">-->
+  <!--              <div class="px-xl-3">-->
+  <!--                <button class="btn btn-block btn-secondary">-->
+  <!--                  <i class="fa fa-sign-out"></i>-->
+  <!--                  <span (click)="authenticationService.logout()">Đăng xuất</span>-->
+  <!--                </button>-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--          <div class="card">-->
+  <!--            <div class="card-body">-->
+  <!--              <h6 class="card-title font-weight-bold">Bạn cần hỗ trợ?</h6>-->
+  <!--              <p class="card-text">Gọi ngay đến tổng đài 0347002333 để được hỗ trợ nhanh nhất</p>-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+</div>
+
+

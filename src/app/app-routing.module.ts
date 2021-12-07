@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {LayoutMerchantComponent} from './layout/layout-merchant/layout-merchant.component';
@@ -7,6 +7,7 @@ import {LayoutAdminComponent} from './layout/layout-admin/layout-admin.component
 import {AuthGuard} from './auth/helper/auth-guard';
 import {RegisterMerchantComponent} from './auth/register-merchant/register-merchant.component';
 import {MerchantGuard} from './auth/helper/merchant-guard';
+import {LayoutUserDetailComponent} from './layout/layout-user-detail/layout-user-detail.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
     component: LayoutAdminComponent,
     canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule)
+  },
+  {
+    path: 'detail',
+    component: LayoutUserDetailComponent,
+    loadChildren: () => import('./user-detail/user-detail.module').then(module => module.UserDetailModule)
   },
   {
     path: '',
