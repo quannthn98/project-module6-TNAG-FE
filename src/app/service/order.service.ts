@@ -16,4 +16,8 @@ export class OrderService {
   createNewOrder(checkoutForm, merchantId: number): Observable<Order> {
     return this.http.post(`${API_URL}/orders/${merchantId}`, checkoutForm);
   }
+
+  getAllOrdersByUser(): Observable<Order> {
+    return this.http.get<Order>(`${API_URL}/orders/user`);
+  }
 }
