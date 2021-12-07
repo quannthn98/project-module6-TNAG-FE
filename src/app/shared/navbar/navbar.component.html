@@ -71,58 +71,37 @@
               class="sr-only">(current)</span></a>
           </li>
         </ng-container>
-        <!--        <ng-container *ngIf="currentUser">-->
-        <!--          <ng-container *ngIf="currentUser.roles[0].authority == 'ROLE_MERCHANT'">-->
-        <!--            <li class="nav-item">-->
-        <!--              <a class="nav-link" routerLink="/merchant"-->
-        <!--                 style="color: black;font-size: 18px;">{{currentUser.username}}<span-->
-        <!--                class="sr-only"></span></a>-->
-        <!--            </li>-->
-        <!--          </ng-container>-->
-        <!--          <ng-container *ngIf="currentUser.roles[0].authority == 'ROLE_ADMIN'">-->
-        <!--            <li class="nav-item">-->
-        <!--              <a class="nav-link" routerLink="/admin"-->
-        <!--                 style="color: black;font-size: 18px;">{{currentUser.username}}<span-->
-        <!--                class="sr-only"></span></a>-->
-        <!--            </li>-->
-        <!--          </ng-container>-->
-        <!--          <li class="nav-item">-->
-        <!--            <a class="nav-link" (click)="logout()" style="color: black;font-size: 18px;">-->
-        <!--              <i class="fas fa-sign-out-alt">-->
-        <!--                Đăng xuất<span class="sr-only"></span>-->
-        <!--              </i>-->
-        <!--            </a>-->
-        <!--          </li>-->
-        <!--        </ng-container>-->
-<!--        <li class="nav-item dropdown dropdown-cart">-->
-<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"-->
-<!--             aria-haspopup="true" aria-expanded="false">-->
-<!--            <i class="fas fa-shopping-basket"></i> Giỏ hàng-->
-<!--            <span class="badge badge-success">5</span>-->
-<!--          </a>-->
-<!--          <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">-->
-<!--            <div class="dropdown-cart-top-body border-top p-4">-->
-<!--              <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka Sub-->
-<!--                12" (30 cm) x 1 <span class="float-right text-secondary">314.000</span></p>-->
-<!--              <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Corn & Peas-->
-<!--                Salad x 1 <span class="float-right text-secondary">209.000</span></p>-->
-<!--              <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Veg Seekh Sub 6"-->
-<!--                (15 cm) x 1 <span class="float-right text-secondary">133.000</span></p>-->
-<!--              <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka Sub-->
-<!--                12" (30 cm) x 1 <span class="float-right text-secondary">314.000</span></p>-->
-<!--              <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Corn & Peas Salad-->
-<!--                x 1 <span class="float-right text-secondary">209.000</span></p>-->
-<!--            </div>-->
-<!--            <div class="dropdown-cart-top-footer border-top p-4">-->
-<!--              <p class="mb-0 font-weight-bold text-secondary">Tổng tiền <span-->
-<!--                class="float-right text-dark">499.000</span></p>-->
-<!--              &lt;!&ndash; <small class="text-info">Extra charges may apply</small> &ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="dropdown-cart-top-footer border-top p-2">-->
-<!--              <a class="btn btn-success btn-block btn-lg" href="checkout.html"> Thanh toán</a>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </li>-->
+        <ng-container *ngIf="!isMerchant && !isAdmin && currentUser">
+          <li class="nav-item dropdown dropdown-cart">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-shopping-basket"></i> Giỏ hàng
+              <span class="badge badge-success">5</span>
+            </a>
+            <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">
+              <div class="dropdown-cart-top-body border-top p-4">
+                <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka Sub
+                  12" (30 cm) x 1 <span class="float-right text-secondary">314.000</span></p>
+                <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Corn & Peas
+                  Salad x 1 <span class="float-right text-secondary">209.000</span></p>
+                <p class="mb-2"><i class="icofont-ui-press text-success food-item"></i> Veg Seekh Sub 6"
+                  (15 cm) x 1 <span class="float-right text-secondary">133.000</span></p>
+                <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Chicken Tikka Sub
+                  12" (30 cm) x 1 <span class="float-right text-secondary">314.000</span></p>
+                <p class="mb-2"><i class="icofont-ui-press text-danger food-item"></i> Corn & Peas Salad
+                  x 1 <span class="float-right text-secondary">209.000</span></p>
+              </div>
+              <div class="dropdown-cart-top-footer border-top p-4">
+                <p class="mb-0 font-weight-bold text-secondary">Tổng tiền <span
+                  class="float-right text-dark">499.000</span></p>
+                <!--               <small class="text-info">Extra charges may apply</small>-->
+              </div>
+              <div class="dropdown-cart-top-footer border-top p-2">
+                <a class="btn btn-success btn-block btn-lg" href="checkout.html"> Thanh toán</a>
+              </div>
+            </div>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>
