@@ -33,4 +33,8 @@ export class DishService {
   getDishById(id: number): Observable<Dish> {
     return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
   }
+
+  updateDish(id: number, formData: FormData): Observable<Dish> {
+    return this.http.put<Dish>(`${API_URL}/dishes/${id}`, formData);
+  }
 }
