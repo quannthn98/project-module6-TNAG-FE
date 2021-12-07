@@ -32,7 +32,7 @@ export class DishListComponent implements OnInit {
   }
 
   getAllDishByMerchant() {
-    this.userService.getAllDishByMerchant(this.id, this.searchText).subscribe((data: any) => {
+    this.dishService.getAllDish(this.id, this.searchText).subscribe((data: any) => {
         console.log(data.content);
         this.dishes = data.content;
       }, error => {
@@ -52,8 +52,7 @@ export class DishListComponent implements OnInit {
   }
 
   findDishById(id) {
-    this.userService.getDishById(id).subscribe((data: any) => {
-      console.log(data);
+    this.dishService.getDishById(id).subscribe((data: any) => {
       this.dish = data;
     }, error => {
       console.log(error);

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Dish} from '../model/dish';
 import {User} from '../model/user';
 import {MerchantProfile} from '../model/merchant-profile';
 import {UserAddress} from '../model/user-address';
@@ -40,14 +39,6 @@ export class UserService {
     return this.http.put<User>(`${API_URL}/merchants/updateStatus/${id}/blocked`, null);
   }
 
-  getAllDishByMerchant(id: number, name?: string): Observable<Dish[]> {
-    if (name == null || name === '') {
-      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant`);
-    } else {
-      return this.http.get<Dish[]>(`${API_URL}/dishes/${id}/merchant?q=${name}`);
-    }
-  }
-
   getMerchantById(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/merchants/${id}`);
   }
@@ -66,10 +57,6 @@ export class UserService {
 
   getUserById(id: number): Observable<User> {
     return this.http.get(API_URL + '/users/' + id);
-  }
-
-  getDishById(id: number): Observable<Dish> {
-    return this.http.get<Dish>(`${API_URL}/dishes/${id}`);
   }
 
   updateUserProfile(profile): Observable<UserProfile> {
