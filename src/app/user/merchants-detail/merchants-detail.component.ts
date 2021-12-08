@@ -6,6 +6,8 @@ import {Cart} from '../../model/cart';
 import {CartDetail} from '../../model/cart-detail';
 import {CartService} from '../../service/cart.service';
 import {DishService} from '../../service/dish.service';
+import {Coupon} from '../../model/coupon';
+import {CouponService} from '../../service/coupon.service';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -19,17 +21,20 @@ export class MerchantsDetailComponent implements OnInit {
   dishes: Dish[] = [];
   id: number;
   estimatePayment = 0;
+  coupon: Coupon = {};
 
   constructor(private userService: UserService,
               private router: Router,
               private activeRoute: ActivatedRoute,
               private cartService: CartService,
-              private dishService: DishService) {
+              private dishService: DishService,
+              private couponService: CouponService) {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
       this.getAllDishByMerchant();
       this.getCartByMerchant();
+      this.getCouponByMerchant();
     });
   }
 
@@ -43,6 +48,12 @@ export class MerchantsDetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getCouponByMerchant() {
+    this.couponService.getAllByMerchant(this.id).subscribe(data => {
+      this.coupon = data;
+    });
   }
 
   getCartByMerchant() {
