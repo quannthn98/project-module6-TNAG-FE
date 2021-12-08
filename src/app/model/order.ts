@@ -1,6 +1,7 @@
 import {UserAddress} from './user-address';
 import {OrderDetail} from './order-detail';
 import {User} from './user';
+import {OrderStatus} from './order-status';
 
 export interface Order {
   id?: number;
@@ -8,10 +9,11 @@ export interface Order {
   finishedTime?: any;
   address?: UserAddress;
   totalPayment?: number;
-  status?: any;
+  orderStatus?: OrderStatus;
   coupon?: any;
   shipper?: any;
-  orderDetail?: OrderDetail[];
+  ordersDetails?: OrderDetail[];
   merchant?: User;
+  note?: string;
 
 }

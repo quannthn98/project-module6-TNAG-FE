@@ -3,6 +3,9 @@ import {UserService} from '../../service/user.service';
 import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../service/order.service';
 import {Order} from '../../model/order';
+import {Dish} from '../../model/dish';
+import {OrderStatus} from '../../model/order-status';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-order-list',
@@ -13,23 +16,29 @@ export class OrderListComponent implements OnInit {
   id: number;
   orders: Order[] = [];
   infoOrder: Order = {};
+  infoDish: Dish[] = [];
+  orderStatus: OrderStatus[] = [];
+  currentStatus: string;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private alertService: AlertService) {
     activatedRoute.paramMap.subscribe(param => {
       this.id = +param.get('id');
-      this.getOrderByMerchant(this.id);
+      this.getOrderByMerchant('');
+      this.getAllStatus();
     });
   }
 
   ngOnInit() {
   }
 
-  getOrderByMerchant(id: number) {
-    this.orderService.getOrderByMerchant(id).subscribe((data: any) => {
+  getOrderByMerchant(statusName: string) {
+    this.orderService.getOrderByMerchant(statusName).subscribe((data: any) => {
       this.orders = data.content;
-      console.log(this.orders);
+      this.currentStatus = statusName;
+      console.log(data);
     }, error => {
       console.log(error);
     });
@@ -38,7 +47,27 @@ export class OrderListComponent implements OnInit {
   getOrder(id: number) {
     this.orderService.getOrderById(id).subscribe((order: Order) => {
       this.infoOrder = order;
-      console.log(this.infoOrder);
+      this.infoDish = order.ordersDetails;
+    });
+  }
+
+  getAllStatus() {
+    this.orderService.getAllOrderStatus().subscribe((data: any) => {
+      this.orderStatus = data.content;
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  canceledOrder(value: string) {
+    if (!(value == null || value === '')) {
+      this.infoOrder.note += '\n(Lý do hủy: ' + value + ' )';
+    }
+    this.orderService.cancellationOrder(this.infoOrder).subscribe(() => {
+      this.getOrderByMerchant(this.currentStatus);
+      this.alertService.alertSuccess('Hủy đơn hàng thành công');
+    }, error => {
+      this.alertService.alertError('Hủy đơn hàng thất bại');
     });
   }
 }

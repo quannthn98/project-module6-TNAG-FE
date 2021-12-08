@@ -74,15 +74,6 @@ export class CheckoutComponent implements OnInit {
   getUserDeliverAddress() {
     this.userService.getAllDeliverAddressByUser().subscribe((data: any) => {
       this.addresses = data;
-      if (this.addresses.length < 3) {
-        this.rowLoop.push(1);
-      } else {
-        for (let i = 0; i < this.addresses.length; i++) {
-          if (i % 2 === 0) {
-            this.rowLoop.push(1);
-          }
-        }
-      }
       console.log(data);
     });
   }
