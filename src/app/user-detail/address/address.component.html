@@ -1,6 +1,10 @@
-<div class="container-fluid">
-  <table class="table table-striped">
-    <thead>
+<div class="card">
+  <div class="card-header">
+    <h4>Danh sách địa chỉ giao hàng</h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
       <tr>
         <th>#</th>
         <th>Người nhận</th>
@@ -8,36 +12,108 @@
         <th>Địa chỉ nhận hàng</th>
         <th>Thao tác</th>
       </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let a of addresses; index as i">
-      <td>{{i + 1}}</td>
-      <td>{{a.customerName}}</td>
-      <td>{{a.phone}}</td>
-      <td>{{a.address}}</td>
-      <td>
-        <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-outline-info me-1"><i class="far fa-edit"></i></button>
-        <button class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <tr *ngFor="let a of addresses; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{a.customerName}}</td>
+        <td>{{a.phone}}</td>
+        <td>{{a.address}}</td>
+        <td>
+          <button (click)="focusTarget(i)" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="far fa-trash-alt"></i></button>
+          <button (click)="focusTarget(i)" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-outline-info ms-2"><i class="far fa-edit"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-outline-success">Thêm mới</button>
+  </div>
+
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <form #createForm="ngForm" (ngSubmit)="addNewAddress(createForm)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm/sửa Địa chỉ giao hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="customer">Tên người nhận</label>
+            <input [ngModel]="targetAddress.customerName" #customerName="ngModel" name="customerName" id="customer"
+                   type="text"
+                   [ngClass]="[(customerName.valid) ? 'form-control is-valid' :((customerName.dirty || customerName.touched || createForm.submitted)? 'form-control is-invalid':'form-control')]"
+                   required
+                   minlength="3">
+            <ng-container
+              *ngIf="customerName.invalid && (customerName.dirty || customerName.touched || createForm.submitted)">
+              <p *ngIf="customerName.errors?.required" class="invalid-feedback">
+                Trường này không được để trống
+              </p>
+              <p *ngIf="customerName.errors?.minlength" class="invalid-feedback">
+                Trường này phải ít nhất 3 ký tự
+              </p>
+            </ng-container>
+            <label for="phone">Số điện thoại người nhận</label>
+            <input [ngModel]="targetAddress.phone" #phone="ngModel" name="phone" id="phone" type="number"
+                   [ngClass]="[(phone.valid) ? 'form-control is-valid' :((phone.dirty || phone.touched || createForm.submitted)? 'form-control is-invalid':'form-control')]"
+                   required
+                   minlength="9"
+                   maxlength="11">
+            <ng-container
+              *ngIf="phone.invalid && (phone.dirty || phone.touched || createForm.submitted)">
+              <p *ngIf="phone.errors?.required" class="invalid-feedback">
+                Trường này không được để trống
+              </p>
+              <p *ngIf="phone.errors?.minlength || phone.errors?.maxlength" class="invalid-feedback">
+                Trường này phải có 9 - 11 ký tự
+              </p>
+            </ng-container>
+            <label for="address">Địa chỉ</label>
+            <textarea #address = "ngModel" [ngModel]="targetAddress.address" class="form-control" name="address" id="address" cols="30"
+                      rows="10"
+            required
+            minlength="10"></textarea>
+
+            <ng-container
+              *ngIf="address.invalid && (address.dirty || address.touched || createForm.submitted)">
+              <p *ngIf="address.errors?.required" class="invalid-feedback">
+                Trường này không được để trống
+              </p>
+              <p *ngIf="address.errors?.minlength" class="invalid-feedback">
+                Nội dung quá ngắn
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="clearForm(createForm)" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Lưu</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--modal cofirm delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel1">Xác nhận xoá địa chỉ</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
+        Xoá địa chỉ này?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button (click)="deleteAddress()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Đồng ý</button>
       </div>
     </div>
   </div>

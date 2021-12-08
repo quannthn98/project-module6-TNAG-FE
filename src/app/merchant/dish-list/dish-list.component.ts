@@ -33,7 +33,6 @@ export class DishListComponent implements OnInit {
 
   getAllDishByMerchant() {
     this.dishService.getAllDish(this.id, this.searchText).subscribe((data: any) => {
-        console.log(data.content);
         this.dishes = data.content;
       }, error => {
         console.log(error);

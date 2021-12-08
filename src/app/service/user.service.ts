@@ -74,4 +74,12 @@ export class UserService {
   getAllDeliverAddressByUser(): Observable<UserAddress> {
     return this.http.get<UserAddress>(`${API_URL}/users/address`);
   }
+
+  addNewDeliverAddress(userAddress: UserAddress): Observable<UserAddress> {
+    return this.http.post(`${API_URL}/users/address`, userAddress);
+  }
+
+  deleteDeliverAddress(id: number): Observable<UserAddress> {
+    return this.http.delete(`${API_URL}/users/address/${id}`);
+  }
 }
