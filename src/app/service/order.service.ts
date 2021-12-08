@@ -22,10 +22,10 @@ export class OrderService {
     return this.http.get<Order>(`${API_URL}/orders/user`);
   }
 
-  getOrderByIdMerchant(merchantId: number,name? : string): Observable<Order[]> {
-    if(name== null || name ===''){
+  getOrderByIdMerchant(merchantId: number,name? : any): Observable<Order[]> {
+    if (name == null || name === '') {
       return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`)
-    }else {
+    } else {
       return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`);
     }
   }

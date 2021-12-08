@@ -11,7 +11,7 @@ import {OrderService} from "../../service/order.service";
   styleUrls: ['./merchant-order.component.css']
 })
 export class MerchantOrderComponent implements OnInit {
-  searchOrders: string;
+  searchOrders: any;
   orders: Order[] = [];
   merchantId: number;
   constructor(private userService: UserService,
@@ -28,8 +28,13 @@ export class MerchantOrderComponent implements OnInit {
   getOrderByMerchantId(){
     this.orderService.getOrderByIdMerchant(this.merchantId,this.searchOrders).subscribe( (data: any) => {
       console.log(data.content);
-      //Gửi dạng page phải chấm content
-      this.orders = data.content;
+      if(this.searchOrders == null || this.searchOrders == ''){
+        //Gửi dạng page phải chấm content
+        this.orders = data.content;
+      }else {
+        this.orders = data;
+      }
+
     },error => {
       console.log(error);
       }
