@@ -6,7 +6,9 @@ import {Category} from '../../model/category';
 import {CategoryService} from '../../service/category.service';
 import {User} from '../../model/user';
 import {UserService} from '../../service/user.service';
-import Swal from 'sweetalert2';
+import {CartDetail} from '../../model/cart-detail';
+import {CartService} from '../../service/cart.service';
+import {Cart} from '../../model/cart';
 
 @Component({
   selector: 'app-navbar',
@@ -21,10 +23,13 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   isMerchant = false;
   isUser = false;
+  carts: Cart[] = [];
+  cartDetail: CartDetail[] = [];
 
   constructor(private authenticationService: AuthenticationService,
               private categoryService: CategoryService,
               private userService: UserService,
+              private cartService: CartService,
               private router: Router) {
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -50,6 +55,7 @@ export class NavbarComponent implements OnInit {
     this.getAllCategory();
     this.getCurrentUserDetail();
     this.checkRole();
+    this.getCartByUser();
   }
 
   getAllCategory() {
@@ -66,21 +72,22 @@ export class NavbarComponent implements OnInit {
   getCurrentUserDetail() {
     this.userService.getUserById(this.currentUser.id).subscribe(user => {
       this.currentUserDetail = user;
-      console.log(this.currentUserDetail);
     }, error => {
       console.log(error);
     });
   }
 
-  sweetalert2() {
-    Swal.fire({
-      position: 'top-end',
-      width: 300,
-      icon: 'success',
-      toast: true,
-      text: 'Đã đăng xuất',
-      showConfirmButton: false,
-      timer: 1000
+  getCartByUser() {
+    this.cartService.getCartByUser().subscribe((data: any) => {
+      this.carts = data;
+      for (let i = 0; i < this.carts.length; i++) {
+        this.cartDetail = this.carts[i].cartDetails;
+        let totalPayment = 0;
+        for (let j = 0; j < this.cartDetail.length; j++) {
+          totalPayment += (this.cartDetail[j].price * this.cartDetail[j].quantity);
+        }
+        this.carts[i].totalPayment = totalPayment;
+      }
     });
   }
 }
