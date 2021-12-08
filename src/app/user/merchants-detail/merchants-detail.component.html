@@ -8,14 +8,15 @@
       <div class="row d-flex align-items-end">
         <div class="col-md-8">
           <div class="restaurant-detailed-header-left">
-            <img class="img-fluid mr-3 float-left" alt="osahan" src="http://localhost:8080/{{merchant.merchantProfile.avatar}}">
-            <h2 class="text-white">{{merchant.merchantProfile.name}}</h2>
-            <p class="text-white mb-1"><i class="icofont-location-pin"></i>{{merchant.merchantProfile.address}}
+            <img class="img-fluid mr-3 float-left" alt="osahan"
+                 src="http://localhost:8080/{{merchant?.merchantProfile?.avatar}}">
+            <h2 class="text-white">{{merchant?.merchantProfile?.name}}</h2>
+            <p class="text-white mb-1"><i class="icofont-location-pin"></i>{{merchant?.merchantProfile?.address}}
             </p>
             <p class="text-white mb-0"><i class="icofont-phone-circle"></i>
-              Hotline: {{merchant.merchantProfile.hotline}}</p>
+              Hotline: {{merchant?.merchantProfile?.hotline}}</p>
             <p class="text-white mb-0"><i class="icofont-clock-time"></i> Open
-              Hours: {{merchant.merchantProfile.openHours}}</p>
+              Hours: {{merchant?.merchantProfile?.openHours}}</p>
           </div>
         </div>
         <div class="col-md-4">
@@ -73,103 +74,103 @@
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-order-online" role="tabpanel"
                  aria-labelledby="pills-order-online-tab">
-<!--              <div id="#menu" class="row">-->
-<!--                &lt;!&ndash; <h5 class="mb-4 mt-3 col-md-12">Bán chạy</h5> &ndash;&gt;-->
-<!--                <div class="col-md-4 col-sm-6 mb-4">-->
-<!--                  <div-->
-<!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
-<!--                    <div class="list-card-image">-->
-<!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
-<!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
-<!--                      <div class="favourite-heart text-danger position-absolute"><a-->
-<!--                        href="#"><i class="icofont-heart"></i></a></div>-->
-<!--                      <div class="member-plan position-absolute"><span-->
-<!--                        class="badge badge-dark">Promoted</span></div>-->
-<!--                      <a href="#">-->
-<!--                        <img src="img/list/7.png" class="img-fluid item-img">-->
-<!--                      </a>-->
-<!--                    </div>-->
-<!--                    <div class="p-3 position-relative">-->
-<!--                      <div class="list-card-body">-->
-<!--                        <h6 class="mb-1"><a href="#" class="text-black">Gafood - Gà Ủ-->
-<!--                          Muối</a></h6>-->
-<!--                        <p class="text-gray mb-2">Bạch Mai</p>-->
-<!--                        <p class="text-gray time mb-0"><a-->
-<!--                          class="btn btn-link btn-sm text-black" href="#">30.000 <span-->
-<!--                          class="badge badge-success">5% Giảm</span></a> <span-->
-<!--                          class="float-right">-->
-<!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
-<!--                                                                ngay</a>-->
-<!--                                                        </span>-->
-<!--                        </p>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6 mb-4">-->
-<!--                  <div-->
-<!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
-<!--                    <div class="list-card-image">-->
-<!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
-<!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
-<!--                      <div class="favourite-heart text-danger position-absolute"><a-->
-<!--                        href="#"><i class="icofont-heart"></i></a></div>-->
-<!--                      <div class="member-plan position-absolute"><span-->
-<!--                        class="badge badge-dark">Promoted</span></div>-->
-<!--                      <a href="#">-->
-<!--                        <img src="img/list/8.png" class="img-fluid item-img">-->
-<!--                      </a>-->
-<!--                    </div>-->
-<!--                    <div class="p-3 position-relative">-->
-<!--                      <div class="list-card-body">-->
-<!--                        <h6 class="mb-1"><a href="#" class="text-black">Trà Sữa - Đường 18-->
-<!--                        </a>-->
-<!--                        </h6>-->
-<!--                        <p class="text-gray mb-2">P. Mộ Lao, Hà Đông, Hà Nội</p>-->
-<!--                        <p class="text-gray time mb-0"><a-->
-<!--                          class="btn btn-link btn-sm text-black" href="#">5.000 <span-->
-<!--                          class="badge badge-primary">Giảm</span></a> <span-->
-<!--                          class="float-right">-->
-<!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
-<!--                                                                ngay</a>-->
-<!--                                                        </span>-->
-<!--                        </p>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 col-sm-6 mb-4">-->
-<!--                  <div-->
-<!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
-<!--                    <div class="list-card-image">-->
-<!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
-<!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
-<!--                      <div class="favourite-heart text-danger position-absolute"><a-->
-<!--                        href="#"><i class="icofont-heart"></i></a></div>-->
-<!--                      <div class="member-plan position-absolute"><span-->
-<!--                        class="badge badge-dark">Promoted</span></div>-->
-<!--                      <a href="#">-->
-<!--                        <img src="img/list/9.png" class="img-fluid item-img">-->
-<!--                      </a>-->
-<!--                    </div>-->
-<!--                    <div class="p-3 position-relative">-->
-<!--                      <div class="list-card-body">-->
-<!--                        <h6 class="mb-1"><a href="#" class="text-black">Nem-->
-<!--                          Chua Rán</a></h6>-->
-<!--                        <p class="text-gray mb-2">P. Bồ Đề, Long Biên, Hà Nội</p>-->
-<!--                        <p class="text-gray time mb-0"><a-->
-<!--                          class="btn btn-link btn-sm text-black" href="#">50.000 <span-->
-<!--                          class="badge badge-info">Giảm</span></a> <span-->
-<!--                          class="float-right">-->
-<!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
-<!--                                                                ngay </a>-->
-<!--                                                        </span>-->
-<!--                        </p>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div id="#menu" class="row">-->
+              <!--                &lt;!&ndash; <h5 class="mb-4 mt-3 col-md-12">Bán chạy</h5> &ndash;&gt;-->
+              <!--                <div class="col-md-4 col-sm-6 mb-4">-->
+              <!--                  <div-->
+              <!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
+              <!--                    <div class="list-card-image">-->
+              <!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
+              <!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
+              <!--                      <div class="favourite-heart text-danger position-absolute"><a-->
+              <!--                        href="#"><i class="icofont-heart"></i></a></div>-->
+              <!--                      <div class="member-plan position-absolute"><span-->
+              <!--                        class="badge badge-dark">Promoted</span></div>-->
+              <!--                      <a href="#">-->
+              <!--                        <img src="img/list/7.png" class="img-fluid item-img">-->
+              <!--                      </a>-->
+              <!--                    </div>-->
+              <!--                    <div class="p-3 position-relative">-->
+              <!--                      <div class="list-card-body">-->
+              <!--                        <h6 class="mb-1"><a href="#" class="text-black">Gafood - Gà Ủ-->
+              <!--                          Muối</a></h6>-->
+              <!--                        <p class="text-gray mb-2">Bạch Mai</p>-->
+              <!--                        <p class="text-gray time mb-0"><a-->
+              <!--                          class="btn btn-link btn-sm text-black" href="#">30.000 <span-->
+              <!--                          class="badge badge-success">5% Giảm</span></a> <span-->
+              <!--                          class="float-right">-->
+              <!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
+              <!--                                                                ngay</a>-->
+              <!--                                                        </span>-->
+              <!--                        </p>-->
+              <!--                      </div>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--                <div class="col-md-4 col-sm-6 mb-4">-->
+              <!--                  <div-->
+              <!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
+              <!--                    <div class="list-card-image">-->
+              <!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
+              <!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
+              <!--                      <div class="favourite-heart text-danger position-absolute"><a-->
+              <!--                        href="#"><i class="icofont-heart"></i></a></div>-->
+              <!--                      <div class="member-plan position-absolute"><span-->
+              <!--                        class="badge badge-dark">Promoted</span></div>-->
+              <!--                      <a href="#">-->
+              <!--                        <img src="img/list/8.png" class="img-fluid item-img">-->
+              <!--                      </a>-->
+              <!--                    </div>-->
+              <!--                    <div class="p-3 position-relative">-->
+              <!--                      <div class="list-card-body">-->
+              <!--                        <h6 class="mb-1"><a href="#" class="text-black">Trà Sữa - Đường 18-->
+              <!--                        </a>-->
+              <!--                        </h6>-->
+              <!--                        <p class="text-gray mb-2">P. Mộ Lao, Hà Đông, Hà Nội</p>-->
+              <!--                        <p class="text-gray time mb-0"><a-->
+              <!--                          class="btn btn-link btn-sm text-black" href="#">5.000 <span-->
+              <!--                          class="badge badge-primary">Giảm</span></a> <span-->
+              <!--                          class="float-right">-->
+              <!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
+              <!--                                                                ngay</a>-->
+              <!--                                                        </span>-->
+              <!--                        </p>-->
+              <!--                      </div>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--                <div class="col-md-4 col-sm-6 mb-4">-->
+              <!--                  <div-->
+              <!--                    class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">-->
+              <!--                    <div class="list-card-image">-->
+              <!--                      &lt;!&ndash; <div class="star position-absolute"><span class="badge badge-success"><i-->
+              <!--                                  class="icofont-star"></i> 3.1 (300+)</span></div> &ndash;&gt;-->
+              <!--                      <div class="favourite-heart text-danger position-absolute"><a-->
+              <!--                        href="#"><i class="icofont-heart"></i></a></div>-->
+              <!--                      <div class="member-plan position-absolute"><span-->
+              <!--                        class="badge badge-dark">Promoted</span></div>-->
+              <!--                      <a href="#">-->
+              <!--                        <img src="img/list/9.png" class="img-fluid item-img">-->
+              <!--                      </a>-->
+              <!--                    </div>-->
+              <!--                    <div class="p-3 position-relative">-->
+              <!--                      <div class="list-card-body">-->
+              <!--                        <h6 class="mb-1"><a href="#" class="text-black">Nem-->
+              <!--                          Chua Rán</a></h6>-->
+              <!--                        <p class="text-gray mb-2">P. Bồ Đề, Long Biên, Hà Nội</p>-->
+              <!--                        <p class="text-gray time mb-0"><a-->
+              <!--                          class="btn btn-link btn-sm text-black" href="#">50.000 <span-->
+              <!--                          class="badge badge-info">Giảm</span></a> <span-->
+              <!--                          class="float-right">-->
+              <!--                                                            <a class="btn btn-outline-secondary btn-sm" href="#">Mua-->
+              <!--                                                                ngay </a>-->
+              <!--                                                        </span>-->
+              <!--                        </p>-->
+              <!--                      </div>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
 
               <div class="row">
                 <h5 class="mb-4 mt-3 col-md-12">Starters <small class="h6 text-black-50">{{dishes.length}}
@@ -177,30 +178,32 @@
                 <div class="col-md-12">
                   <div class="bg-white rounded border shadow-sm mb-4">
                     <div class="menu-list p-3 border-bottom" *ngFor="let d of dishes; index as i">
-                                                <span class="count-number float-right">
+                                                <span class=" float-right">
                                                   <ng-container *ngIf="d.status == true">
-                                                    <button (click)="addDishToCart(d.id, '-')"
-                                                            class="btn btn-outline-secondary btn-sm left dec"> <i
-                                                      class="icofont-minus"></i> </button>
-                                                    <input class="count-number-input" type="text" value="1" readonly="">
+<!--                                                    <button (click)="addDishToCart(d.id, '-')"-->
+                                                    <!--                                                            class="btn btn-outline-secondary btn-sm left dec"> <i-->
+                                                    <!--                                                      class="icofont-minus"></i> </button>-->
+                                                    <!--                                                    <input class="count-number-input" type="text" value="1" readonly="">-->
                                                     <button (click)="addDishToCart(d.id, '+')"
-                                                            class="btn btn-outline-secondary btn-sm right inc"> <i
-                                                      class="icofont-plus"></i>
+                                                            class="btn btn-primary">
+<!--                                                      <i class="fas fa-cart-plus"></i>-->
+                                                      <i class="fas fa-plus-square"></i>
                                                     </button>
                                                   </ng-container>
                                                     <ng-container *ngIf="d.status == false">
                                                         Hết hàng
                                                     </ng-container>
-
                                                 </span>
                       <div class="media">
-
                         <img class="mr-3 rounded-pill" src="http://localhost:8080/{{d.image}}"
                              alt="image">
                         <div class="media-body">
+                          <ng-container *ngIf="d?.status == true">
+                            <h6 class=" float-right me-3 mt-2">{{d?.price}} VNĐ</h6>
+                          </ng-container>
                           <h6 class="mb-1">{{d.name}}</h6>
                           <!--                          <p class="text-gray mb-0">150.000 (1kg)</p>-->
-                          <p>Descrition: {{d.description}}</p>
+                          <p class="mb-0">Descrition: {{d.description}}</p>
                         </div>
                       </div>
                     </div>
@@ -252,22 +255,22 @@
                 <div class="restaurant-slider-main position-relative homepage-great-deals-carousel">
                   <div class="owl-carousel owl-theme homepage-ad">
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/1.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/1.png">
                     </div>
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/2.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/2.png">
                     </div>
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/3.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/3.png">
                     </div>
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/1.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/1.png">
                     </div>
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/2.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/2.png">
                     </div>
                     <div class="item">
-                      <img class="img-fluid" src="img/gallery/3.png">
+                      <img class="img-fluid" src="assets/static/img/gallery/3.png">
                     </div>
                   </div>
                   <div class="position-absolute restaurant-slider-pics bg-dark text-white">2 of 14
@@ -295,11 +298,11 @@
                   </div>
                 </div>
                 <h5 class="mb-4">Restaurant Info</h5>
-                <p class="mb-3">{{merchant.merchantProfile.name}}
-                  <br> {{merchant.merchantProfile.address}}
+                <p class="mb-3">{{merchant?.merchantProfile?.name}}
+                  <br> {{merchant?.merchantProfile?.address}}
                 </p>
                 <p class="mb-2 text-black"><i class="icofont-phone-circle text-primary mr-2"></i>
-                  {{merchant.merchantProfile.hotline}}</p>
+                  {{merchant?.merchantProfile?.hotline}}</p>
                 <p class="mb-2 text-black"><i class="icofont-email text-primary mr-2"></i> <a
                   href="https://thaotrinh.info/cdn-cgi/l/email-protection"
                   class="__cf_email__"
@@ -308,7 +311,7 @@
                      data-cfemail="a6c9d5c7cec7c8c3c7d2e6c1cbc7cfca88c5c9cb">[email&#160;protected]</a>
                 </p>
                 <p class="mb-2 text-black"><i class="icofont-clock-time text-primary mr-2"></i>
-                  Open Hours: {{merchant.merchantProfile.openHours}}
+                  Open Hours: {{merchant?.merchantProfile?.openHours}}
                   <!--                  <span class="badge badge-success"> OPEN NOW </span>-->
                 </p>
                 <hr class="clearfix">
@@ -437,7 +440,7 @@
                 <h5 class="mb-1">All Ratings and Reviews</h5>
                 <div class="reviews-members pt-4 pb-4">
                   <div class="media">
-                    <a href="#"><img alt="Generic placeholder image" src="img/user/1.png"
+                    <a href="#"><img alt="Generic placeholder image" src="assets/static/img/user/1.png"
                                      class="mr-3 rounded-pill"></a>
                     <div class="media-body">
                       <div class="reviews-members-header">
@@ -469,19 +472,19 @@
                         <span class="total-like-user-main ml-2" dir="rtl">
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Gurdeep Osahan" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/5.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/5.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Gurdeep Singh" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/2.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/2.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Askbootstrap" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/3.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/3.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top" title="Osahan"
                                                            href="#"><img alt="Generic placeholder image"
-                                                                         src="img/user/4.png"
+                                                                         src="assets/static/img/user/4.png"
                                                                          class="total-like-user rounded-pill"></a>
                                                     </span>
                       </div>
@@ -491,7 +494,7 @@
                 <hr>
                 <div class="reviews-members pt-4 pb-4">
                   <div class="media">
-                    <a href="#"><img alt="Generic placeholder image" src="img/user/6.png"
+                    <a href="#"><img alt="Generic placeholder image" src="assets/static/img/user/6.png"
                                      class="mr-3 rounded-pill"></a>
                     <div class="media-body">
                       <div class="reviews-members-header">
@@ -520,19 +523,19 @@
                         <span class="total-like-user-main ml-2" dir="rtl">
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Gurdeep Osahan" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/5.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/5.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Gurdeep Singh" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/2.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/2.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top"
                                                            title="Askbootstrap" href="#"><img
-                                                          alt="Generic placeholder image" src="img/user/3.png"
+                                                          alt="Generic placeholder image" src="assets/static/img/user/3.png"
                                                           class="total-like-user rounded-pill"></a>
                                                         <a data-toggle="tooltip" data-placement="top" title="Osahan"
                                                            href="#"><img alt="Generic placeholder image"
-                                                                         src="img/user/4.png"
+                                                                         src="assets/static/img/user/4.png"
                                                                          class="total-like-user rounded-pill"></a>
                                                     </span>
                       </div>
@@ -601,7 +604,7 @@
             </div>
           </div>
           <div class="mb-2 bg-white rounded p-2 clearfix">
-            <img class="img-fluid float-left" src="img/wallet-icon.png">
+            <img class="img-fluid float-left" src="assets/static/img/wallet-icon.png">
             <h6 class="font-weight-bold text-right mb-2">Tổng đơn: <span
               class="text-danger">{{estimatePayment}}</span> vnđ</h6>
             <h6 class="font-weight-bold text-right mb-2">Giảm giá: <span
