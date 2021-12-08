@@ -7,6 +7,7 @@ import {CategoryService} from '../../service/category.service';
 import {User} from '../../model/user';
 import {UserService} from '../../service/user.service';
 import Swal from 'sweetalert2';
+import {SocketService} from '../../service/socket/socket.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +26,8 @@ export class NavbarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService,
               private categoryService: CategoryService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private socketService: SocketService) {
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
       this.roles = this.currentUser.roles;
@@ -50,6 +52,7 @@ export class NavbarComponent implements OnInit {
     this.getAllCategory();
     this.getCurrentUserDetail();
     this.checkRole();
+    this.socketService.connectToNotify();
   }
 
   getAllCategory() {
