@@ -5,4 +5,5 @@ export interface Cart {
   merchant?: any;
   user?: any;
   cartDetails?: CartDetail[];
+  totalPayment?: number;
 }
