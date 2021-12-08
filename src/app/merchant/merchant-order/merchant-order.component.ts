@@ -11,9 +11,7 @@ import {OrderService} from "../../service/order.service";
   styleUrls: ['./merchant-order.component.css']
 })
 export class MerchantOrderComponent implements OnInit {
-  orderId: number;
-  phoneCustomer:string;
-  nameCustomer: string;
+  searchOrders: string;
   orders: Order[] = [];
   merchantId: number;
   constructor(private userService: UserService,
@@ -28,7 +26,7 @@ export class MerchantOrderComponent implements OnInit {
   }
 
   getOrderByMerchantId(){
-    this.orderService.getOrderByIdMerchant(this.merchantId,this.orderId,this.phoneCustomer,this.nameCustomer).subscribe( (data: any) => {
+    this.orderService.getOrderByIdMerchant(this.merchantId,this.searchOrders).subscribe( (data: any) => {
       console.log(data.content);
       //Gửi dạng page phải chấm content
       this.orders = data.content;

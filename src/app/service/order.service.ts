@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Order} from '../model/order';
+import {Dish} from "../model/dish";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -21,14 +22,11 @@ export class OrderService {
     return this.http.get<Order>(`${API_URL}/orders/user`);
   }
 
-  getOrderByIdMerchant(merchantId: number, orderId: number,phoneCustomer:string,nameCustomer: string): Observable<Order> {
-    if ((orderId && phoneCustomer && nameCustomer) == null || (( phoneCustomer==''&& nameCustomer=='') && orderId == null)){
-      return this.http.get<Order>(`${API_URL}/orders/merchant/${merchantId}`);
-    }else if(  !(orderId== null) &&( (phoneCustomer && nameCustomer)==null || (phoneCustomer && nameCustomer)==='' )   ) {
-      return this.http.get<Order>(`${API_URL}/orders/merchant/${merchantId}/${orderId}`);
+  getOrderByIdMerchant(merchantId: number,name? : string): Observable<Order[]> {
+    if(name== null || name ===''){
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`)
     }else {
-      alert("Vui lòng chỉ nhập 1 trường tìm kiếm");
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`);
     }
-
   }
 }
