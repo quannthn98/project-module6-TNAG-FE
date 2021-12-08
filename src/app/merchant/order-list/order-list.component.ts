@@ -19,6 +19,8 @@ export class OrderListComponent implements OnInit {
   infoDish: Dish[] = [];
   orderStatus: OrderStatus[] = [];
   currentStatus: string;
+  totalPages: number;
+  currentPage: number;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
@@ -38,6 +40,8 @@ export class OrderListComponent implements OnInit {
     this.orderService.getOrderByMerchant(statusName).subscribe((data: any) => {
       this.orders = data.content;
       this.currentStatus = statusName;
+      this.totalPages = data.totalPages;
+      this.currentPage = data.number + 1;
       console.log(data);
     }, error => {
       console.log(error);
@@ -69,5 +73,8 @@ export class OrderListComponent implements OnInit {
     }, error => {
       this.alertService.alertError('Hủy đơn hàng thất bại');
     });
+  }
+  counter(i: number) {
+    return new Array(i);
   }
 }

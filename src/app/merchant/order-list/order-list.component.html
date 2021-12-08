@@ -120,12 +120,7 @@
 </table>
 <div class="pagination">
   <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#" class="active">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
+  <a *ngFor="let page of counter(totalPages); index as i">{{i+1}}</a>
   <a href="#">&raquo;</a>
 </div>
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
