@@ -8,6 +8,8 @@ import {UserAddress} from '../../model/user-address';
 import {NgForm} from '@angular/forms';
 import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
+import {SocketService} from '../../service/socket/socket.service';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,7 +31,9 @@ export class CheckoutComponent implements OnInit {
               private userService: UserService,
               private orderService: OrderService,
               private alertService: AlertService,
-              private router: Router) {
+              private router: Router,
+              private socketService: SocketService,
+              private authenticationService: AuthenticationService) {
     this.activatedRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -39,6 +43,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
   }
 
   getCartByMerchant() {
@@ -90,6 +95,14 @@ export class CheckoutComponent implements OnInit {
 
     }, this.id).subscribe(data => {
       console.log(data);
+      const notification = {
+        sender: this.authenticationService.currentUserValue,
+        receiver: {
+          id: this.id
+        },
+        content: 'Đơn hàng mới'
+      };
+      this.socketService.sendNotification(notification);
       this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');
       this.router.navigateByUrl('');
     });

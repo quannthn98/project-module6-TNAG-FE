@@ -4,4 +4,5 @@ export interface ShipperProfile {
   idFront?: any;
   idBack?: any;
   ownerCertificate?: any;
+  profession?: any;
 }

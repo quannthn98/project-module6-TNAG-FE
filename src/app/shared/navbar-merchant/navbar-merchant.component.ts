@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SocketService} from '../../service/socket/socket.service';
+import {NotificationService} from '../../service/notification.service';
 
 @Component({
   selector: 'app-navbar-merchant',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarMerchantComponent implements OnInit {
 
-  constructor() { }
+  constructor(private socketService: SocketService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
   }
 
 }

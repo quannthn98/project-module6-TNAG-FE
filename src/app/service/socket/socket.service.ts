@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {environment} from '../../../environments/environment';
 import {UserToken} from '../../model/userToken';
 import {AuthenticationService} from '../authentication.service';
 import {Order} from '../../model/order';
+import {Notification} from '../../model/notification';
+import {NotificationService} from '../notification.service';
+import {OrderService} from '../order.service';
+import {AlertService} from '../alert.service';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -15,9 +19,14 @@ export class SocketService {
   stompClient: any;
   currentUser: UserToken;
   orders: Order[] = [];
+  notifications: Notification[] = [];
+  notification: Notification;
 
-  constructor(private authenticationService: AuthenticationService) {
-
+  constructor(private authenticationService: AuthenticationService,
+              private notificationService: NotificationService,
+              private orderService: OrderService,
+              private alertService: AlertService) {
+    this.currentUser = this.authenticationService.currentUserValue;
   }
 
   connectToOrders() {
@@ -25,7 +34,26 @@ export class SocketService {
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, frame => {
       this.stompClient.subscribe('/topic/orders', data => {
-        console.log(data);
+        console.log(data.body);
+        this.orders.push(JSON.parse(data.body));
+      });
+    });
+  }
+
+  connectToNotify() {
+    const ws = new SockJS(`${API_URL}/ws`);
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.connect({}, frame => {
+      this.stompClient.subscribe('/topic/notify', data => {
+        this.notificationService.getAllNotificationByUser(this.currentUser.id).subscribe(notifications => {
+          this.notifications = notifications;
+        });
+        this.notification = JSON.parse(data.body);
+        if (this.notification.receiver.id === this.currentUser.id) {
+          this.alertService.alertSuccess('Bạn có 1 đơn hàng mới');
+          this.notifications.push(JSON.parse(data.body));
+        }
+        console.log(JSON.parse(data.body));
       });
     });
   }
@@ -36,7 +64,7 @@ export class SocketService {
     }
   }
 
-  addNewOrder() {
-
+  sendNotification(notification: Notification) {
+    this.stompClient.send('/app/notify', {}, JSON.stringify(notification));
   }
 }
