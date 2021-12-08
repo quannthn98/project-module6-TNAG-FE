@@ -8,6 +8,8 @@ import {UserAddress} from '../../model/user-address';
 import {NgForm} from '@angular/forms';
 import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
+import {Coupon} from '../../model/coupon';
+import {CouponService} from '../../service/coupon.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,13 +25,18 @@ export class CheckoutComponent implements OnInit {
   merchantProfile;
   addresses: UserAddress[] = [];
   rowLoop: number[] = [];
+  code: string;
+  coupon: Coupon;
+  totalPayment;
+  shippingCost = 15000;
 
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
               private userService: UserService,
               private orderService: OrderService,
               private alertService: AlertService,
-              private router: Router) {
+              private router: Router,
+              private couponService: CouponService) {
     this.activatedRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -39,6 +46,18 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getCoupon() {
+    this.couponService.findByInputCode(this.code).subscribe(data => {
+      this.coupon = data;
+      if (this.estimatePayment > this.coupon.discountCondition) {
+        this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
+        this.alertService.alertSuccess('Đã áp dụng coupon cho đơn hàng này');
+      } else {
+        this.alertService.alertError('Đơn hàng của bạn không đủ điều kiện sử dụng coupon này');
+      }
+    });
   }
 
   getCartByMerchant() {
@@ -86,6 +105,10 @@ export class CheckoutComponent implements OnInit {
       paymentMethod: {
         id: checkoutForm.value.paymentMethod
       },
+      coupon: {
+        id: this.coupon.id
+      },
+      totalPayment: this.totalPayment,
       note: checkoutForm.value.note
     }, this.id).subscribe(data => {
       console.log(data);
