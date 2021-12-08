@@ -86,7 +86,8 @@ export class CheckoutComponent implements OnInit {
       paymentMethod: {
         id: checkoutForm.value.paymentMethod
       },
-      note: checkoutForm.value.note
+      note: checkoutForm.value.note,
+
     }, this.id).subscribe(data => {
       console.log(data);
       this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');

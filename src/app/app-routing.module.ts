@@ -8,6 +8,7 @@ import {AuthGuard} from './auth/helper/auth-guard';
 import {RegisterMerchantComponent} from './auth/register-merchant/register-merchant.component';
 import {MerchantGuard} from './auth/helper/merchant-guard';
 import {LayoutUserDetailComponent} from './layout/layout-user-detail/layout-user-detail.component';
+import {RegisterShipperComponent} from './auth/register-shipper/register-shipper.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'register/merchant',
     component: RegisterMerchantComponent
+  },
+  {
+    path: 'register/shipper',
+    component: RegisterShipperComponent
   },
   {
     path: 'merchant',

@@ -5,13 +5,10 @@ import {MerchantsDetailComponent} from './merchants-detail/merchants-detail.comp
 import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
 import {CheckoutComponent} from './checkout/checkout.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
+import {ShipperRegisterComponent} from './shipper-register/shipper-register.component';
 
 
 const routes: Routes = [
-  {
-    path: 'register/merchant',
-    component: MerchantRegisterComponent
-  },
   {
     path: 'user/merchant/:id',
     component: MerchantsDetailComponent
