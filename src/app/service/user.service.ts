@@ -17,6 +17,7 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class UserService {
   merchants: MerchantProfile[] = [];
+  selectedCategoryId: number;
 
   constructor(private http: HttpClient) {
   }

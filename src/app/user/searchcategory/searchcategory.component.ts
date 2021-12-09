@@ -18,6 +18,7 @@ export class SearchcategoryComponent implements OnInit {
 
 
   constructor(private httpClient: HttpClient, private userService: UserService, private categorySevice: CategoryService) {
+    this.categoryId = this.userService.selectedCategoryId;
     this.getUserDtoByCategoryId();
     this.getAllCategories();
   }
