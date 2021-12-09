@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   coupon: Coupon;
   totalPayment;
   shippingCost = 15000;
+  orderForm: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
@@ -103,19 +104,33 @@ export class CheckoutComponent implements OnInit {
   }
 
   createNewOrder(checkoutForm: NgForm) {
-    this.orderService.createNewOrder({
-      address: {
-        id: checkoutForm.value.address
-      },
-      paymentMethod: {
-        id: checkoutForm.value.paymentMethod
-      },
-      coupon: {
-        id: this.coupon.id
-      },
-      totalPayment: this.totalPayment,
-      note: checkoutForm.value.note
-    }, this.id).subscribe(data => {
+    if (this.coupon === undefined) {
+      this.orderForm = {
+        address: {
+          id: checkoutForm.value.address
+        },
+        paymentMethod: {
+          id: checkoutForm.value.paymentMethod
+        },
+        totalPayment: this.estimatePayment + this.shippingCost,
+        note: checkoutForm.value.note
+      };
+    } else {
+      this.orderForm = {
+        address: {
+          id: checkoutForm.value.address
+        },
+        paymentMethod: {
+          id: checkoutForm.value.paymentMethod
+        },
+        coupon: {
+          id: this.coupon.id
+        },
+        totalPayment: this.totalPayment,
+        note: checkoutForm.value.note
+      };
+    }
+    this.orderService.createNewOrder(this.orderForm, this.id).subscribe(data => {
       console.log(data);
       const notification = {
         sender: this.authenticationService.currentUserValue,
