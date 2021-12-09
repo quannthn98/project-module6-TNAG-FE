@@ -19,11 +19,15 @@ export class OrderListComponent implements OnInit {
   infoDish: Dish[] = [];
   orderStatus: OrderStatus[] = [];
   currentStatus: string;
+  searchOrders: any;
+  merchantId: number;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private orderService: OrderService,
               private alertService: AlertService) {
+    this.merchantId = JSON.parse(localStorage.user).id;
+
     activatedRoute.paramMap.subscribe(param => {
       this.id = +param.get('id');
       this.getOrderByMerchant('');
@@ -35,10 +39,17 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderByMerchant(statusName: string) {
-    this.orderService.getOrderByMerchant(statusName).subscribe((data: any) => {
-      this.orders = data.content;
-      this.currentStatus = statusName;
-      console.log(data);
+    this.orderService.getOrderByMerchant(statusName,this.merchantId, this.searchOrders).subscribe((data: any) => {
+      if(this.searchOrders == null || this.searchOrders == ''){
+        //Gửi dạng page phải chấm content
+        this.orders = data.content;
+        this.currentStatus = statusName;
+        console.log(data);
+      }else {
+        this.orders = data;
+        this.currentStatus = statusName;
+        console.log(data)
+      }
     }, error => {
       console.log(error);
     });
@@ -70,4 +81,5 @@ export class OrderListComponent implements OnInit {
       this.alertService.alertError('Hủy đơn hàng thất bại');
     });
   }
+
 }

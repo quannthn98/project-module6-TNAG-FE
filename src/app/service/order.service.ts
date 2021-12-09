@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Order} from '../model/order';
+import {Dish} from "../model/dish";
 import {OrderStatus} from '../model/order-status';
 
 const API_URL = `${environment.apiUrl}`;
@@ -19,12 +20,17 @@ export class OrderService {
     return this.http.post(`${API_URL}/orders/${merchantId}`, checkoutForm);
   }
 
-  getOrderByMerchant(statusName: string): Observable<Order[]> {
-    if (statusName == null || statusName === '') {
-      return this.http.get<Order[]>(API_URL + '/orders/merchant');
-    } else {
-      return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
-    }
+  getOrderByMerchant(statusName: string,merchantId: number,name? : any): Observable<Order[]> {
+   if(name == null || name === ''){
+     if (statusName == null || statusName === '') {
+       return this.http.get<Order[]>(API_URL + '/orders/merchant');
+     } else {
+       return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+     }
+   }else {
+     return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`)
+   }
+
   }
 
   getAllOrdersByUser(): Observable<Order> {
@@ -41,5 +47,12 @@ export class OrderService {
 
   cancellationOrder(order: Order): Observable<Order> {
     return this.http.put<Order>(API_URL + '/orderStatus', order);
+  }
+  getOrderByIdMerchant(merchantId: number,name? : any): Observable<Order[]> {
+    if (name == null || name === '') {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`)
+    } else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`);
+    }
   }
 }

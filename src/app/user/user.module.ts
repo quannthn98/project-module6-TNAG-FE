@@ -11,10 +11,11 @@ import {SharedModule} from '../shared/shared.module';
 import { MerchantRegisterComponent } from './merchant-register/merchant-register.component';
 import {FormsModule} from '@angular/forms';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { SearchcategoryComponent } from './searchcategory/searchcategory.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent],
+  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent, SearchcategoryComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
