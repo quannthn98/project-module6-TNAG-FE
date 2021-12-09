@@ -20,7 +20,7 @@ export class OrderListComponent implements OnInit {
   orderStatus: OrderStatus[] = [];
   currentStatus: string;
   totalPages: number;
-  currentPage: number;
+  currentPage = 0;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
@@ -37,12 +37,11 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderByMerchant(statusName: string) {
-    this.orderService.getOrderByMerchant(statusName).subscribe((data: any) => {
+    this.orderService.getOrderByMerchant(statusName, this.currentPage).subscribe((data: any) => {
       this.orders = data.content;
       this.currentStatus = statusName;
       this.totalPages = data.totalPages;
-      this.currentPage = data.number + 1;
-      console.log(data);
+      this.currentPage = data.number;
     }, error => {
       console.log(error);
     });
@@ -74,7 +73,18 @@ export class OrderListComponent implements OnInit {
       this.alertService.alertError('Hủy đơn hàng thất bại');
     });
   }
+
   counter(i: number) {
     return new Array(i);
+  }
+
+  changePage(i: number) {
+    this.orderService.getOrderByMerchant(this.currentStatus, i).subscribe((data: any) => {
+      this.orders = data.content;
+      this.currentPage = i;
+      this.getOrderByMerchant(this.currentStatus);
+    }, error => {
+      this.alertService.alertError('Lỗi rồi');
+    });
   }
 }
