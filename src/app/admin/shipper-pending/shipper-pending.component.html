@@ -1,0 +1,95 @@
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Tên</th>
+    <th scope="col">Số điện thoại</th>
+    <th scope="col">Nghề nghiệp</th>
+    <th scope="col">Hành động</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let r of request; index as i">
+    <td>{{r.id}}</td>
+    <td>{{r.user.userProfile.fullName}}</td>
+    <td>{{r.user.userProfile.phone}}</td>
+    <td>{{r.shipperProfile.profession}}</td>
+    <td>
+      <button (click)="getRequest(i)" class="btn btn-outline-info"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop">Phê duyệt
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Thông tin chi tiết</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-4">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">Họ và tên: </h6>
+                  <p class="card-text">{{targetShipper?.user.userProfile.fullName}}</p>
+                  <h6 class="card-title">SĐT: </h6>
+                  <p class="card-text">{{targetShipper?.user.userProfile.phone}}</p>
+                  <h6 class="card-title">Email:</h6>
+                  <p class="card-text">{{targetShipper?.user.email}} VNĐ</p>
+                  <h6 class="card-title">Nghề nghiệp: </h6>
+                  <p class="card-text">{{targetShipper?.shipperProfile.profession}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="col">
+                <label for="idFront">CCCD/CMND mặt trước</label>
+              </div>
+              <div class="col">
+                <img id="idFront" src="http://localhost:8080/{{targetShipper?.shipperProfile.idCardFront}}" >
+              </div>
+              <div class="col">
+                <label for="idBack">CCCD/CMND mặt sau</label>
+              </div>
+              <div class="col">
+                <img id="idBack" src="http://localhost:8080/{{targetShipper?.shipperProfile.idCardBack}}" >
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="col">
+                <label for="license">Bằng lái xe</label>
+              </div>
+              <div class="col">
+                <img id="license" src="http://localhost:8080/{{targetShipper?.shipperProfile.driverLicense}}" >
+              </div>
+              <div class="col">
+                <label for="certificate">CCCD/CMND mặt trước</label>
+              </div>
+              <div class="col">
+                <img id="certificate" src="http://localhost:8080/{{targetShipper?.shipperProfile.vehicleOwnershipCertificate}}" >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="updateStatus('false')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Từ chối</button>
+        <button (click)="updateStatus('true')" type="button" class="btn btn-primary" data-bs-dismiss="modal">Phê duyệt</button>
+      </div>
+    </div>
+  </div>
+</div>

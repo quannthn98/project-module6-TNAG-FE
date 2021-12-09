@@ -9,9 +9,10 @@ import { MerchantEditComponent } from './merchant-edit/merchant-edit.component';
 import { HomeComponent } from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DishListByMerchantComponent } from './dish-list-by-merchant/dish-list-by-merchant.component';
+import { ShipperPendingComponent } from './shipper-pending/shipper-pending.component';
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantDetailComponent, MerchantPendingComponent, MerchantEditComponent, HomeComponent, DishListByMerchantComponent],
+  declarations: [MerchantListComponent, MerchantDetailComponent, MerchantPendingComponent, MerchantEditComponent, HomeComponent, DishListByMerchantComponent, ShipperPendingComponent],
   imports: [
     AdminRoutingModule,
     CommonModule,
