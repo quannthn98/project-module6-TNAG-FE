@@ -56,8 +56,10 @@ export class CheckoutComponent implements OnInit {
 
   getCoupon() {
     this.couponService.findByInputCode(this.code).subscribe(data => {
-      this.coupon = data;
-      if (this.estimatePayment > this.coupon.discountCondition) {
+      if (data.merchantProfile.id != this.merchantProfile.id){
+         this.alertService.alertError('Coupon không hợp lệ')
+      } else if (this.estimatePayment > this.coupon.discountCondition) {
+        this.coupon = data;
         this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
         this.alertService.alertSuccess('Đã áp dụng coupon cho đơn hàng này');
       } else {
@@ -99,7 +101,6 @@ export class CheckoutComponent implements OnInit {
   getUserDeliverAddress() {
     this.userService.getAllDeliverAddressByUser().subscribe((data: any) => {
       this.addresses = data;
-      console.log(data);
     });
   }
 
