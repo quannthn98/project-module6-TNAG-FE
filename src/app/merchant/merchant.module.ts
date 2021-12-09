@@ -12,6 +12,7 @@ import {MerchantInfoDetailComponent} from './merchant-info-detail/merchant-info-
 import {MerchantInfoEditComponent} from './merchant-info-edit/merchant-info-edit.component';
 import {DishCreateComponent} from './dish-create/dish-create.component';
 import { MerchantOrderComponent } from './merchant-order/merchant-order.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MerchantOrderComponent } from './merchant-order/merchant-order.componen
     MerchantInfoDetailComponent,
     MerchantInfoEditComponent,
     DishCreateComponent,
-    MerchantOrderComponent
+    MerchantOrderComponent,
+    OrderListComponent
   ],
   imports: [
     CommonModule,

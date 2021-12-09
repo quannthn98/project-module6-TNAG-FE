@@ -7,6 +7,7 @@ import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditDishComponent} from './edit-dish/edit-dish.component';
 import {DishCreateComponent} from './dish-create/dish-create.component';
 import {MerchantOrderComponent} from "./merchant-order/merchant-order.component";
+import {OrderListComponent} from './order-list/order-list.component';
 
 const routes: Routes = [
   {
@@ -34,8 +35,8 @@ const routes: Routes = [
     component: MerchantInfoEditComponent
   },
   {
-    path: 'merchant/order',
-    component: MerchantOrderComponent
+    path: ':id/order',
+    component: OrderListComponent
   }
 ];
 

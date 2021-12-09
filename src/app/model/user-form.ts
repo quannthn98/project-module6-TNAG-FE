@@ -6,4 +6,5 @@ export interface UserForm {
   fullName?: string;
   phone?: string;
   sex?: string;
+  address?: string;
 }
