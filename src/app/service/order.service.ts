@@ -19,7 +19,7 @@ export class OrderService {
     return this.http.post(`${API_URL}/orders/${merchantId}`, checkoutForm);
   }
 
-  getOrderByMerchant(statusName: string, page: number): Observable<Order[]> {
+  getOrderByMerchantAndStatus(statusName: string, page: number): Observable<Order[]> {
     if (statusName == null || statusName === '') {
       return this.http.get<Order[]>(API_URL + '/orders/merchant?page=' + page);
     } else {

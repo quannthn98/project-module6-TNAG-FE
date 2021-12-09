@@ -37,7 +37,7 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderByMerchant(statusName: string) {
-    this.orderService.getOrderByMerchant(statusName, this.currentPage).subscribe((data: any) => {
+    this.orderService.getOrderByMerchantAndStatus(statusName, this.currentPage).subscribe((data: any) => {
       this.orders = data.content;
       this.currentStatus = statusName;
       this.totalPages = data.totalPages;
@@ -79,7 +79,7 @@ export class OrderListComponent implements OnInit {
   }
 
   changePage(i: number) {
-    this.orderService.getOrderByMerchant(this.currentStatus, i).subscribe((data: any) => {
+    this.orderService.getOrderByMerchantAndStatus(this.currentStatus, i).subscribe((data: any) => {
       this.orders = data.content;
       this.currentPage = i;
       this.getOrderByMerchant(this.currentStatus);
