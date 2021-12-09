@@ -8,10 +8,11 @@ import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import { RegisterMerchantComponent } from './register-merchant/register-merchant.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { RegisterShipperComponent } from './register-shipper/register-shipper.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, RegisterMerchantComponent],
+  declarations: [LoginComponent, RegisterComponent, RegisterMerchantComponent, RegisterShipperComponent],
     imports: [
         CommonModule,
         AuthRoutingModule,
