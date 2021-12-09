@@ -57,9 +57,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCategory();
-    this.getCurrentUserDetail();
     this.checkRole();
-    this.getCartByUser();
+    if (this.isUser || this.isMerchant) {
+      this.getCartByUser();
+    }
     this.socketService.connectToNotify();
     this.getNotification();
   }

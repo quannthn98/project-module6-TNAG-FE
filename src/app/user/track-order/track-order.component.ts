@@ -3,6 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../service/order.service';
 import {Order} from '../../model/order';
 import {LocationService} from '../../service/location.service';
+import {SocketService} from '../../service/socket/socket.service';
+import {Message} from '../../model/message';
+import {AuthenticationService} from '../../service/authentication.service';
 
 
 @Component({
@@ -16,30 +19,25 @@ export class TrackOrderComponent implements OnInit, OnChanges {
   merchantLocation: any;
   userLocation: any;
   distance: any;
-
-  origin: any;
-  destination: any;
+  message: string;
+  newMessage: Message;
+  currentUser;
 
   constructor(private activatedRoute: ActivatedRoute,
               private orderService: OrderService,
-              private locationService: LocationService) {
+              private locationService: LocationService,
+              private socketService: SocketService,
+              private authenticationService: AuthenticationService) {
+    this.currentUser = this.authenticationService.currentUserValue;
     this.activatedRoute.paramMap.subscribe(paraMap => {
       this.orderId = +paraMap.get('id');
       this.getOrderById();
+      this.scrollChatToBottom();
     });
   }
 
 
   ngOnInit() {
-    this.origin = {
-      lat: 24.799448,
-      lng: 120.979021
-    };
-    this.destination = {
-      lat: 24.799524,
-      lng: 120.975017
-    };
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -58,7 +56,12 @@ export class TrackOrderComponent implements OnInit, OnChanges {
         lat: merchantLocation.results[0].geometry.lat,
         lng: merchantLocation.results[0].geometry.lng
       };
-      this.distance = this.locationService.calculateDistance(this.origin, this.destination)
+      this.distance = this.locationService.calculateDistance(this.userLocation, this.merchantLocation);
+      if (this.currentUser.id === this.order.user.id) {
+        await this.socketService.connectToChat(this.order.shipper.id);
+      } else {
+        await this.socketService.connectToChat(this.order.user.id);
+      }
     });
   }
 
@@ -68,6 +71,42 @@ export class TrackOrderComponent implements OnInit, OnChanges {
 
   getMerchantGeoToPromise(): any {
     return this.locationService.forwardConvert(this.order.merchant.merchantProfile.address).toPromise();
+  }
+
+  sendMessage() {
+    if (this.order.shipper.id === this.currentUser.id) {
+      this.newMessage = {
+        sender: {
+          id: this.currentUser.id
+        },
+        receiver: {
+          id: this.order.user.id
+        },
+        content: this.message
+      };
+    } else {
+      this.newMessage = {
+        sender: {
+          id: this.currentUser.id
+        },
+        receiver: {
+          id: this.order.shipper.id
+        },
+        content: this.message
+      };
+    }
+    console.log(this.message);
+    console.log(this.newMessage);
+    this.socketService.sendMessage(this.newMessage);
+    this.scrollChatToBottom();
+  }
+
+  scrollChatToBottom() {
+    document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+  }
+
+  showChatBox() {
+    document.getElementById('chatbox').style.display = 'block';
   }
 
 }
