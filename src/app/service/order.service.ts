@@ -33,11 +33,15 @@ export class OrderService {
 
   }
 
-  getOrderByMerchantAndStatus(statusName: string, page: number): Observable<Order[]> {
-    if (statusName == null || statusName === '') {
-      return this.http.get<Order[]>(API_URL + '/orders/merchant?page=' + page);
-    } else {
-      return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+  getOrderByMerchantAndStatus(statusName: string, page: number, merchantId: number, name?: any): Observable<Order[]> {
+    if(name == null || name === ''){
+      if (statusName == null || statusName === '') {
+        return this.http.get<Order[]>(API_URL + '/orders/merchant?page=' + page);
+      } else {
+        return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+      }
+    }else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`)
     }
   }
 
