@@ -4,6 +4,7 @@ import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
 import {OrderDetail} from '../../model/order-detail';
 import {OrderStatus} from '../../model/order-status';
+import {SocketService} from "../../service/socket/socket.service";
 
 @Component({
   selector: 'app-shipper-order',
@@ -18,17 +19,19 @@ export class ShipperOrderComponent implements OnInit {
   pickedOrder: Order;
 
   constructor(private orderService: OrderService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private socketService: SocketService) {
   }
 
   ngOnInit() {
     this.getCreatedOrder();
     this.getShippingStatus();
+    this.socketService.connectToOrders()
   }
 
   getCreatedOrder() {
     this.orderService.getCreatedOrder().subscribe((data: any) => {
-      this.orders = data.content;
+      this.socketService.orders = data.content;
       console.log(this.orders);
     }, error => {
       this.alertService.alertError('Lỗi rồi đó');
