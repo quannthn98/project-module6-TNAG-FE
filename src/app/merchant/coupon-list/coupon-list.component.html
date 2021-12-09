@@ -1,0 +1,79 @@
+<div class="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0">Quản lý cửa hàng</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a routerLink="/merchant">Quản lý cửa hàng</a></li>
+        <li class="breadcrumb-item active">Danh sách coupon</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header border-0">
+            <h3 class="card-title">Danh sách món ăn</h3>
+            <div class="float-right">
+              <form>
+<!--                <input (input)="getAllDishByMerchant()" name="q" class="form-control" type="search" style="max-width: 300px" [(ngModel)]="searchText" placeholder="Tìm Kiếm Món Ăn">-->
+              </form>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-hover table-bordered">
+              <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã Coupon</th>
+                <th scope="col">Số tiền giảm</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Loại Coupon</th>
+                <th scope="col">Hành Động</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let coupon of coupons; index as i">
+                <th scope="row">{{i}}</th>
+                <td>{{coupon?.inputCode}}</td>
+                <td>{{coupon?.discount}} VNĐ</td>
+                <td>{{coupon?.description}}</td>
+                <td>Áp dụng cho {{coupon?.type?.name == 'DISH' ? "Món ăn": "Phí vận chuyển"}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-success ml-2" routerLink="edit/{{coupon?.id}}"><i class="far fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" (click)="findCouponById(coupon?.id)" data-bs-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
+<!--                  <button type="button" class="btn btn-outline-info ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)"><i class="fas fa-info-circle"></i></button>-->
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Xóa Coupon</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc muốn xoá coupon này chứ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitDeleteCoupon()">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
