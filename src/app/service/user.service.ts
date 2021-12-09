@@ -7,6 +7,7 @@ import {MerchantProfile} from '../model/merchant-profile';
 import {UserAddress} from '../model/user-address';
 import {UserProfile} from '../model/user-profile';
 import {UserForm} from '../model/user-form';
+import {Userdto} from "../model/userdto";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -81,5 +82,9 @@ export class UserService {
 
   deleteDeliverAddress(id: number): Observable<UserAddress> {
     return this.http.delete(`${API_URL}/users/address/${id}`);
+  }
+
+  getUserByCategory(id: number): Observable<Userdto[]> {
+    return this.http.get<Userdto[]>(`${API_URL}/users/findUserByCategory/${id}`);
   }
 }
