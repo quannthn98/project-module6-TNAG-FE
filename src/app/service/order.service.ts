@@ -20,17 +20,25 @@ export class OrderService {
     return this.http.post(`${API_URL}/orders/${merchantId}`, checkoutForm);
   }
 
-  getOrderByMerchant(statusName: string,merchantId: number,name? : any): Observable<Order[]> {
-   if(name == null || name === ''){
-     if (statusName == null || statusName === '') {
-       return this.http.get<Order[]>(API_URL + '/orders/merchant');
-     } else {
-       return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
-     }
-   }else {
-     return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`)
-   }
+  getOrderByMerchant(statusName: string, merchantId: number, name?: any): Observable<Order[]> {
+    if (name == null || name === '') {
+      if (statusName == null || statusName === '') {
+        return this.http.get<Order[]>(API_URL + '/orders/merchant');
+      } else {
+        return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+      }
+    } else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`)
+    }
 
+  }
+
+  getOrderByMerchantAndStatus(statusName: string, page: number): Observable<Order[]> {
+    if (statusName == null || statusName === '') {
+      return this.http.get<Order[]>(API_URL + '/orders/merchant?page=' + page);
+    } else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+    }
   }
 
   getAllOrdersByUser(): Observable<Order> {
@@ -47,6 +55,17 @@ export class OrderService {
 
   cancellationOrder(order: Order): Observable<Order> {
     return this.http.put<Order>(API_URL + '/orderStatus', order);
+  }
+
+  getCreatedOrder(): Observable<Order[]> {
+    return this.http.get<Order[]>(API_URL + '/orders/createdOrders');
+  }
+
+  deliveryConfirmOrder(orderStatus: OrderStatus, orderId: number): Observable<OrderStatus> {
+    return this.http.put<OrderStatus>(`${API_URL}/orderStatus/confirmShipping/${orderId}`, orderStatus);
+  }
+  getOrderByShipper(): Observable<Order[]> {
+    return this.http.get<Order[]>(API_URL + '/orders/shipper');
   }
   getOrderByIdMerchant(merchantId: number,name? : any): Observable<Order[]> {
     if (name == null || name === '') {

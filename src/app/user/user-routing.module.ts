@@ -5,7 +5,9 @@ import {MerchantsDetailComponent} from './merchants-detail/merchants-detail.comp
 import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
 import {CheckoutComponent} from './checkout/checkout.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
-import {SearchcategoryComponent} from "./searchcategory/searchcategory.component";
+import {ShipperRegisterComponent} from './shipper-register/shipper-register.component';
+import {TrackOrderComponent} from './track-order/track-order.component';
+import {SearchcategoryComponent} from './searchcategory/searchcategory.component';
 
 
 const routes: Routes = [
@@ -22,11 +24,15 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
+    path: 'track/order/:id',
+    component: TrackOrderComponent
+  },
+  {
     path: '',
     component: HomeComponent
   },
   {
-    path:'searchcategory',
+    path: 'searchcategory',
     component: SearchcategoryComponent
   }
 ];

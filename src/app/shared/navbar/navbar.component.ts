@@ -9,6 +9,8 @@ import {UserService} from '../../service/user.service';
 import {CartDetail} from '../../model/cart-detail';
 import {CartService} from '../../service/cart.service';
 import {Cart} from '../../model/cart';
+import {SocketService} from '../../service/socket/socket.service';
+import {NotificationService} from '../../service/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,8 +31,10 @@ export class NavbarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService,
               private categoryService: CategoryService,
               private userService: UserService,
+              private router: Router,
+              private socketService: SocketService,
               private cartService: CartService,
-              private router: Router) {
+              private notificationService: NotificationService) {
     this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
       this.roles = this.currentUser.roles;
@@ -56,6 +60,8 @@ export class NavbarComponent implements OnInit {
     this.getCurrentUserDetail();
     this.checkRole();
     this.getCartByUser();
+    this.socketService.connectToNotify();
+    this.getNotification();
   }
 
   getAllCategory() {
@@ -88,6 +94,12 @@ export class NavbarComponent implements OnInit {
         }
         this.carts[i].totalPayment = totalPayment;
       }
+    });
+  }
+
+  getNotification() {
+    this.notificationService.getAllNotificationByUser(this.currentUser.id).subscribe(data => {
+      this.socketService.notifications = data;
     });
   }
 }
