@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
 import {Order} from '../model/order';
+import {Dish} from "../model/dish";
 import {OrderStatus} from '../model/order-status';
 
 const API_URL = `${environment.apiUrl}`;
@@ -17,6 +18,19 @@ export class OrderService {
 
   createNewOrder(checkoutForm, merchantId: number): Observable<Order> {
     return this.http.post(`${API_URL}/orders/${merchantId}`, checkoutForm);
+  }
+
+  getOrderByMerchant(statusName: string, merchantId: number, name?: any): Observable<Order[]> {
+    if (name == null || name === '') {
+      if (statusName == null || statusName === '') {
+        return this.http.get<Order[]>(API_URL + '/orders/merchant');
+      } else {
+        return this.http.get<Order[]>(`${API_URL}/orders/merchant?q=${statusName}`);
+      }
+    } else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`)
+    }
+
   }
 
   getOrderByMerchantAndStatus(statusName: string, page: number): Observable<Order[]> {
@@ -52,5 +66,12 @@ export class OrderService {
   }
   getOrderByShipper(): Observable<Order[]> {
     return this.http.get<Order[]>(API_URL + '/orders/shipper');
+  }
+  getOrderByIdMerchant(merchantId: number,name? : any): Observable<Order[]> {
+    if (name == null || name === '') {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`)
+    } else {
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`);
+    }
   }
 }

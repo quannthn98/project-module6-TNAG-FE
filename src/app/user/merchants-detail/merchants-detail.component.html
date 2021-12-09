@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <section class="restaurant-detailed-banner">
   <div class="text-center">
-    <img class="img-fluid cover" src="assets/static/img/mall-dedicated-banner.png">
+    <img class="img-fluid cover" src="http://localhost:8080/{{merchant?.merchantProfile?.cover}}">
   </div>
   <div class="restaurant-detailed-header">
     <div class="container">
@@ -70,12 +70,26 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-        <div class="card-warning">
+        <div class="card-warning sticky-top" style="border:solid 2px #ffc107">
           <div class="card-header">
-            <h5>Coupon</h5>
+            <h5 style="color: white">Coupon</h5>
           </div>
           <div class="card-body">
-            
+            <ul class="list-group" *ngFor="let coupon of coupons">
+              <li class="list-group-item mt-1" style="border:solid 1px #ffc107">
+                <ng-container *ngIf="coupon?.type?.name === 'SHIPPER'">
+                  <i class="fas fa-shipping-fast"></i>
+                </ng-container>
+                <ng-container *ngIf="coupon?.type?.name === 'DISH'">
+                  <i class="fas fa-utensils" style="margin-right: 5px"></i>
+                </ng-container>
+                Nhập "{{coupon?.inputCode}}" giảm {{coupon?.discount}} cho
+                <ng-container *ngIf="coupon?.type?.name === 'DISH'">món ăn</ng-container>
+                <ng-container *ngIf="coupon?.type?.name === 'SHIPPER'">tiền vận chuyển</ng-container>
+              <p class="card-text">{{coupon?.description}}</p>
+              </li>
+
+            </ul>
           </div>
         </div>
       </div>
@@ -589,8 +603,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item">
+      <div class="col-md-3 ">
+        <div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item sticky-top">
           <h5 class="mb-1 text-white">Đặt hàng ngay</h5>
           <p class="mb-4 text-white">{{this.cartDetails.length}} sản phẩm</p>
           <div *ngFor="let c of cartDetails" class="bg-white rounded shadow-sm mb-2">

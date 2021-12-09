@@ -5,10 +5,26 @@ import {MerchantInfoDetailComponent} from './merchant-info-detail/merchant-info-
 import {MerchantInfoEditComponent} from './merchant-info-edit/merchant-info-edit.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {EditDishComponent} from './edit-dish/edit-dish.component';
-import {DishCreateComponent} from './dish-create/dish-create.component';;
+import {DishCreateComponent} from './dish-create/dish-create.component';
+import {MerchantOrderComponent} from "./merchant-order/merchant-order.component";
 import {OrderListComponent} from './order-list/order-list.component';
+import {CouponListComponent} from './coupon-list/coupon-list.component';
+import {CouponCreateComponent} from './coupon-create/coupon-create.component';
+import {CouponEditComponent} from './coupon-edit/coupon-edit.component';
 
 const routes: Routes = [
+  {
+    path: 'coupon/edit/:id',
+    component: CouponEditComponent
+  },
+  {
+    path: 'coupon-create',
+    component: CouponCreateComponent
+  },
+  {
+    path: 'coupon',
+    component: CouponListComponent
+  },
   {
     path: 'dish/create',
     component: DishCreateComponent

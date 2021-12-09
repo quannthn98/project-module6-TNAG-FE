@@ -34,7 +34,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let order of orders; index as i">
-    <td>{{(currentPage * 5) + i + 1}}</td>
+    <td>{{i + 1}}</td>
     <td>{{order?.orderTime}}</td>
     <td>{{order?.address?.customerName}}</td>
     <td>{{order?.address?.address}}</td>

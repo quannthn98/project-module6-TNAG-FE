@@ -21,11 +21,15 @@ export class OrderListComponent implements OnInit {
   currentStatus: string;
   totalPages: number;
   currentPage = 0;
+  searchOrders: any;
+  merchantId: number;
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private orderService: OrderService,
               private alertService: AlertService) {
+    this.merchantId = JSON.parse(localStorage.user).id;
+
     activatedRoute.paramMap.subscribe(param => {
       this.id = +param.get('id');
       this.getOrderByMerchant('');
