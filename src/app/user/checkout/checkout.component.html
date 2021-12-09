@@ -175,11 +175,11 @@
               <div *ngFor="let c of cartDetails" class="gold-members p-2 border-bottom">
                 <p class="text-gray mb-0 float-right ml-2">{{c?.price}}</p>
                 <span class="count-number float-right">
-                                    <button (click)="addDishToCart(c?.dish?.id, '-')"
+                                    <button type="button" (click)="addDishToCart(c?.dish?.id, '-')"
                                             class="btn btn-outline-secondary  btn-sm left dec"> <i
                                       class="icofont-minus"></i> </button>
                                     <input class="count-number-input" type="text" value="{{c?.quantity}}" readonly="">
-                                    <button (click)="addDishToCart(c?.dish?.id, '+')"
+                                    <button type="button" (click)="addDishToCart(c?.dish?.id, '+')"
                                             class="btn btn-outline-secondary btn-sm right inc"> <i
                                       class="icofont-plus"></i> </button>
                                 </span>
@@ -196,7 +196,7 @@
                 <input type="text" [(ngModel)]="code" name="code" class="form-control" placeholder="Mã giảm giá">
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="button" (click)="getCoupon()"><i
-                    class="icofont-sale-discount"></i> APPLY
+                    class="icofont-sale-discount"></i> Áp dụng
                   </button>
                 </div>
               </div>
@@ -229,16 +229,5 @@
     </div>
 
   </form>
-</section>
-<section class="section pt-5 pb-5 text-center bg-white">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h5 class="m-0">Bạn có cửa hàng? <a routerLink="/login">Gia nhập với chúng tôi cùng cung cấp sản phẩm tốt nhất
-          cho
-          khách hàng</a></h5>
-      </div>
-    </div>
-  </div>
 </section>
 <app-footer></app-footer>
