@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container mt-4">
+  <div class="row flex-lg-nowrap">
+    <!--    <div class="col-12 col-lg-auto mb-3" style="width: 250px;">-->
+    <!--      <div class="card p-3">-->
+    <!--        <div class="e-navlist e-navlist&#45;&#45;active-lg">-->
+    <!--          <ul class="nav">-->
+
+    <!--            <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-fw fa-bar-chart mr-1"></i>-->
+    <!--              <span>Thông tin cá nhân</span></a></li>-->
+
+    <!--            <li class="nav-item"><a class="nav-link px-2" target="__blank"><i class="fa fa-fw fa-th mr-1"></i>-->
+    <!--              <span>Lịch sử đơn hàng</span></a></li>-->
+
+    <!--            <li class="nav-item"><a class="nav-link px-2"><i class="fa fa-fw fa-cog mr-1"></i>-->
+    <!--              <span>Địa chỉ giao hàng</span></a></li>-->
+    <!--          </ul>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="col-md-3">
+      <app-sidebar-shipper></app-sidebar-shipper>
+    </div>
+
+    <div class="col-md-9" style="min-height: 80%">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

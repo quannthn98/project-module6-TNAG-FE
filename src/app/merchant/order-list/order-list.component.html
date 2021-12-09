@@ -9,53 +9,14 @@
         <li class="breadcrumb-item active">Quản ký đơn hàng</li>
       </ol>
     </div>
-    <div class="float-right">
-      <form>
-        <input (input)="getOrderByMerchant(currentStatus)" name="q" class="form-control" type="search" style="max-width: 300px" [(ngModel)]="searchOrders" placeholder="Tìm Kiếm">
-      </form>
-    </div>
   </div>
 </div>
-<table class="table table-hover table-bordered" *ngIf="searchOrders">
-  <thead>
-  <tr>
-    <th scope="col">STT</th>
-    <th scope="col">Mã Đơn</th>
-    <th scope="col">Ghi Chú</th>
-    <th scope="col">Thời Gian Đặt Hàng</th>
-    <th scope="col">Tổng Giá Trị Đơn Hàng</th>
-    <th scope="col">Người Đặt Hàng</th>
-    <th scope="col">Số Điện Thoại</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <tr *ngFor="let o of orders; index as i">
-    <th scope="row">{{i+1}}</th>
-    <td>{{o?.id}}</td>
-    <td>{{o?.note}}</td>
-    <td>{{o?.orderTime}}</td>
-    <td>{{o?.totalPayment}}</td>
-    <td>{{o?.address.customerName}}</td>
-    <td>{{o?.address.phone}}</td>
-    <!--                <td>{{o?.user.}}</td>-->
-    <!--                <td >{{d?.status == true ? "Còn hàng": "Hết hàng"}}</td>-->
-    <!--                <td>-->
-    <!--                  <button type="button" class="btn btn-warning ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="editDishById(d.id)">Sửa</button>-->
-    <!--                  <button type="button" class="btn btn-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)">Xóa</button>-->
-    <!--                  <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)">Chi Tiết</button>-->
-    <!--                </td>-->
-  </tr>
-  </tbody>
-</table>
-<table class="table table-hover table-bordered" *ngIf="!searchOrders">
+<table class="table table-hover table-bordered">
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">Mã Đơn</th>
     <th scope="col">Thời gian đặt hàng</th>
     <th scope="col">Người đặt hàng</th>
-    <th scope="col">Số Điện Thoại</th>
     <th scope="col">Địa chỉ giao hàng</th>
     <th scope="col">
       <select class="custom-select" id="inputGroupSelect01" #pickedStatus
@@ -74,10 +35,8 @@
   <tbody>
   <tr *ngFor="let order of orders; index as i">
     <td>{{i + 1}}</td>
-    <td>{{order?.id}}</td>
     <td>{{order?.orderTime}}</td>
     <td>{{order?.address?.customerName}}</td>
-    <td>{{order?.address.phone}}</td>
     <td>{{order?.address?.address}}</td>
     <td>{{order?.orderStatus?.name}}</td>
     <td>{{order?.totalPayment}}</td>
@@ -88,8 +47,8 @@
     </td>
     <td>
       <ng-container *ngIf="order.orderStatus.name != 'CANCELED'">
-      <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-              (click)="getOrder(order.id)"><i class="far fa-times-circle"></i></button>
+        <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                (click)="getOrder(order.id)"><i class="far fa-times-circle"></i></button>
       </ng-container>
     </td>
     <!--    <td>{{order?.ordersStatus?}}</td>-->
@@ -160,14 +119,12 @@
   </tbody>
 </table>
 <div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#" class="active">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
+  <a *ngIf="currentPage!=0" (click)="changePage((currentPage-1))">&laquo;</a>
+  <ng-container *ngFor="let page of counter(totalPages); index as i">
+    <a *ngIf="currentPage == i" class="active">{{i + 1}}</a>
+    <a #picked *ngIf="currentPage != i" (click)="changePage(i)">{{i + 1}}</a>
+  </ng-container>
+  <a *ngIf="currentPage!=totalPages-1" (click)="changePage(currentPage+1)">&raquo;</a>
 </div>
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog">
@@ -182,12 +139,14 @@
       <div _ngcontent-apg-c4="" class="form-group col-md-12">
         <label _ngcontent-apg-c4="">Lý do hủy đơn</label>
         <textarea _ngcontent-apg-c4="" class="form-control ng-untouched ng-pristine ng-valid"
-        name="note" #cancellationReason placeholder="Lý do hủy đơn hàng ...." rows="3"
-        ng-reflect-name="note" ng-reflect-model="" ></textarea>
+                  name="note" #cancellationReason placeholder="Lý do hủy đơn hàng ...." rows="3"
+                  ng-reflect-name="note" ng-reflect-model=""></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-        <button (click)="canceledOrder(cancellationReason.value)" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xóa</button>
+        <button (click)="canceledOrder(cancellationReason.value)" type="button" class="btn btn-primary"
+                data-bs-dismiss="modal">Xóa
+        </button>
       </div>
     </div>
   </div>

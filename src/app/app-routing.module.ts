@@ -8,6 +8,8 @@ import {AuthGuard} from './auth/helper/auth-guard';
 import {RegisterMerchantComponent} from './auth/register-merchant/register-merchant.component';
 import {MerchantGuard} from './auth/helper/merchant-guard';
 import {LayoutUserDetailComponent} from './layout/layout-user-detail/layout-user-detail.component';
+import {RegisterShipperComponent} from './auth/register-shipper/register-shipper.component';
+import {LayoutShipperComponent} from './layout/layout-shipper/layout-shipper.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
   {
     path: 'register/merchant',
     component: RegisterMerchantComponent
+  },
+  {
+    path: 'register/shipper',
+    component: RegisterShipperComponent
   },
   {
     path: 'merchant',
@@ -42,6 +48,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./user/user.module').then(module => module.UserModule)
+  },
+  {
+    path: 'shipper',
+    component: LayoutShipperComponent,
+    loadChildren: () => import('./shipper/shipper.module').then(module => module.ShipperModule)
   }
 ];
 
