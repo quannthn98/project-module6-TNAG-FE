@@ -6,6 +6,7 @@ import {MerchantRegisterComponent} from './merchant-register/merchant-register.c
 import {CheckoutComponent} from './checkout/checkout.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {ShipperRegisterComponent} from './shipper-register/shipper-register.component';
+import {TrackOrderComponent} from './track-order/track-order.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'checkout/:id',
     component: CheckoutComponent
+  },
+  {
+    path: 'track/order/:id',
+    component: TrackOrderComponent
   },
   {
     path: '',

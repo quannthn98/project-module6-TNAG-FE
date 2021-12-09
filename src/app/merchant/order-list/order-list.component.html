@@ -1,0 +1,153 @@
+<div class="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0">Quản lý đơn hàng</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a routerLink="/merchant">Quản lý cửa hàng</a></li>
+        <li class="breadcrumb-item active">Quản ký đơn hàng</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Thời gian đặt hàng</th>
+    <th scope="col">Người đặt hàng</th>
+    <th scope="col">Địa chỉ giao hàng</th>
+    <th scope="col">
+      <select class="custom-select" id="inputGroupSelect01" #pickedStatus
+              (click)="getOrderByMerchant(pickedStatus.value)">
+        <option selected value="">Trạng thái</option>
+        <ng-container *ngFor="let st of orderStatus">
+          <option value="{{st.name}}">{{st.name}}</option>
+        </ng-container>
+      </select>
+    </th>
+    <th scope="col">Tổng giá trị đơn hàng</th>
+    <th scope="col" colspan="1">Chi tiết</th>
+    <th scope="col" colspan="1">Hủy đơn hàng</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of orders; index as i">
+    <td>{{i + 1}}</td>
+    <td>{{order?.orderTime}}</td>
+    <td>{{order?.address?.customerName}}</td>
+    <td>{{order?.address?.address}}</td>
+    <td>{{order?.orderStatus?.name}}</td>
+    <td>{{order?.totalPayment}}</td>
+    <td>
+      <button class="btn btn-outline-info ml-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+              (click)="getOrder(order?.id)"><i class="fas fa-info-circle"></i>
+      </button>
+    </td>
+    <td>
+      <ng-container *ngIf="order.orderStatus.name != 'CANCELED'">
+      <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+              (click)="getOrder(order.id)"><i class="far fa-times-circle"></i></button>
+      </ng-container>
+    </td>
+    <!--    <td>{{order?.ordersStatus?}}</td>-->
+    <!--    <td>-->
+    <!--      <button class="btn btn-success" (mousedown)="getId(merchant.id)" data-toggle="modal"-->
+    <!--              data-target="#infoModal">Chi tiết cửa hàng-->
+    <!--      </button>-->
+    <!--    </td>-->
+    <!--    <td>-->
+    <!--      <button class="btn btn-success" routerLink="{{merchant.id}}/dish">Chi tiết món ăn</button>-->
+    <!--    </td>-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Chi tiết đơn hàng</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Món ăn</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dish of infoDish; index as i">
+                <td>{{i + 1}}</td>
+                <td>{{dish?.dish.name}}</td>
+                <td>{{dish?.dish?.price}}</td>
+                <td>{{dish?.quantity}}</td>
+                <td>{{dish?.total}}</td>
+              </tr>
+              </tbody>
+              <tbody>
+              <tr>
+                <td colspan="4">Giảm giá</td>
+                <td> 0</td>
+              </tr>
+              <tr>
+                <td colspan="4">Thanh toán</td>
+                <td> {{infoOrder?.totalPayment}} </td>
+              </tr>
+              </tbody>
+
+            </table>
+          </div>
+          <div _ngcontent-apg-c4="" class="form-group col-md-12"><label _ngcontent-apg-c4="">Ghi chú cho cửa
+            hàng </label><textarea _ngcontent-apg-c4="" class="form-control ng-untouched ng-pristine ng-valid"
+                                   name="note" ngmodel="" placeholder="Cửa hàng nên lưu ý..." rows="3"
+                                   ng-reflect-name="note" ng-reflect-model="" disabled>{{infoOrder?.note}}</textarea>
+          </div>
+          <div _ngcontent-apg-c4="" class="form-group col-md-12">
+            <div _ngcontent-apg-c4="" class="custom-control custom-checkbox"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </tr>
+  </tbody>
+</table>
+<div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#">1</a>
+  <a href="#" class="active">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Hủy đơn hàng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc muốn xoá đơn hàng này chứ?
+      </div>
+      <div _ngcontent-apg-c4="" class="form-group col-md-12">
+        <label _ngcontent-apg-c4="">Lý do hủy đơn</label>
+        <textarea _ngcontent-apg-c4="" class="form-control ng-untouched ng-pristine ng-valid"
+        name="note" #cancellationReason placeholder="Lý do hủy đơn hàng ...." rows="3"
+        ng-reflect-name="note" ng-reflect-model="" ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+        <button (click)="canceledOrder(cancellationReason.value)" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -52,12 +52,12 @@ export class UserService {
     return this.http.get<any>(API_URL + '/status');
   }
 
-  findAllMerchantByName(searchValue: string): Observable<User> {
-    return this.http.get(API_URL + '/merchants/search/' + searchValue);
+  findAllMerchantByName(searchValue: string): Observable<User[]> {
+    return this.http.get<User[]>(API_URL + '/merchants/search/' + searchValue);
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get(API_URL + '/users/' + id);
+    return this.http.get<User>(API_URL + '/users/' + id);
   }
 
   updateUserProfile(profile): Observable<UserProfile> {
