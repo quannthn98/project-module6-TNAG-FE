@@ -10,6 +10,8 @@ import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
 import {SocketService} from '../../service/socket/socket.service';
 import {AuthenticationService} from '../../service/authentication.service';
+import {Coupon} from '../../model/coupon';
+import {CouponService} from '../../service/coupon.service';
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +27,10 @@ export class CheckoutComponent implements OnInit {
   merchantProfile;
   addresses: UserAddress[] = [];
   rowLoop: number[] = [];
+  code: string;
+  coupon: Coupon;
+  totalPayment;
+  shippingCost = 15000;
 
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
@@ -33,7 +39,8 @@ export class CheckoutComponent implements OnInit {
               private alertService: AlertService,
               private router: Router,
               private socketService: SocketService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private couponService: CouponService) {
     this.activatedRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -44,6 +51,18 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.socketService.connectToNotify();
+  }
+
+  getCoupon() {
+    this.couponService.findByInputCode(this.code).subscribe(data => {
+      this.coupon = data;
+      if (this.estimatePayment > this.coupon.discountCondition) {
+        this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
+        this.alertService.alertSuccess('Đã áp dụng coupon cho đơn hàng này');
+      } else {
+        this.alertService.alertError('Đơn hàng của bạn không đủ điều kiện sử dụng coupon này');
+      }
+    });
   }
 
   getCartByMerchant() {
@@ -91,8 +110,11 @@ export class CheckoutComponent implements OnInit {
       paymentMethod: {
         id: checkoutForm.value.paymentMethod
       },
-      note: checkoutForm.value.note,
-
+      coupon: {
+        id: this.coupon.id
+      },
+      totalPayment: this.totalPayment,
+      note: checkoutForm.value.note
     }, this.id).subscribe(data => {
       console.log(data);
       const notification = {
@@ -107,5 +129,5 @@ export class CheckoutComponent implements OnInit {
       this.router.navigateByUrl('');
     });
   }
-
 }
+

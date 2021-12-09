@@ -21,7 +21,7 @@ export class MerchantsDetailComponent implements OnInit {
   dishes: Dish[] = [];
   id: number;
   estimatePayment = 0;
-  coupon: Coupon = {};
+  coupons: Coupon[] = [];
 
   constructor(private userService: UserService,
               private router: Router,
@@ -52,7 +52,10 @@ export class MerchantsDetailComponent implements OnInit {
 
   getCouponByMerchant() {
     this.couponService.getAllByMerchant(this.id).subscribe(data => {
-      this.coupon = data;
+      this.coupons = data;
+      for (let i = 0; i < this.coupons.length; i++) {
+        console.log(this.coupons[i].type.name);
+      }
     });
   }
 

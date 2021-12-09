@@ -1,0 +1,124 @@
+<div class="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0">Quản lý cửa hàng</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a routerLink="/merchant">Quản lý cửa hàng</a></li>
+        <li class="breadcrumb-item active">Thêm coupon</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-body table-responsive p-0">
+          <div class="card-body">
+            <div class="card">
+              <form #formCreateCoupon="ngForm"
+                    (ngSubmit)="formCreateCoupon.valid && submitCreateCoupon(formCreateCoupon)">
+                <div class="card-header">
+                  <h5 class="card-title" id="staticBackdropLabel">Thêm mới coupon</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label for="inputCode" class="form-label">Mã coupon:</label>
+                        <input type="text" #inputCode="ngModel" id="inputCode" [ngModel]="coupon.inputCode"
+                               name="inputCode"
+                               [ngClass]="[(inputCode.valid) ? 'form-control is-valid' :((inputCode.dirty || inputCode.touched || formCreateCoupon.submitted)? 'form-control is-invalid':'form-control')]"
+                               required>
+                        <ng-container
+                          *ngIf="inputCode.invalid && (inputCode.dirty || inputCode.touched || formCreateCoupon.submitted)">
+                          <p *ngIf="inputCode.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="mb-3">
+                        <label for="discount" class="form-label">Tiền giảm giá:</label>
+                        <input type="text" #discount="ngModel" class="form-control" id="discount"
+                               [ngModel]="coupon.discount"
+                               [ngClass]="[(discount.valid) ? 'form-control is-valid' :((discount.dirty || discount.touched || formCreateCoupon.submitted)? 'form-control is-invalid':'form-control')]"
+                               name="discount" required>
+                        <ng-container
+                          *ngIf="discount.invalid && (discount.dirty || discount.touched || formCreateCoupon.submitted)">
+                          <p *ngIf="discount.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponType" class="form-label">Loại Coupon:</label>
+                        <select class="form-select" [ngModel]="coupon.type" name="type" id="couponType" aria-label="Default select example">
+                          <option [value]="undefined" selected disabled>-- Chọn loại coupon --</option>
+                          <option value="{{ct?.id}}" *ngFor="let ct of couponType">
+                            <ng-container *ngIf="ct?.name == 'DISH'">
+                              Áp dụng cho món ăn
+                            </ng-container>
+                            <ng-container *ngIf="ct?.name == 'SHIPPER'">
+                              Áp dụng cho phí vận chuyển
+                            </ng-container>
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label for="discountCondition" class="form-label">Điều kiện:</label>
+                        <input #discountCondition="ngModel"
+                               type="text" id="discountCondition"
+                               [ngModel]="coupon.discountCondition"
+                               [ngClass]="[(discountCondition.valid) ? 'form-control is-valid' :((discountCondition.dirty || discountCondition.touched || formCreateCoupon.submitted)? 'form-control is-invalid':'form-control')]"
+                               name="discountCondition"
+                               required>
+                        <ng-container
+                          *ngIf="discountCondition.invalid && (discountCondition.dirty || discountCondition.touched || formCreateCoupon.submitted)">
+                          <p *ngIf="discountCondition.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Mô tả:</label>
+                        <textarea #description="ngModel"
+                                  type="text" id="description"
+                                  [ngModel]="coupon.description"
+                                  [ngClass]="[(description.valid) ? 'form-control is-valid' :((description.dirty || description.touched || formCreateCoupon.submitted)? 'form-control is-invalid':'form-control')]"
+                                  name="description"
+                                  required></textarea>
+                        <ng-container
+                          *ngIf="description.invalid && (description.dirty || description.touched || formCreateCoupon.submitted)">
+                          <p *ngIf="description.errors?.required" class="invalid-feedback">
+                            Trường này không được để trống
+                          </p>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-secondary mr-2"
+                          routerLink="/merchant/coupon">
+                    Quay Lại
+                  </button>
+                  <button type="submit" class="btn btn-success">Lưu</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+</aside>
+
+
+
+

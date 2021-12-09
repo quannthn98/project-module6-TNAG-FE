@@ -7,9 +7,14 @@ import {CheckoutComponent} from './checkout/checkout.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {ShipperRegisterComponent} from './shipper-register/shipper-register.component';
 import {TrackOrderComponent} from './track-order/track-order.component';
+import {SearchcategoryComponent} from './searchcategory/searchcategory.component';
 
 
 const routes: Routes = [
+  {
+    path: 'register/merchant',
+    component: MerchantRegisterComponent
+  },
   {
     path: 'user/merchant/:id',
     component: MerchantsDetailComponent
@@ -25,6 +30,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'searchcategory',
+    component: SearchcategoryComponent
   }
 ];
 

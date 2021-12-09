@@ -11,6 +11,7 @@ import {SharedModule} from '../shared/shared.module';
 import {MerchantRegisterComponent} from './merchant-register/merchant-register.component';
 import {FormsModule} from '@angular/forms';
 import {UserDetailComponent} from './user-detail/user-detail.component';
+import {SearchcategoryComponent} from './searchcategory/searchcategory.component';
 import {ShipperRegisterComponent} from './shipper-register/shipper-register.component';
 import {TrackOrderComponent} from './track-order/track-order.component';
 import {AgmCoreModule} from '@agm/core';
@@ -18,7 +19,7 @@ import {AgmDirectionModule} from 'agm-direction';
 
 
 @NgModule({
-  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent, ShipperRegisterComponent, TrackOrderComponent],
+  declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent, ShipperRegisterComponent, TrackOrderComponent, SearchcategoryComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

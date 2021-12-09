@@ -11,7 +11,11 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {MerchantInfoDetailComponent} from './merchant-info-detail/merchant-info-detail.component';
 import {MerchantInfoEditComponent} from './merchant-info-edit/merchant-info-edit.component';
 import {DishCreateComponent} from './dish-create/dish-create.component';
+import { MerchantOrderComponent } from './merchant-order/merchant-order.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { CouponListComponent } from './coupon-list/coupon-list.component';
+import { CouponCreateComponent } from './coupon-create/coupon-create.component';
+import { CouponEditComponent } from './coupon-edit/coupon-edit.component';
 
 
 @NgModule({
@@ -22,6 +26,11 @@ import { OrderListComponent } from './order-list/order-list.component';
     MerchantInfoDetailComponent,
     MerchantInfoEditComponent,
     DishCreateComponent,
+    OrderListComponent,
+    CouponListComponent,
+    CouponCreateComponent,
+    CouponEditComponent,
+    MerchantOrderComponent,
     OrderListComponent
   ],
   imports: [

@@ -25,6 +25,22 @@
           </a>
         </li>
         <li class="nav-item">
+          <a routerLink="coupon" class="nav-link">
+            <i class="nav-icon fas fa-gift"></i>
+            <p>
+              Danh sách coupon
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="coupon-create" class="nav-link">
+            <i class="nav-icon fas fa-gifts"></i>
+            <p>
+              Thêm coupon
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a routerLink="{{currenUser.id}}" class="nav-link">
             <i class="nav-icon far fa-image"></i>
             <p>
@@ -34,6 +50,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/merchant/{{currenUser.id}}/order">
+<!--          <a routerLink="merchant/order" class="nav-link">-->
             <i class="nav-icon fas fa-columns"></i>
             <p>
               Đơn hàng
