@@ -14,7 +14,7 @@ export class MerchantService {
   constructor(private http: HttpClient) {
   }
 
-  updateMerchantProfile(id: number, merchantProfile: MerchantProfile): Observable<MerchantProfile> {
+  updateMerchantProfile(id: number, merchantProfile: FormData): Observable<MerchantProfile> {
     return this.http.put<MerchantProfile>(`${API_URL}/merchants/${id}`, merchantProfile);
   }
 
