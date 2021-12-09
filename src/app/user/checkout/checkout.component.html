@@ -77,17 +77,17 @@
             <div class="bg-white rounded shadow-sm p-4 mb-4">
               <h4 class="mb-3">Chọn địa chỉ giao hàng</h4>
               <div class="overflow-auto container-fluid" style="max-height: 430px">
-                <ng-container *ngFor="let destination of addresses; index as i">
+                <ng-container *ngFor="let a of addresses; index as i">
                   <div class="col">
                     <div class="bg-white card addresses-item mb-4 border">
-                      <label for="address{{destination.id}}">
+                      <label for="address{{a.id}}">
                         <div class="gold-members p-4">
                           <div class="media">
                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                             <div class="media-body">
-                              <h6 class="mb-1 text-black">Người nhận: {{destination.customerName}}</h6>
-                              <p class="text-black">Địa chỉ: {{destination.address}}</p>
-                              <p class="text-black">Số điện thoại {{destination.phone}}</p>
+                              <h6 class="mb-1 text-black">Người nhận: {{a.customerName}}</h6>
+                              <p class="text-black">Địa chỉ: {{a.address}}</p>
+                              <p class="text-black">Số điện thoại {{a.phone}}</p>
                               <p class="mb-0 text-black font-weight-bold"><a
                                 class="btn btn-sm btn-success mr-2" href="#"> Giao tới địa
                                 chỉ này</a>
@@ -95,7 +95,7 @@
                               </p>
                             </div>
                           </div>
-                          <input id="address{{destination.id}}" ngModel name="address" value="{{destination.id}}"
+                          <input id="address{{a.id}}" (change)="setSelectedAddress(a.id)" [checked] = "i === 0" name="address" value="{{a.id}}"
                                  type="radio" class="float-end">
                         </div>
                       </label>
