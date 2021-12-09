@@ -8,6 +8,7 @@ import {UserAddress} from '../model/user-address';
 import {UserProfile} from '../model/user-profile';
 import {UserForm} from '../model/user-form';
 import {ShipperProfile} from '../model/shipper-profile';
+import {Userdto} from "../model/userdto";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -16,6 +17,7 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class UserService {
   merchants: MerchantProfile[] = [];
+  selectedCategoryId: number;
 
   constructor(private http: HttpClient) {
   }
@@ -86,5 +88,9 @@ export class UserService {
 
   shipperRegister(registerForm): Observable<any> {
     return this.http.post(`${API_URL}/usersư/register/shipper`, registerForm);
+  }
+
+  getUserByCategory(id: number): Observable<Userdto[]> {
+    return this.http.get<Userdto[]>(`${API_URL}/users/findUserByCategory/${id}`);
   }
 }
