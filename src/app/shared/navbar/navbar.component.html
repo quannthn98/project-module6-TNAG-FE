@@ -9,7 +9,7 @@
       <div class="float-start">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" *ngFor="let c of categories">
-            <a class="nav-link" style="color: black" routerLink="#">{{c.name}}<span class="sr-only"></span></a>
+            <a (click)="getSelectedCategory(c.id)" class="nav-link" style="color: black" routerLink="/searchcategory">{{c.name}}<span class="sr-only"></span></a>
           </li>
         </ul>
       </div>

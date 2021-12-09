@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
   isUser = false;
   carts: Cart[] = [];
   cartDetail: CartDetail[] = [];
+  selectedCategoryId: number;
 
   constructor(private authenticationService: AuthenticationService,
               private categoryService: CategoryService,
@@ -101,5 +102,9 @@ export class NavbarComponent implements OnInit {
     this.notificationService.getAllNotificationByUser(this.currentUser.id).subscribe(data => {
       this.socketService.notifications = data;
     });
+  }
+
+  getSelectedCategory(id: number) {
+    this.userService.selectedCategoryId = id;
   }
 }
