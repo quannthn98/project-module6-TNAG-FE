@@ -8,6 +8,7 @@ import {CartService} from '../../service/cart.service';
 import {DishService} from '../../service/dish.service';
 import {Coupon} from '../../model/coupon';
 import {CouponService} from '../../service/coupon.service';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -15,7 +16,7 @@ import {CouponService} from '../../service/coupon.service';
   styleUrls: ['./merchants-detail.component.css']
 })
 export class MerchantsDetailComponent implements OnInit {
-  merchant;
+  merchant: User;
   cart: Cart;
   cartDetails: CartDetail[] = [];
   dishes: Dish[] = [];
@@ -32,9 +33,7 @@ export class MerchantsDetailComponent implements OnInit {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
-      this.getAllDishByMerchant();
-      this.getCartByMerchant();
-      this.getCouponByMerchant();
+
     });
   }
 
@@ -51,7 +50,7 @@ export class MerchantsDetailComponent implements OnInit {
   }
 
   getCouponByMerchant() {
-    this.couponService.getAllByMerchant(this.id).subscribe(data => {
+    this.couponService.getAllByMerchant(this.merchant.merchantProfile.id).subscribe(data => {
       this.coupons = data;
       for (let i = 0; i < this.coupons.length; i++) {
         console.log(this.coupons[i].type.name);
@@ -80,6 +79,9 @@ export class MerchantsDetailComponent implements OnInit {
   private getMerchantById() {
     this.userService.getMerchantById(this.id).subscribe(data => {
         this.merchant = data;
+      this.getAllDishByMerchant();
+      this.getCartByMerchant();
+      this.getCouponByMerchant();
       }, error => {
         console.log(error);
       }
