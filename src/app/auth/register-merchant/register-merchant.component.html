@@ -6,63 +6,132 @@
       <div class="col-md-8 col-lg-6">
         <div class="login d-flex align-items-center py-5">
           <div class="container">
-              <h3 class="login-heading mb-4 text-center">Đăng ký cửa hàng nhận ngay ưu đãi!</h3>
-            <form #formRegisterMerchant="ngForm" (ngSubmit)="submitRegisterMerchant(formRegisterMerchant)">
+            <h3 class="login-heading mb-4 text-center">Đăng ký cửa hàng nhận ngay ưu đãi!</h3>
+            <form #formRegisterMerchant="ngForm"
+                  (ngSubmit)="formRegisterMerchant.valid && submitRegisterMerchant(formRegisterMerchant)">
               <div class="row">
                 <div class="col-md-6 col-lg-6 mx-auto pl-5 pr-5">
                   <div class="form-label-group mb-4">
-                    <input type="text" id="name" class="form-control"
-                           placeholder="Tên cửa hàng" [ngModel]="merchantInfo.name" name="name">
+                    <input #name="ngModel" type="text" id="name" class="form-control"
+                           placeholder="Tên cửa hàng" [ngModel]="merchantInfo.name"
+                           [ngClass]="[(name.valid) ? 'form-control is-valid' :((name.dirty || name.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
+                           name="name" required>
                     <label for="name">Tên cửa hàng</label>
+                    <ng-container
+                      *ngIf="name.invalid && (name.dirty || name.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="name.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div class="form-label-group mb-4">
-                    <input type="text" id="hotline" class="form-control" [ngModel]="merchantInfo.hotline"
-                           name="hotline" placeholder="Hotline">
+                    <input #hotline="ngModel" type="text" id="hotline" class="form-control"
+                           [ngModel]="merchantInfo.hotline"
+                           name="hotline" placeholder="Hotline"
+                           [ngClass]="[(hotline.valid) ? 'form-control is-valid' :((hotline.dirty || hotline.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
+                           required>
                     <label for="hotline">Hotline</label>
+                    <ng-container
+                      *ngIf="hotline.invalid && (hotline.dirty || hotline.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="hotline.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div class="form-label-group mb-4">
-                    <input type="text" id="address" class="form-control"
-                           placeholder="Địa chỉ" [ngModel]="merchantInfo.address" name="address">
+                    <input #address="ngModel" type="text" id="address" class="form-control" required
+                           placeholder="Địa chỉ" [ngModel]="merchantInfo.address" name="address"
+                           [ngClass]="[(address.valid) ? 'form-control is-valid' :((address.dirty || address.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]">
                     <label for="address" class="form-label">Địa chỉ</label>
+                    <ng-container
+                      *ngIf="address.invalid && (address.dirty || address.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="address.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div class="form-label-group mb-4">
-                    <input type="text" id="openHours" class="form-control" [ngModel]="merchantInfo.openHours"
-                           name="openHours" placeholder="Giờ mở cửa">
+                    <input #openHours="ngModel" type="text" id="openHours" class="form-control"
+                           [ngModel]="merchantInfo.openHours"
+                           name="openHours" placeholder="Giờ mở cửa"
+                           [ngClass]="[(openHours.valid) ? 'form-control is-valid' :((openHours.dirty || openHours.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
+                           required>
                     <label for="openHours">Giờ mở cửa</label>
+                    <ng-container
+                      *ngIf="openHours.invalid && (openHours.dirty || openHours.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="openHours.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
-                  <div class=" mb-4">
+                  <div class="form-label-group mb-4">
+                    <input #description="ngModel" type="text" id="description" class="form-control"
+                           [ngModel]="merchantInfo.description"
+                           required minlength="10"
+                           name="description" placeholder="Description"
+                           [ngClass]="[(description.valid) ? 'form-control is-valid' :((description.dirty || description.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]">
                     <label for="description">Mô tả cửa hàng</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="4" [ngModel]="merchantInfo.description"></textarea>
-<!--                    <input type="text" id="" class="form-control"-->
-<!--                           name="description" placeholder="Description">-->
+                    <ng-container
+                      *ngIf="description.invalid && (description.dirty || description.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="description.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                      <p *ngIf="description.errors?.minlength" class="invalid-feedback">
+                        Trường này phải từ 10 ký tự trở lên
+                      </p>
+                    </ng-container>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-6 mx-auto pl-5 pr-5">
                   <div class="form-label mb-4">
                     <label class="form-label-group" for="avatar">Ảnh đại diện cửa hàng</label>
-                    <input type="file" id="avatar" class="form-control" [ngModel]="merchantInfo.avatar"
-                           name="avatar" placeholder="Ảnh đại diện cửa hàng"
+                    <input #avatar="ngModel" type="file" id="avatar" class="form-control"
+                           [ngModel]="merchantInfo.avatar"
+                           name="avatar" placeholder="Ảnh đại diện cửa hàng" required
+                           [ngClass]="[(avatar.valid) ? 'form-control is-valid' :((avatar.dirty || avatar.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
                            (change)="handleAvatarInput($event)">
+                    <ng-container
+                      *ngIf="avatar.invalid && (avatar.dirty || avatar.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="avatar.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div class="form-label mb-4">
                     <label class="form-label-group" for="cover">Ảnh bìa cửa hàng</label>
-                    <input type="file" id="cover" class="form-control" [ngModel]="merchantInfo.cover"
+                    <input #cover="ngModel" type="file" id="cover" class="form-control" [ngModel]="merchantInfo.cover"
                            name="cover" placeholder="Ảnh bìa cửa hàng"
-                           (change)="handleCoverInput($event)">
+                           (change)="handleCoverInput($event)"
+                           [ngClass]="[(cover.valid) ? 'form-control is-valid' :((cover.dirty || cover.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
+                           required>
+                    <ng-container
+                      *ngIf="cover.invalid && (cover.dirty || cover.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="cover.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div class="form-label mb-4">
                     <label class="form-label-group" for="thumbnail">Ảnh thumbnail cửa hàng</label>
-                    <input type="file" id="thumbnail" class="form-control" [ngModel]="merchantInfo.thumbnail"
+                    <input #thumbnail="ngModel" type="file" id="thumbnail" class="form-control" [ngModel]="merchantInfo.thumbnail"
                            name="thumbnail" placeholder="Ảnh thumbnail cửa hàng"
-                           (change)="handleThumbnailInput($event)">
+                           (change)="handleThumbnailInput($event)"
+                           [ngClass]="[(thumbnail.valid) ? 'form-control is-valid' :((thumbnail.dirty || thumbnail.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"
+                           required>
+                    <ng-container
+                      *ngIf="thumbnail.invalid && (thumbnail.dirty || thumbnail.touched || formRegisterMerchant.submitted)">
+                      <p *ngIf="thumbnail.errors?.required" class="invalid-feedback">
+                        Trường này không được để trống
+                      </p>
+                    </ng-container>
                   </div>
                   <div>
                     <label class="form-label">Danh mục sản phẩm:</label>
-<!--                    <input type="search" class="form-control" style="max-width: 300px" [(ngModel)]="searchText"-->
-<!--                           name="searchText" autocomplete="off" placeholder="Tìm kiếm danh mục sản phẩm">-->
-<!--                    <hr>-->
+                    <input type="search" class="form-control" style="max-width: 300px" [(ngModel)]="searchText"
+                           name="searchText" autocomplete="off" placeholder="Tìm kiếm danh mục sản phẩm">
+                    <hr>
                     <div class="overflow-auto" style="max-height: 100px">
-                      <div class="form-check" *ngFor="let c of categories">
+                      <div class="form-check" *ngFor="let c of categories | filter:searchText">
                         <input type="checkbox" class="form-check-input" [value]="c.id"
                                [checked]="categoryArray.includes(c.id)" [id]="c.id"
                                name="categories" (change)="inputIdCategory(c.id)">
