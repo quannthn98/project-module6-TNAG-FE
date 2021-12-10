@@ -22,6 +22,7 @@ export class SocketService {
   currentUser: UserToken;
   messages: Message[] = [];
   newMessage: Message;
+  unreadMessage = 0;
   orders: Order[] = [];
   notifications: Notification[] = [];
   notification: Notification;
@@ -55,7 +56,7 @@ export class SocketService {
         });
         this.notification = JSON.parse(data.body);
         if (this.notification.receiver.id === this.currentUser.id) {
-          this.alertService.alertSuccess('Bạn có 1 đơn hàng mới');
+          this.unreadMessage += 1;
           this.notifications.push(JSON.parse(data.body));
         }
         console.log(JSON.parse(data.body));
@@ -87,7 +88,16 @@ export class SocketService {
     }
   }
 
-  sendNotification(notification: Notification) {
+  sendNotification(message: string, senderId: number, receiverId: number) {
+    const notification = {
+      sender: {
+        id: senderId
+      },
+      receiver: {
+        id: receiverId
+      },
+      content: message
+    };
     this.stompClient.send('/app/notify', {}, JSON.stringify(notification));
   }
 

@@ -17,4 +17,5 @@ export class NotificationService {
   getAllNotificationByUser(id: number): Observable<Notification[]> {
     return this.http.get<Notification[]>(`${API_URL}/notify/${id}`);
   }
+
 }

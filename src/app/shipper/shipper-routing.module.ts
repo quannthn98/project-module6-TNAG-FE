@@ -7,16 +7,16 @@ import {ShippedHistoryComponent} from './shipped-history/shipped-history.compone
 
 const routes: Routes = [
   {
-    path: 'createdOrder',
-    component: ShipperOrderComponent
-  },
-  {
     path: 'shippedHistory',
     component: ShippedHistoryComponent
   },
   {
     path: 'shipperDetail',
     component: ShipperDetailComponent
+  },
+  {
+    path: '',
+    component: ShipperOrderComponent
   }
 ];
 

@@ -9,6 +9,7 @@ import {DishService} from '../../service/dish.service';
 import {Coupon} from '../../model/coupon';
 import {CouponService} from '../../service/coupon.service';
 import {User} from '../../model/user';
+import {AlertService} from '../../service/alert.service';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -29,7 +30,8 @@ export class MerchantsDetailComponent implements OnInit {
               private activeRoute: ActivatedRoute,
               private cartService: CartService,
               private dishService: DishService,
-              private couponService: CouponService) {
+              private couponService: CouponService,
+              private alertService: AlertService) {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -88,4 +90,11 @@ export class MerchantsDetailComponent implements OnInit {
     );
   }
 
+  goToCheckout() {
+    if (this.cartDetails.length <= 0) {
+      this.alertService.alertError('Bạn cần thêm món ăn vào giỏ hàng trước khi thanh toán');
+    } else {
+      this.router.navigateByUrl(`/checkout/${this.id}`);
+    }
+  }
 }

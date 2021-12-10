@@ -56,8 +56,10 @@ export class CheckoutComponent implements OnInit {
 
   getCoupon() {
     this.couponService.findByInputCode(this.code).subscribe(data => {
-      this.coupon = data;
-      if (this.estimatePayment > this.coupon.discountCondition) {
+      if (data.merchantProfile.id != this.merchantProfile.id){
+         this.alertService.alertError('Coupon không hợp lệ')
+      } else if (this.estimatePayment > this.coupon.discountCondition) {
+        this.coupon = data;
         this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
         this.alertService.alertSuccess('Đã áp dụng coupon cho đơn hàng này');
       } else {
@@ -99,7 +101,6 @@ export class CheckoutComponent implements OnInit {
   getUserDeliverAddress() {
     this.userService.getAllDeliverAddressByUser().subscribe((data: any) => {
       this.addresses = data;
-      console.log(data);
     });
   }
 
@@ -132,16 +133,9 @@ export class CheckoutComponent implements OnInit {
     }
     this.orderService.createNewOrder(this.orderForm, this.id).subscribe(data => {
       console.log(data);
-      const notification = {
-        sender: this.authenticationService.currentUserValue,
-        receiver: {
-          id: this.id
-        },
-        content: 'Đơn hàng mới'
-      };
-      this.socketService.sendNotification(notification);
+      this.socketService.sendNotification('Đơn hàng mới', this.authenticationService.currentUserValue.id, this.id);
       this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl(`/track/order/${data.id}`);
     });
   }
 }

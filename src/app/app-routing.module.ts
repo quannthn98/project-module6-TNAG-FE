@@ -46,13 +46,13 @@ const routes: Routes = [
     loadChildren: () => import('./user-detail/user-detail.module').then(module => module.UserDetailModule)
   },
   {
-    path: '',
-    loadChildren: () => import('./user/user.module').then(module => module.UserModule)
-  },
-  {
     path: 'shipper',
     component: LayoutShipperComponent,
     loadChildren: () => import('./shipper/shipper.module').then(module => module.ShipperModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./user/user.module').then(module => module.UserModule)
   }
 ];
 

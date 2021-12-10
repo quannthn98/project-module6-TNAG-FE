@@ -97,8 +97,8 @@ export class TrackOrderComponent implements OnInit, OnChanges {
     }
     console.log(this.message);
     console.log(this.newMessage);
-    this.socketService.sendMessage(this.newMessage);
     this.scrollChatToBottom();
+    this.socketService.sendMessage(this.newMessage);
   }
 
   scrollChatToBottom() {
