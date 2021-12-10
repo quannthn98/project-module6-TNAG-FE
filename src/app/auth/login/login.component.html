@@ -17,7 +17,7 @@
                       type="text" name="username" ngModel id="username"
                       required
                       placeholder="Username">
-                    <label for="username">Username</label>
+                    <label for="username">Tài khoản</label>
                     <ng-container
                       *ngIf="username.invalid && (formLogin.submitted)">
                       <p *ngIf="username.errors?.required" class="invalid-feedback">
@@ -28,7 +28,7 @@
                   <div class="form-label-group">
                     <input type="password" name="password" ngModel id="inputPassword" class="form-control"
                            placeholder="Password">
-                    <label for="inputPassword">Password</label>
+                    <label for="inputPassword">Mật khẩu</label>
                   </div>
                   <div>
                     <p style="color: red" id="errorsLogin"></p>

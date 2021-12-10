@@ -198,12 +198,13 @@
       </div>
       <div class="col-md-3 ">
         <div class="generator-bg rounded shadow-sm mb-4 p-4 osahan-cart-item sticky-top">
-          <h5 class="mb-1 text-white">Đặt hàng ngay</h5>
-          <p class="mb-4 text-white">{{this.cartDetails.length}} sản phẩm</p>
-          <div *ngFor="let c of cartDetails" class="bg-white rounded shadow-sm mb-2">
-            <div class="gold-members p-2 border-bottom">
-              <p class="text-gray mb-0 float-right ml-2">{{c.price}}</p>
-              <span class="count-number float-right">
+          <ng-container *ngIf="authenticationService.currentUserValue != null">
+            <h5 class="mb-1 text-white">Đặt hàng ngay</h5>
+            <p class="mb-4 text-white">{{this.cartDetails.length}} sản phẩm</p>
+            <div *ngFor="let c of cartDetails" class="bg-white rounded shadow-sm mb-2">
+              <div class="gold-members p-2 border-bottom">
+                <p class="text-gray mb-0 float-right ml-2">{{c.price}}</p>
+                <span class="count-number float-right">
                 <ng-container *ngIf="c.dish.status == true">
                   <button (click)="addDishToCart(c.dish.id, '-')"
                           class="btn btn-outline-secondary  btn-sm left dec"> <i
@@ -218,29 +219,34 @@
                 </ng-container>
 
                                 </span>
-              <div class="media">
-                <div class="mr-2"><i class="icofont-ui-press text-danger food-item"></i></div>
-                <div class="media-body">
-                  <p class="mt-1 mb-0 text-black">{{c.dish.name}}</p>
+                <div class="media">
+                  <div class="mr-2"><i class="icofont-ui-press text-danger food-item"></i></div>
+                  <div class="media-body">
+                    <p class="mt-1 mb-0 text-black">{{c.dish.name}}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="mb-2 bg-white rounded p-2 clearfix">
-            <img class="img-fluid float-left" src="assets/static/img/wallet-icon.png">
-            <h6 class="font-weight-bold text-right mb-2">Tổng đơn: <span
-              class="text-danger">{{estimatePayment}}</span> vnđ</h6>
-            <h6 class="font-weight-bold text-right mb-2">Giảm giá: <span
-              class="text-danger">0</span> vnđ</h6>
-            <h6 class="font-weight-bold text-right mb-2">Thanh toán: <span
-              class="text-danger">{{estimatePayment}}</span> vnđ</h6>
-            <!-- <p class="seven-color mb-1 text-right">Extra charges may apply</p> -->
-            <p class="text-black mb-0 text-right">Tiết kiệm 30.000 vnđ</p>
-          </div>
-          <button (click)="goToCheckout()"  class="btn btn-success btn-block btn-lg">
-            Thanh toán
-            <i class="icofont-long-arrow-right"></i>
-          </button>
+            <div class="mb-2 bg-white rounded p-2 clearfix">
+              <img class="img-fluid float-left" src="assets/static/img/wallet-icon.png">
+              <h6 class="font-weight-bold text-right mb-2">Tổng đơn: <span
+                class="text-danger">{{estimatePayment}}</span> vnđ</h6>
+              <h6 class="font-weight-bold text-right mb-2">Giảm giá: <span
+                class="text-danger">0</span> vnđ</h6>
+              <h6 class="font-weight-bold text-right mb-2">Thanh toán: <span
+                class="text-danger">{{estimatePayment}}</span> vnđ</h6>
+              <!-- <p class="seven-color mb-1 text-right">Extra charges may apply</p> -->
+              <p class="text-black mb-0 text-right">Tiết kiệm 30.000 vnđ</p>
+            </div>
+            <button (click)="goToCheckout()"  class="btn btn-success btn-block btn-lg">
+              Thanh toán
+              <i class="icofont-long-arrow-right"></i>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="authenticationService.currentUserValue == null">
+            <h5><a routerLink="/login">Đăng nhập</a>  ngay để đặt hàng</h5>
+          </ng-container>
+
         </div>
       </div>
     </div>

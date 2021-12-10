@@ -10,6 +10,7 @@ import {Coupon} from '../../model/coupon';
 import {CouponService} from '../../service/coupon.service';
 import {User} from '../../model/user';
 import {AlertService} from '../../service/alert.service';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-merchants-detail',
@@ -31,7 +32,8 @@ export class MerchantsDetailComponent implements OnInit {
               private cartService: CartService,
               private dishService: DishService,
               private couponService: CouponService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private authenticationService: AuthenticationService) {
     this.activeRoute.paramMap.subscribe(paraMap => {
       this.id = +paraMap.get('id');
       this.getMerchantById();
@@ -61,15 +63,17 @@ export class MerchantsDetailComponent implements OnInit {
   }
 
   getCartByMerchant() {
-    this.cartService.getCartByMerchant(this.id).subscribe(data => {
-      this.cart = data;
-      this.cartDetails = data.cartDetails;
-      this.estimatePayment = 0;
-      for (let i = 0; i < this.cartDetails.length; i++) {
-        this.estimatePayment += this.cartDetails[i].price * this.cartDetails[i].quantity;
-      }
-      console.log('my Cart: ' + data.cartDetails[0].dish.name);
-    });
+    if (this.authenticationService.currentUserValue != null) {
+      this.cartService.getCartByMerchant(this.id).subscribe(data => {
+        this.cart = data;
+        this.cartDetails = data.cartDetails;
+        this.estimatePayment = 0;
+        for (let i = 0; i < this.cartDetails.length; i++) {
+          this.estimatePayment += this.cartDetails[i].price * this.cartDetails[i].quantity;
+        }
+        console.log('my Cart: ' + data.cartDetails[0].dish.name);
+      });
+    }
   }
 
   addDishToCart(dishId: number, direction: string) {
@@ -81,9 +85,9 @@ export class MerchantsDetailComponent implements OnInit {
   private getMerchantById() {
     this.userService.getMerchantByUserId(this.id).subscribe(data => {
         this.merchant = data;
-      this.getAllDishByMerchant();
-      this.getCartByMerchant();
-      this.getCouponByMerchant();
+        this.getAllDishByMerchant();
+        this.getCartByMerchant();
+        this.getCouponByMerchant();
       }, error => {
         console.log(error);
       }

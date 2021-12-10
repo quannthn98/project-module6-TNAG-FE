@@ -91,15 +91,14 @@ a.fa-bell {
 }
 span.fa-comment {
   position: absolute;
-  font-size: 0.4em;
+  font-size: 0.7em;
   top: -4px;
   color: red;
   right: -4px;
 }
 span.num {
   position: absolute;
-  display: none;
-  font-size: 0.15em;
+  font-size: 0.35em;
   top: 1px;
   color: #fff;
   right: 2px;

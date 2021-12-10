@@ -8,7 +8,7 @@ import {UserAddress} from '../model/user-address';
 import {UserProfile} from '../model/user-profile';
 import {UserForm} from '../model/user-form';
 import {ShipperProfile} from '../model/shipper-profile';
-import {Userdto} from "../model/userdto";
+import {Userdto} from '../model/userdto';
 
 const API_URL = `${environment.apiUrl}`;
 

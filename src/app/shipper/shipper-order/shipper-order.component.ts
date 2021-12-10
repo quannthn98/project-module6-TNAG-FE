@@ -65,6 +65,7 @@ export class ShipperOrderComponent implements OnInit {
     this.socketService.connectToNotify();
     this.orderService.deliveryConfirmOrder(this.shippingStatus, this.pickedOrder.id).subscribe((data) => {
       this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng của bạn`, data.shipper.id, data.user.id);
+      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng ${data.id}`, data.shipper.id, data.merchant.id);
       this.router.navigateByUrl(`/track/order/${data.id}`);
     }, error => {
       this.socketService.disconnect();
