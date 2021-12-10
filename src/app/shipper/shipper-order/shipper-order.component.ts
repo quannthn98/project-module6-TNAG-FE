@@ -44,6 +44,7 @@ export class ShipperOrderComponent implements OnInit {
   getShippingStatus() {
     this.orderService.getAllOrderStatus().subscribe((data: any) => {
       const allStatus: OrderStatus[] = data.content;
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < allStatus.length; i++) {
         if (allStatus[i].name === 'SHIPPING') {
           this.shippingStatus = allStatus[i];
@@ -64,8 +65,10 @@ export class ShipperOrderComponent implements OnInit {
   deliveryConfirm() {
     this.socketService.connectToNotify();
     this.orderService.deliveryConfirmOrder(this.shippingStatus, this.pickedOrder.id).subscribe((data) => {
-      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng của bạn`, data.shipper.id, data.user.id);
-      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng ${data.id}`, data.shipper.id, data.merchant.id);
+      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng của bạn`,
+        data.shipper.id, data.user.id);
+      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng ${data.id}`,
+        data.shipper.id, data.merchant.id);
       this.router.navigateByUrl(`/track/order/${data.id}`);
     }, error => {
       this.socketService.disconnect();
