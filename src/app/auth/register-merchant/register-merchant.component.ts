@@ -59,8 +59,6 @@ export class RegisterMerchantComponent implements OnInit {
     formData.append('avatar', this.avatar);
     formData.append('cover', this.cover);
     formData.append('thumbnail', this.thumbnail);
-    console.log(this.merchantInfo);
-    console.log(JSON.stringify(this.merchantInfo.categories));
     this.merchantService.register(this.user.id, formData).subscribe(() => {
       this.router.navigate(['/']);
     });

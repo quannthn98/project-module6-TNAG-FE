@@ -4,7 +4,9 @@ import {OrderService} from '../../service/order.service';
 import {AlertService} from '../../service/alert.service';
 import {OrderDetail} from '../../model/order-detail';
 import {OrderStatus} from '../../model/order-status';
-import {SocketService} from "../../service/socket/socket.service";
+import {Router} from '@angular/router';
+import {SocketService} from '../../service/socket/socket.service';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-shipper-order',
@@ -14,13 +16,15 @@ import {SocketService} from "../../service/socket/socket.service";
 export class ShipperOrderComponent implements OnInit {
   orders: Order[] = [];
   orderDetail: OrderDetail[] = [];
-  totalPayment: number;
+  totalPayment = 0;
   shippingStatus: OrderStatus;
   pickedOrder: Order;
 
   constructor(private orderService: OrderService,
               private alertService: AlertService,
-              private socketService: SocketService) {
+              private router: Router,
+              private socketService: SocketService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -41,7 +45,7 @@ export class ShipperOrderComponent implements OnInit {
     this.orderService.getAllOrderStatus().subscribe((data: any) => {
       const allStatus: OrderStatus[] = data.content;
       for (let i = 0; i < allStatus.length; i++) {
-        if (allStatus[i].name === 'SHIPPING' ) {
+        if (allStatus[i].name === 'SHIPPING') {
           this.shippingStatus = allStatus[i];
           break;
         }
@@ -58,10 +62,12 @@ export class ShipperOrderComponent implements OnInit {
   }
 
   deliveryConfirm() {
-    this.orderService.deliveryConfirmOrder(this.shippingStatus, this.pickedOrder.id).subscribe(() => {
-      this.getCreatedOrder();
-      this.alertService.alertSuccess('Ok rồi bạn ơi');
+    this.socketService.connectToNotify();
+    this.orderService.deliveryConfirmOrder(this.shippingStatus, this.pickedOrder.id).subscribe((data) => {
+      this.socketService.sendNotification(`Shipper ${this.authenticationService.currentUserValue.name} đã tiếp nhận đơn hàng của bạn`, data.shipper.id, data.user.id);
+      this.router.navigateByUrl(`/track/order/${data.id}`);
     }, error => {
+      this.socketService.disconnect();
       this.alertService.alertError('Xác nhận sai rồi');
     });
   }

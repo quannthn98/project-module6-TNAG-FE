@@ -13,7 +13,7 @@ import {AlertService} from '../../service/alert.service';
 export class ShippedHistoryComponent implements OnInit {
   orders: Order[] = [];
   orderDetail: OrderDetail[] = [];
-  totalPayment: number;
+  totalPayment = 0;
   pickedOrder: Order;
   shippingStatus: OrderStatus;
 

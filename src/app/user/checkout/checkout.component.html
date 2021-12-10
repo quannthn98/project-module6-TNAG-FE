@@ -1,69 +1,4 @@
 <app-navbar></app-navbar>
-<div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog" aria-labelledby="add-address"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="add-address">Add Delivery Address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label for="inputPassword4">Delivery Area</label>
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Delivery Area">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                    class="icofont-ui-pointer"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="form-group col-md-12">
-              <label for="inputPassword4">Complete Address
-              </label>
-              <input type="text" class="form-control"
-                     placeholder="Complete Address e.g. house number, street name, landmark">
-            </div>
-            <div class="form-group col-md-12">
-              <label for="inputPassword4">Delivery Instructions
-              </label>
-              <input type="text" class="form-control"
-                     placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall">
-            </div>
-            <div class="form-group mb-0 col-md-12">
-              <label for="inputPassword4">Nickname
-              </label>
-              <div class="btn-group btn-group-toggle d-flex justify-content-center"
-                   data-toggle="buttons">
-                <label class="btn btn-info active">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Home
-                </label>
-                <label class="btn btn-info">
-                  <input type="radio" name="options" id="option2" autocomplete="off"> Work
-                </label>
-                <label class="btn btn-info">
-                  <input type="radio" name="options" id="option3" autocomplete="off"> Other
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn d-flex w-50 text-center justify-content-center btn-outline-primary"
-                data-dismiss="modal">CANCEL
-        </button>
-        <button type="button"
-                class="btn d-flex w-50 text-center justify-content-center btn-primary">SUBMIT
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 <section class="offer-dedicated-body mt-4 mb-4 pt-2 pb-2">
   <form #checkoutForm="ngForm" (ngSubmit)="createNewOrder(checkoutForm)">
     <div class="container">
@@ -77,17 +12,17 @@
             <div class="bg-white rounded shadow-sm p-4 mb-4">
               <h4 class="mb-3">Chọn địa chỉ giao hàng</h4>
               <div class="overflow-auto container-fluid" style="max-height: 430px">
-                <ng-container *ngFor="let destination of addresses; index as i">
+                <ng-container *ngFor="let a of addresses; index as i">
                   <div class="col">
                     <div class="bg-white card addresses-item mb-4 border">
-                      <label for="address{{destination.id}}">
+                      <label for="address{{a.id}}">
                         <div class="gold-members p-4">
                           <div class="media">
                             <div class="mr-3"><i class="icofont-ui-home icofont-3x"></i></div>
                             <div class="media-body">
-                              <h6 class="mb-1 text-black">Người nhận: {{destination.customerName}}</h6>
-                              <p class="text-black">Địa chỉ: {{destination.address}}</p>
-                              <p class="text-black">Số điện thoại {{destination.phone}}</p>
+                              <h6 class="mb-1 text-black">Người nhận: {{a.customerName}}</h6>
+                              <p class="text-black">Địa chỉ: {{a.address}}</p>
+                              <p class="text-black">Số điện thoại {{a.phone}}</p>
                               <p class="mb-0 text-black font-weight-bold"><a
                                 class="btn btn-sm btn-success mr-2" href="#"> Giao tới địa
                                 chỉ này</a>
@@ -95,7 +30,7 @@
                               </p>
                             </div>
                           </div>
-                          <input id="address{{destination.id}}" ngModel name="address" value="{{destination.id}}"
+                          <input id="address{{a.id}}" (change)="setSelectedAddress(a.id)" [checked] = "i === 0" name="address" value="{{a.id}}"
                                  type="radio" class="float-end">
                         </div>
                       </label>
@@ -223,6 +158,28 @@
               You have saved <strong>$1,884</strong> on the bill
           </div> -->
           <div class="pt-2"></div>
+          <div class="card-warning sticky-top" style="border:solid 2px #ffc107">
+            <div class="card-header">
+              <h5 style="color: white">Coupon</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group" *ngFor="let coupon of coupons">
+                <li class="list-group-item mt-1" style="border:solid 1px #ffc107">
+                  <ng-container *ngIf="coupon?.type?.name === 'SHIPPER'">
+                    <i class="fas fa-shipping-fast"></i>
+                  </ng-container>
+                  <ng-container *ngIf="coupon?.type?.name === 'DISH'">
+                    <i class="fas fa-utensils" style="margin-right: 5px"></i>
+                  </ng-container>
+                  Nhập "{{coupon?.inputCode}}" giảm {{coupon?.discount}} cho
+                  <ng-container *ngIf="coupon?.type?.name === 'DISH'">món ăn</ng-container>
+                  <ng-container *ngIf="coupon?.type?.name === 'SHIPPER'">tiền vận chuyển</ng-container>
+                  <p class="card-text">{{coupon?.description}}</p>
+                </li>
+
+              </ul>
+            </div>
+          </div>
 
         </div>
       </div>

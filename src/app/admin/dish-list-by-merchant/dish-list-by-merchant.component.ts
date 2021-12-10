@@ -40,7 +40,7 @@ export class DishListByMerchantComponent implements OnInit {
   }
 
   getMerchantById() {
-    this.userService.getMerchantById(this.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.id).subscribe(data => {
       this.merchant = data.merchantProfile;
     });
   }

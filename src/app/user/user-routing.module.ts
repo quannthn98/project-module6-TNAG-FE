@@ -32,8 +32,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'searchcategory',
+    path: 'searchCategory',
     component: SearchcategoryComponent
+  },
+  {
+    path: 'shipperRegister',
+    component: ShipperRegisterComponent
   }
 ];
 

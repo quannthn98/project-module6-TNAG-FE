@@ -24,6 +24,9 @@ export class MerchantInfoEditComponent implements OnInit {
   categoryList: any[] = [];
   categoryArray: any[] = [];
   searchText;
+  avatar;
+  cover;
+  thumbnail;
 
   constructor(private userService: UserService,
               private merchantService: MerchantService,
@@ -37,7 +40,7 @@ export class MerchantInfoEditComponent implements OnInit {
   }
 
   getMerchant() {
-    this.userService.getMerchantById(this.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.id).subscribe(data => {
       this.user = data;
       data.merchantProfile.categories.forEach(x => this.categoryArray.push(x.id));
       this.categoryList = this.categoryList.concat(this.categoryArray);
@@ -60,9 +63,27 @@ export class MerchantInfoEditComponent implements OnInit {
     let array = [];
     this.categoryList.forEach(x => array.push({id: x}));
     this.merchantInfo.categories = array;
-    this.merchantService.updateMerchantProfile(this.user.merchantProfile.id, this.merchantInfo).subscribe(() => {
+    let formData = new FormData();
+    formData.append('name', this.merchantInfo.name);
+    formData.append('address', this.merchantInfo.address);
+    for (let i = 0; i < this.merchantInfo.categories.length; i++) {
+      formData.append('categories', this.merchantInfo.categories[i].id);
+    }
+    formData.append('hotline', this.merchantInfo.hotline);
+    formData.append('description', this.merchantInfo.description);
+    formData.append('openHours', this.merchantInfo.openHours);
+    if (this.avatar != null) {
+      formData.append('avatar', this.avatar);
+    }
+    if (this.cover != null) {
+      formData.append('cover', this.cover);
+    }
+    if (this.thumbnail != null) {
+      formData.append('thumbnail', this.thumbnail);
+    }
+    this.merchantService.updateMerchantProfile(this.user.merchantProfile.id, formData).subscribe(() => {
       this.router.navigate([`/merchant/${this.id}`]);
-      this.alertSuccess();
+      this.alertService.alertSuccess('Cập nhật thành công');
     });
   }
 
@@ -75,14 +96,15 @@ export class MerchantInfoEditComponent implements OnInit {
     this.merchantInfo.categories = this.categoryList;
   }
 
-  alertSuccess() {
-    Swal.fire({
-      toast: true,
-      position: 'top-end',
-      icon: 'success',
-      title: 'Cập nhật thành công',
-      showConfirmButton: false,
-      timer: 1500
-    });
+  handleCoverInput(event) {
+    this.cover = (event.target).files[0];
+  }
+
+  handleAvatarInput(event) {
+    this.avatar = (event.target).files[0];
+  }
+
+  handleThumbnailInput(event) {
+    this.thumbnail = (event.target).files[0];
   }
 }

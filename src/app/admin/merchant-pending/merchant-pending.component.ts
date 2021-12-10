@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../service/user.service';
 import {MerchantProfile} from '../../model/merchant-profile';
 import Swal from 'sweetalert2';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-merchant-pending',
@@ -12,7 +13,7 @@ export class MerchantPendingComponent implements OnInit {
   id: number;
   idUpdate: number;
   merchants: MerchantProfile[] = [];
-  approvingMerchant: any;
+  approvingMerchant: User;
 
   constructor(private userService: UserService) {
   }
@@ -32,11 +33,11 @@ export class MerchantPendingComponent implements OnInit {
 
   getId(id: number) {
     this.id = id;
-    this.getMerchantById(this.id);
+    this.getMerchantByUserId(this.id);
   }
 
-  getMerchantById(id: number) {
-    this.userService.getMerchantById(id).subscribe((user: any) => {
+  getMerchantByUserId(id: number) {
+    this.userService.getMerchantByUserId(id).subscribe((user: any) => {
       this.approvingMerchant = user;
     });
   }

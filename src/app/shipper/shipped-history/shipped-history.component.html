@@ -7,31 +7,31 @@
         <div class="bg-white card mb-4 order-list shadow-sm">
           <div class="gold-members p-4">
             <div class="media">
-              <img class="mr-4" src="http://localhost:8080/{{o.merchant.merchantProfile.thumbnail}}"
+              <img class="mr-4" src="http://localhost:8080/{{o?.merchant.merchantProfile.thumbnail}}"
                    alt="Generic placeholder image">
               <div class="media-body">
-                <span *ngIf="o.orderStatus.name == 'CREATED'" class="float-right text-black">
+                <span *ngIf="o?.orderStatus.name == 'CREATED'" class="float-right text-black">
                   Đơn hàng đang xử lý <i style="color: sandybrown" class="icofont-clock-time"></i>
                 </span>
-                <span *ngIf="o.orderStatus.name == 'SHIPPING'" class="float-right text-black">
+                <span *ngIf="o?.orderStatus.name == 'SHIPPING'" class="float-right text-black">
                   Shipper đang giao hàng <i style="color: sandybrown" class="icofont-clock-time"></i>
                 </span>
-                <span *ngIf="o.orderStatus.name == 'COMPLETED'" class="float-right text-black">
+                <span *ngIf="o?.orderStatus.name == 'COMPLETED'" class="float-right text-black">
                   Hoàn thành <i style="color: sandybrown" class="icofont-clock-time"></i>
                 </span>
-                <span *ngIf="o.orderStatus.name == 'DONE'" class="float-right text-black">{{o?.finishedTime}}
+                <span *ngIf="o?.orderStatus.name == 'DONE'" class="float-right text-black">{{o?.finishedTime}}
                   Hoàn thành <i style="color: sandybrown" class="icofont-check-circled"></i>
                 </span>
                 <h6 class="mb-2">
-                  <a routerLink="/user/merchant/{{o.merchant.id}}" class="text-black">
-                    {{o.merchant.merchantProfile.name}}
+                  <a routerLink="/user/merchant/{{o?.merchant.id}}" class="text-black">
+                    {{o?.merchant.merchantProfile.name}}
                   </a>
                 </h6>
                 <p class="text-gray mb-1"><i class="icofont-location-arrow"></i>
-                  {{o.address.address}}
+                  {{o?.address.address}}
                 </p>
                 <p class="text-gray mb-3"><i class="icofont-list"></i> ORDER
-                  #{{o.id}} <i class="icofont-clock-time ml-2"></i> {{o.orderTime}}</p>
+                  #{{o?.id}} <i class="icofont-clock-time ml-2"></i> {{o?.orderTime}}</p>
                 <hr>
                 <div class="float-right">
                   <a class="btn btn-sm btn-outline-primary" (click)="getOrderDetail(i)" data-bs-toggle="modal"
@@ -41,7 +41,7 @@
                     class="icofont-check-circled"></i> Xác nhận đã giao hàng</a>
                 </div>
                 <p class="mb-0 text-black text-primary pt-2"><span
-                  class="text-black font-weight-bold"> Tổng:</span> VND {{o.totalPayment}}
+                  class="text-black font-weight-bold"> Tổng:</span> VND {{o?.totalPayment}}
                 </p>
               </div>
             </div>
@@ -99,7 +99,7 @@
           </tr>
           <tr>
             <td colspan="2">Địa chỉ giao hàng:</td>
-            <td colspan="3">{{pickedOrder.address.address}}</td>
+            <td colspan="3">{{pickedOrder?.address.address}}</td>
           </tr>
         </table>
       </div>

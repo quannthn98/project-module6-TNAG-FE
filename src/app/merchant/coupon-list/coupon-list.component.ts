@@ -32,7 +32,7 @@ export class CouponListComponent implements OnInit {
   }
 
   getMerchant() {
-    this.userService.getMerchantById(this.currentUser.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.currentUser.id).subscribe(data => {
       this.merchant = data;
       this.getAllCoupons();
     });
