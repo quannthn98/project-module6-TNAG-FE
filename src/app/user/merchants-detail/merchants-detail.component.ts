@@ -83,7 +83,7 @@ export class MerchantsDetailComponent implements OnInit {
   }
 
   private getMerchantById() {
-    this.userService.getMerchantById(this.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.id).subscribe(data => {
         this.merchant = data;
         this.getAllDishByMerchant();
         this.getCartByMerchant();

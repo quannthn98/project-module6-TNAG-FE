@@ -35,11 +35,11 @@ export class MerchantPendingComponent implements OnInit {
 
   getId(id: number) {
     this.id = id;
-    this.getMerchantById(this.id);
+    this.getMerchantByUserId(this.id);
   }
 
-  getMerchantById(id: number) {
-    this.userService.getMerchantById(id).subscribe((user: any) => {
+  getMerchantByUserId(id: number) {
+    this.userService.getMerchantByUserId(id).subscribe((user: any) => {
       this.approvingMerchant = user;
     });
   }

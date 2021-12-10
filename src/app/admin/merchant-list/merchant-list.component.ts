@@ -38,7 +38,7 @@ export class MerchantListComponent implements OnInit {
   }
 
   getMerchantById(id: number) {
-    this.userService.getMerchantById(id).subscribe((user: any) => {
+    this.userService.getMerchantByUserId(id).subscribe((user: any) => {
       this.pickedMerchant = user;
     });
   }

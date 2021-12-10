@@ -38,7 +38,7 @@
                 <hr>
                 <div class="float-right">
                   <ng-container *ngIf="o.orderStatus.name == 'CREATED'">
-                    <a class="btn btn-sm btn-outline-danger" (click)="getIdCancelOrder(o.id)" data-bs-toggle="modal" data-bs-target="#modalCancelOrder" ><i class="far fa-trash-alt"style="margin-right: 5px" ></i>Hủy đơn hàng</a>
+                    <a class="btn btn-sm btn-outline-danger" (click)="getOrderDetail(i)" data-bs-toggle="modal" data-bs-target="#modalCancelOrder" ><i class="far fa-trash-alt"style="margin-right: 5px" ></i>Hủy đơn hàng</a>
                   </ng-container>
                 </div>
                 <div class="float-right" style="margin-right: 5px">
@@ -68,9 +68,14 @@
       <div class="modal-body">
         Bạn có chắc chắn muốn hủy đơn hàng này
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy đơn hàng</button>
+      <div class="card-body">
+        <textarea _ngcontent-apg-c4="" id="note" class="form-control ng-untouched ng-pristine ng-valid"
+                  name="note" #cancellationReason placeholder="Lý do hủy đơn hàng ...." rows="3"
+                  ng-reflect-name="note" ng-reflect-model=""></textarea>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" (click)="canceledOrder(cancellationReason.value)" data-bs-dismiss="modal">Hủy đơn hàng</button>
+        </div>
       </div>
     </div>
   </div>
