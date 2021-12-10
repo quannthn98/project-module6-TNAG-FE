@@ -30,6 +30,7 @@
               <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Món Ăn</th>
+                <th scope="col">Giá</th>
                 <th scope="col">Mô Tả</th>
                 <th scope="col">Trạng Thái</th>
                 <th scope="col">Hành Động</th>
@@ -37,8 +38,9 @@
               </thead>
               <tbody>
               <tr *ngFor="let d of dishes; index as i">
-                <th scope="row">{{i}}</th>
+                <th scope="row">{{i + 1}}</th>
                 <td>{{d?.name}}</td>
+                <td>{{d?.price | number}}</td>
                 <td>{{d?.description}}</td>
                 <td >{{d?.status == true ? "Còn hàng": "Hết hàng"}}</td>
                 <td>

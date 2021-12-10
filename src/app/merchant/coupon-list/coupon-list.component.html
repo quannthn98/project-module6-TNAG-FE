@@ -40,7 +40,7 @@
               <tr *ngFor="let coupon of coupons; index as i">
                 <th scope="row">{{i}}</th>
                 <td>{{coupon?.inputCode}}</td>
-                <td>{{coupon?.discount}} VNĐ</td>
+                <td>{{coupon?.discount | number}} VNĐ</td>
                 <td>{{coupon?.description}}</td>
                 <td>Áp dụng cho {{coupon?.type?.name == 'DISH' ? "Món ăn": "Phí vận chuyển"}}</td>
                 <td>

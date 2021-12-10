@@ -3,6 +3,7 @@ import {OrderDetail} from './order-detail';
 import {User} from './user';
 import {OrderStatus} from './order-status';
 import {ShipperProfile} from './shipper-profile';
+import {Coupon} from './coupon';
 
 export interface Order {
   id?: number;
@@ -11,7 +12,7 @@ export interface Order {
   address?: UserAddress;
   totalPayment?: number;
   orderStatus?: OrderStatus;
-  coupon?: any;
+  coupon?: Coupon;
   shipper?: ShipperProfile;
   ordersDetails?: OrderDetail[];
   merchant?: User;

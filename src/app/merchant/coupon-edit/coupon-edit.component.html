@@ -42,7 +42,7 @@
                       <div class="mb-3">
                         <label for="discount" class="form-label">Tiền giảm giá:</label>
                         <input type="text" #discount="ngModel" class="form-control" id="discount"
-                               [ngModel]="coupon.discount"
+                               [ngModel]="coupon.discount | number"
                                [ngClass]="[(discount.valid) ? 'form-control is-valid' :((discount.dirty || discount.touched || formEditCoupon.submitted)? 'form-control is-invalid':'form-control')]"
                                name="discount" required>
                         <ng-container

@@ -24,6 +24,8 @@ export class RegisterMerchantComponent implements OnInit {
   avatar: any;
   cover: any;
   thumbnail: any;
+  open: number;
+  close: number;
 
   constructor(private categoryService: CategoryService,
               private merchantService: MerchantService,

@@ -72,7 +72,7 @@
                         <label for="discountCondition" class="form-label">Điều kiện:</label>
                         <input #discountCondition="ngModel"
                                type="text" id="discountCondition"
-                               [ngModel]="coupon.discountCondition"
+                               [ngModel]="coupon.discountCondition | number"
                                [ngClass]="[(discountCondition.valid) ? 'form-control is-valid' :((discountCondition.dirty || discountCondition.touched || formCreateCoupon.submitted)? 'form-control is-invalid':'form-control')]"
                                name="discountCondition"
                                required>

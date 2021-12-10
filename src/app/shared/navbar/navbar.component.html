@@ -127,7 +127,7 @@
                 <i class="fas fa-shopping-cart" style="margin-right: 5px"></i>
                 <a routerLink="/checkout/{{cart.merchant.id}}"
                    class="mb-2 text-secondary">{{cart.merchant.merchantProfile.name}} x {{cart.cartDetails.length}}
-                  <span class="float-right text-info">{{cart.totalPayment}} VNĐ</span>
+                  <span class="float-right text-info">{{cart.totalPayment | number}} VNĐ</span>
                 </a>
               </div>
               <div class="dropdown-cart-top-footer border-top p-4">

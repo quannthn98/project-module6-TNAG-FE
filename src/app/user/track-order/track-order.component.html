@@ -15,12 +15,12 @@
       </div>
       <div class="col-md-3">
         <div class="bg-white p-4 shadow-lg mb-2">
-          <div class="mb-2"><small>Mã đơn hàng #{{order.id}}<a class="float-right font-weight-bold" href="#"><i
+          <div class="mb-2"><small>Đơn hàng #{{order.id}}<a class="float-right font-weight-bold" href="#"><i
             class="icofont-headphone-alt"></i> Trợ giúp</a></small></div>
           <h6 class="mb-1 mt-1"><a routerLink="/user/merchant/{{order.merchant.id}}" class="text-black">{{order.merchant.merchantProfile.name}} ({{distance}} km)
           </a>
           </h6>
-          <p class="text-gray mb-0"><i class="icofont-clock-time"></i> {{order.orderTime}} | {{order.totalPayment}}</p>
+          <p class="text-gray mb-0"><i class="icofont-clock-time"></i> {{order.orderTime}} | {{order.totalPayment | number}}</p>
         </div>
         <div class="bg-white p-4 shadow-lg">
           <div class="osahan-track-order-detail po">
@@ -42,15 +42,17 @@
                 </p>
               </div>
               <div class="col-md-7">
-                <div class="mb-2"><small><i class="icofont-list"></i> 8 sản phẩm</small></div>
+                <div class="mb-2"><small><i class="icofont-list"></i> {{order.ordersDetails.length}} sản phẩm</small></div>
                 <p *ngFor="let od of order.ordersDetails" class="mb-2"><i
                   class="icofont-ui-press text-danger food-item"></i> {{od.dish.name}} x {{od.quantity}} <span
-                  class="float-right text-secondary">{{od.quantity * od.price}}</span></p>
+                  class="float-right text-secondary">{{(od.quantity * od.price) | number}}</span></p>
 
 
                 <hr>
+                <p class="mb-0 font-weight-bold text-black">Phí vận chuyển <span
+                  class="float-right text-secondary">15,000</span></p>
                 <p class="mb-0 font-weight-bold text-black">Tổng thanh toán <span
-                  class="float-right text-secondary">209.000</span></p>
+                  class="float-right text-secondary">{{order?.totalPayment | number}}</span></p>
                 <!-- <p class="mb-0 text-info"><small>Paid via Credit/Debit card
                         <span class="float-right text-danger">$620 OFF</span></small>
                 </p> -->
@@ -59,24 +61,34 @@
           </div>
         </div>
         <div class="bg-white p-4 shadow-lg mt-2">
-          <div class="row text-center">
-            <div class="col"
-                 [ngStyle]="[(order.orderStatus.name == 'CREATED') ? 'border: #0c84ff 1px solid': 'border: #0c84ff 1px solid']">
-              <i class="icofont-tasks icofont-3x text-info"></i>
-              <p class="mt-1 font-weight-bold text-dark mb-0">Đã tiếp nhận đơn hàng</p>
-              <small class="text-info mb-0">NOW</small>
+          <ng-container *ngIf="order.shipper == null || order.shipper == undefined">
+            <div class="row text-center">
+              <div class="col" >
+                <i class="icofont-warning icofont-3x text-info"></i>
+                <p class="mt-1 font-weight-bold text-dark mb-0">Đang tìm tài xế</p>
+                <small class="text-info mb-0"></small>
+              </div>
             </div>
-            <div class="col">
-              <i class="icofont-check-circled icofont-3x text-success"></i>
-              <p class="mt-1 font-weight-bold text-dark mb-0">Đang lấy hàng</p>
-              <small class="text-success mb-0">NEXT</small>
+          </ng-container>
+          <ng-container *ngIf="order.shipper">
+            <div class="row text-center">
+              <div class="col" >
+                <i class="icofont-tasks icofont-3x text-info"></i>
+                <p class="mt-1 font-weight-bold text-dark mb-0">Đã tiếp nhận đơn hàng</p>
+                <small class="text-info mb-0">{{order.orderStatus.name === 'CREATED' ? 'Hiện tại' : ''}}</small>
+              </div>
+              <div class="col">
+                <i class="icofont-check-circled icofont-3x text-success"></i>
+                <p class="mt-1 font-weight-bold text-dark mb-0">Đang lấy hàng</p>
+                <small class="text-success mb-0">{{order.orderStatus.name === 'SHIPPING' ? 'Hiện tại' : ''}}</small>
+              </div>
+              <div class="col">
+                <i class="icofont-delivery-time icofont-3x text-primary"></i>
+                <p class="mt-1 font-weight-bold text-dark mb-0">Đang giao hàng</p>
+                <small class="text-primary mb-0">{{order.orderStatus.name === 'DONE' ? 'Hoàn thành' : ''}}</small>
+              </div>
             </div>
-            <div class="col">
-              <i class="icofont-delivery-time icofont-3x text-primary"></i>
-              <p class="mt-1 font-weight-bold text-dark mb-0">Đang giao hàng</p>
-              <small class="text-primary mb-0">LATER (ET : 30min)</small>
-            </div>
-          </div>
+          </ng-container>
         </div>
       </div>
       <div class="col-md-3">
@@ -88,7 +100,7 @@
                 </div>
                 <div class="chat">
                   <div class="chat-header clearfix">
-                      Nhắn với shipper
+                      {{order.shipper ? 'Nhắn với tài xế' : 'Đang tìm tài xế cho đơn của bạn'}}
                   </div>
                   <div class="chat-history" >
                     <ul class="m-b-0">
@@ -118,7 +130,6 @@
 
       </div>
     </div>
-  <button (click)="showChatBox()" class="btn btn-outline-success">Chat với shipper</button>
-</section>
+  </section>
 <app-footer></app-footer>
 

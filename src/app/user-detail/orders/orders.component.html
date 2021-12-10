@@ -44,8 +44,10 @@
                 <div class="float-right" style="margin-right: 5px">
                   <a class="btn btn-sm btn-outline-info" (click)="getOrderDetail(i)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
                     class="icofont-headphone-alt" ></i> Chi tiết</a>
-                  <!--                    <a class="btn btn-sm btn-primary" href="detail.html"><i-->
-                  <!--                      class="icofont-refresh"></i> REORDER</a>-->
+                </div>
+                <div class="float-right" style="margin-right: 5px">
+                  <a class="btn btn-sm btn-outline-success" (click)="getOrderDetail(i)" routerLink="/track/order/{{infoOrder?.id}}"><i
+                    class="icofont-info" ></i> Theo dõi đơn </a>
                 </div>
                 <p class="mb-0 text-black text-primary pt-2"><span
                   class="text-black font-weight-bold"> Tổng:</span> VND {{o.totalPayment}}

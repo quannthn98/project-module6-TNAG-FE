@@ -76,7 +76,7 @@
     <td>{{order?.address?.customerName}}</td>
     <td>{{order?.address?.address}}</td>
     <td>{{order?.orderStatus?.name}}</td>
-    <td>{{order?.totalPayment}}</td>
+    <td>{{order?.totalPayment | number}}</td>
     <td>
       <button class="btn btn-outline-info ml-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
               (click)="getOrder(order?.id)"><i class="fas fa-info-circle"></i>
@@ -120,7 +120,7 @@
               <tr *ngFor="let dish of infoDish; index as i">
                 <td>{{i + 1}}</td>
                 <td>{{dish?.dish.name}}</td>
-                <td>{{dish?.dish?.price}}</td>
+                <td>{{dish?.dish?.price | number}}</td>
                 <td>{{dish?.quantity}}</td>
                 <td>{{dish?.total}}</td>
               </tr>

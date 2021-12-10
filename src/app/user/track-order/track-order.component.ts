@@ -41,6 +41,7 @@ export class TrackOrderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.scrollChatToBottom()
   }
 
   getOrderById() {
@@ -97,7 +98,7 @@ export class TrackOrderComponent implements OnInit, OnChanges {
     }
     console.log(this.message);
     console.log(this.newMessage);
-    this.scrollChatToBottom();
+    this.message = '';
     this.socketService.sendMessage(this.newMessage);
   }
 

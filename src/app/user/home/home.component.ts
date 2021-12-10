@@ -21,7 +21,11 @@ export class HomeComponent implements OnInit {
 
   getAllMerchant() {
     this.userService.getAllMerchant().subscribe((data: any) => {
-      this.merchants = data.content;
+      for (let i = 0; i < data.content.length; i++) {
+        if (data.content[i].userStatus.name === 'Đang hoạt động') {
+          this.merchants.push(data.content[i]);
+        }
+      }
       console.log(this.merchants);
     }, error => {
       console.log(error);
