@@ -1,8 +1,8 @@
 export interface ShipperProfile {
   id?: number;
   driverLicense?: any;
-  idFront?: any;
-  idBack?: any;
-  ownerCertificate?: any;
+  idCardFront?: any;
+  idCardBack?: any;
+  vehicleOwnershipCertificate?: any;
   profession?: any;
 }

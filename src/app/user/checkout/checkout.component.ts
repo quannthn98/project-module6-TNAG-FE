@@ -88,7 +88,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getMerchantById() {
-    this.userService.getMerchantById(this.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.id).subscribe(data => {
         console.log(data.merchantProfile);
         this.merchant = data;
         this.merchantProfile = data.merchantProfile;

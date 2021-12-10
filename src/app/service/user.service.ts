@@ -8,7 +8,7 @@ import {UserAddress} from '../model/user-address';
 import {UserProfile} from '../model/user-profile';
 import {UserForm} from '../model/user-form';
 import {ShipperProfile} from '../model/shipper-profile';
-import {Userdto} from "../model/userdto";
+import {Userdto} from '../model/userdto';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -42,7 +42,7 @@ export class UserService {
     return this.http.put<User>(`${API_URL}/merchants/updateStatus/${id}/blocked`, null);
   }
 
-  getMerchantById(id: number): Observable<User> {
+  getMerchantByUserId(id: number): Observable<User> {
     return this.http.get<User>(`${API_URL}/merchants/${id}`);
   }
 

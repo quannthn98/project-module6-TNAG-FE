@@ -71,9 +71,9 @@ export class OrderService {
   getOrderByShipper(): Observable<Order[]> {
     return this.http.get<Order[]>(API_URL + '/orders/shipper');
   }
-  getOrderByIdMerchant(merchantId: number,name? : any): Observable<Order[]> {
+  getOrderByIdMerchant(merchantId: number, name: any): Observable<Order[]> {
     if (name == null || name === '') {
-      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`)
+      return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}`);
     } else {
       return this.http.get<Order[]>(`${API_URL}/orders/merchant/${merchantId}?q=${name}`);
     }

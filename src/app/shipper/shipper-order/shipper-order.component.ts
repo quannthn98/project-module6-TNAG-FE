@@ -45,7 +45,7 @@ export class ShipperOrderComponent implements OnInit {
     this.orderService.getAllOrderStatus().subscribe((data: any) => {
       const allStatus: OrderStatus[] = data.content;
       for (let i = 0; i < allStatus.length; i++) {
-        if (allStatus[i].name === 'SHIPPING' ) {
+        if (allStatus[i].name === 'SHIPPING') {
           this.shippingStatus = allStatus[i];
           break;
         }

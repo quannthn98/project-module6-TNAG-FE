@@ -40,7 +40,7 @@ export class MerchantInfoEditComponent implements OnInit {
   }
 
   getMerchant() {
-    this.userService.getMerchantById(this.id).subscribe(data => {
+    this.userService.getMerchantByUserId(this.id).subscribe(data => {
       this.user = data;
       data.merchantProfile.categories.forEach(x => this.categoryArray.push(x.id));
       this.categoryList = this.categoryList.concat(this.categoryArray);
