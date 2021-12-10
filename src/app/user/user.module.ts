@@ -16,20 +16,22 @@ import {ShipperRegisterComponent} from './shipper-register/shipper-register.comp
 import {TrackOrderComponent} from './track-order/track-order.component';
 import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 
 @NgModule({
   declarations: [HomeComponent, MerchantsComponent, MerchantsDetailComponent, CheckoutComponent, CartComponent, MerchantRegisterComponent, UserDetailComponent, ShipperRegisterComponent, TrackOrderComponent, SearchcategoryComponent],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    SharedModule,
-    FormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCP74ZUbCJ6zKeNqbh3LNej4nDX_VmtvNA'
-    }),
-    AgmDirectionModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        SharedModule,
+        FormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCP74ZUbCJ6zKeNqbh3LNej4nDX_VmtvNA'
+        }),
+        AgmDirectionModule,
+        Ng2SearchPipeModule
+    ]
 })
 export class UserModule {
 }
