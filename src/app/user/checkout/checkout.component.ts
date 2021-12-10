@@ -136,16 +136,9 @@ export class CheckoutComponent implements OnInit {
     }
     this.orderService.createNewOrder(this.orderForm, this.id).subscribe(data => {
       console.log(data);
-      const notification = {
-        sender: this.authenticationService.currentUserValue,
-        receiver: {
-          id: this.id
-        },
-        content: 'Đơn hàng mới'
-      };
-      this.socketService.sendNotification(notification);
+      this.socketService.sendNotification('Đơn hàng mới', this.authenticationService.currentUserValue.id, this.id);
       this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl(`/track/order/${data.id}`);
     });
   }
 

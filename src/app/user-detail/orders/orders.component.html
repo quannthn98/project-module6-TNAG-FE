@@ -54,7 +54,7 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Chi tiết đơn hàng</h5>
@@ -84,7 +84,11 @@
           <tbody>
           <tr>
             <td colspan="4">Giảm giá</td>
-            <td> 0 </td>
+            <td> {{discount}} </td>
+          </tr>
+          <tr>
+            <td colspan="4" >Phí ship</td>
+            <td >15.000</td>
           </tr>
           <tr>
             <td colspan="4">Thanh toán</td>

@@ -11,7 +11,7 @@ import {OrderService} from '../../service/order.service';
 export class ShippedHistoryComponent implements OnInit {
   orders: Order[] = [];
   orderDetail: OrderDetail[] = [];
-  totalPayment: number;
+  totalPayment = 0;
   pickedOrder: Order;
 
   constructor(private orderService: OrderService) {

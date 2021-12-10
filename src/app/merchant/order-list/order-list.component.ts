@@ -41,11 +41,17 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderByMerchant(statusName: string) {
-    this.orderService.getOrderByMerchantAndStatus(statusName, this.currentPage).subscribe((data: any) => {
-      this.orders = data.content;
-      this.currentStatus = statusName;
-      this.totalPages = data.totalPages;
-      this.currentPage = data.number;
+    this.orderService.getOrderByMerchantAndStatus(statusName, this.currentPage, this.merchantId, this.searchOrders).subscribe((data: any) => {
+      if(this.searchOrders == null || this.searchOrders == '') {
+        this.orders = data.content;
+        this.currentStatus = statusName;
+        this.totalPages = data.totalPages;
+        this.currentPage = data.number;
+      }else {
+        this.orders = data;
+        this.currentStatus = statusName;
+        console.log(data)
+      }
     }, error => {
       console.log(error);
     });
@@ -83,7 +89,7 @@ export class OrderListComponent implements OnInit {
   }
 
   changePage(i: number) {
-    this.orderService.getOrderByMerchantAndStatus(this.currentStatus, i).subscribe((data: any) => {
+    this.orderService.getOrderByMerchantAndStatus(this.currentStatus, i, this.merchantId, this.searchOrders).subscribe((data: any) => {
       this.orders = data.content;
       this.currentPage = i;
       this.getOrderByMerchant(this.currentStatus);

@@ -76,3 +76,32 @@
   margin: 4px 10px 0 0;
 }
 
+.unread-noty {
+  position: absolute;
+  right: 11px;
+  top: 6px;
+  color: #fff;
+}
+
+a.fa-bell {
+  position: relative;
+  font-size: 1.5em;
+  color: grey;
+  cursor: pointer;
+}
+span.fa-comment {
+  position: absolute;
+  font-size: 0.4em;
+  top: -4px;
+  color: red;
+  right: -4px;
+}
+span.num {
+  position: absolute;
+  display: none;
+  font-size: 0.15em;
+  top: 1px;
+  color: #fff;
+  right: 2px;
+}
+

@@ -12,6 +12,7 @@ export class OrdersComponent implements OnInit {
   orders: Order[] = [];
   orderDetail: OrderDetail[] = [];
   totalPayment: number;
+  discount: number;
 
   constructor(private orderService: OrderService) {
   }
@@ -30,6 +31,7 @@ export class OrdersComponent implements OnInit {
   getOrderDetail(index: number) {
     this.totalPayment = this.orders[index].totalPayment;
     this.orderDetail = this.orders[index].ordersDetails;
+    this.discount = this.orders[index].coupon.discount;
   }
 
 
