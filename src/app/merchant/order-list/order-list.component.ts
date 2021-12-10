@@ -6,6 +6,8 @@ import {Order} from '../../model/order';
 import {Dish} from '../../model/dish';
 import {OrderStatus} from '../../model/order-status';
 import {AlertService} from '../../service/alert.service';
+import {SocketService} from '../../service/socket/socket.service';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-order-list',
@@ -27,7 +29,9 @@ export class OrderListComponent implements OnInit {
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private orderService: OrderService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private socketService: SocketService,
+              private authenticationService: AuthenticationService) {
     this.merchantId = JSON.parse(localStorage.user).id;
 
     activatedRoute.paramMap.subscribe(param => {
@@ -38,19 +42,20 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
   }
 
   getOrderByMerchant(statusName: string) {
     this.orderService.getOrderByMerchantAndStatus(statusName, this.currentPage, this.merchantId, this.searchOrders).subscribe((data: any) => {
-      if(this.searchOrders == null || this.searchOrders == '') {
+      if (this.searchOrders == null || this.searchOrders === '') {
         this.orders = data.content;
         this.currentStatus = statusName;
         this.totalPages = data.totalPages;
         this.currentPage = data.number;
-      }else {
+      } else {
         this.orders = data;
         this.currentStatus = statusName;
-        console.log(data)
+        console.log(data);
       }
     }, error => {
       console.log(error);
@@ -77,6 +82,7 @@ export class OrderListComponent implements OnInit {
       this.infoOrder.note += '\n(Lý do hủy: ' + value + ' )';
     }
     this.orderService.cancellationOrder(this.infoOrder).subscribe(() => {
+      this.socketService.sendNotification(`Đơn hàng ${this.infoOrder.id} đã bị huỷ, lý do: ${this.infoOrder.note}`, this.authenticationService.currentUserValue.id, this.infoOrder.user.id);
       this.getOrderByMerchant(this.currentStatus);
       this.alertService.alertSuccess('Hủy đơn hàng thành công');
     }, error => {
