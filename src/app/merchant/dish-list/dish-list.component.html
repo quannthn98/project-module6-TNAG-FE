@@ -62,7 +62,7 @@
 </aside>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel3">Thông Tin Món Ăn</h5>
@@ -70,7 +70,7 @@
       </div>
       <div class="modal-body">
         <h5>Tên Món: {{dish?.name}}</h5>
-        <h6>Hình Ảnh: <img src="{{dish?.image}}" alt="Ảnh món"> </h6>
+        <h6>Hình Ảnh: <img src="http://localhost:8080/{{dish?.image}}" width="50%" alt="Ảnh món"> </h6>
         <h6>Mô tả: {{dish?.description}}</h6>
         <h6>Quán Ăn: {{dish?.merchant?.merchantProfile?.name}} </h6>
         <h6>Tình Trạng: {{dish?.status == true ? "Còn hàng" : "Hết hàng"}} </h6>
