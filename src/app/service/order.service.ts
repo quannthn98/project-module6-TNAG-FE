@@ -65,8 +65,8 @@ export class OrderService {
     return this.http.get<Order[]>(API_URL + '/orders/createdOrders');
   }
 
-  deliveryConfirmOrder(orderStatus: OrderStatus, orderId: number): Observable<OrderStatus> {
-    return this.http.put<OrderStatus>(`${API_URL}/orderStatus/confirmShipping/${orderId}`, orderStatus);
+  deliveryConfirmOrder(orderStatus: OrderStatus, orderId: number): Observable<Order> {
+    return this.http.put<Order>(`${API_URL}/orderStatus/confirmShipping/${orderId}`, orderStatus);
   }
   getOrderByShipper(): Observable<Order[]> {
     return this.http.get<Order[]>(API_URL + '/orders/shipper');
