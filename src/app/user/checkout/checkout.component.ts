@@ -32,6 +32,8 @@ export class CheckoutComponent implements OnInit {
   totalPayment;
   shippingCost = 15000;
   orderForm: any;
+  selectedAddressId: number;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
@@ -101,6 +103,7 @@ export class CheckoutComponent implements OnInit {
   getUserDeliverAddress() {
     this.userService.getAllDeliverAddressByUser().subscribe((data: any) => {
       this.addresses = data;
+      this.selectedAddressId = this.addresses[0].id;
     });
   }
 
@@ -108,7 +111,7 @@ export class CheckoutComponent implements OnInit {
     if (this.coupon === undefined) {
       this.orderForm = {
         address: {
-          id: checkoutForm.value.address
+          id: this.selectedAddressId
         },
         paymentMethod: {
           id: checkoutForm.value.paymentMethod
@@ -119,7 +122,7 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.orderForm = {
         address: {
-          id: checkoutForm.value.address
+          id: this.selectedAddressId
         },
         paymentMethod: {
           id: checkoutForm.value.paymentMethod
@@ -133,17 +136,14 @@ export class CheckoutComponent implements OnInit {
     }
     this.orderService.createNewOrder(this.orderForm, this.id).subscribe(data => {
       console.log(data);
-      const notification = {
-        sender: this.authenticationService.currentUserValue,
-        receiver: {
-          id: this.id
-        },
-        content: 'Đơn hàng mới'
-      };
-      this.socketService.sendNotification(notification);
+      this.socketService.sendNotification('Đơn hàng mới', this.authenticationService.currentUserValue.id, this.id);
       this.alertService.alertSuccess('Đặt hàng thành công, đơn hàng của bạn sẽ sớm được shipper tiếp nhận');
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl(`/track/order/${data.id}`);
     });
+  }
+
+  setSelectedAddress(id: number) {
+    this.selectedAddressId = id;
   }
 }
 

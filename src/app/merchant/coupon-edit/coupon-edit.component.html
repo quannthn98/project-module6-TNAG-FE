@@ -54,7 +54,7 @@
                       </div>
                       <div class="mb-3">
                         <label for="couponType" class="form-label">Loại Coupon:</label>
-                        <select class="form-select" [ngModel]="coupon.type" name="type" id="couponType"
+                        <select class="form-select" [ngModel]="coupon.type.id" name="type" id="couponType"
                                 aria-label="Default select example">
                           <!--                          <option [value]="undefined" selected disabled>&#45;&#45; Chọn loại coupon &#45;&#45;</option>-->
                           <option [selected]="ct?.id === coupon.type.id" value="{{ct?.id}}"

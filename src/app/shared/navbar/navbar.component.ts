@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   isMerchant = false;
   isUser = false;
+  isShipper = false;
   carts: Cart[] = [];
   cartDetail: CartDetail[] = [];
   selectedCategoryId: number;
@@ -53,14 +54,18 @@ export class NavbarComponent implements OnInit {
       if (this.roles[i].authority === 'ROLE_USER') {
         this.isUser = true;
       }
+      if (this.roles[i].authority === 'ROLE_SHIPPER') {
+        this.isShipper = true;
+      }
     }
   }
 
   ngOnInit() {
     this.getAllCategory();
-    this.getCurrentUserDetail();
     this.checkRole();
-    this.getCartByUser();
+    if (this.isUser || this.isMerchant) {
+      this.getCartByUser();
+    }
     this.socketService.connectToNotify();
     this.getNotification();
   }
@@ -106,5 +111,9 @@ export class NavbarComponent implements OnInit {
 
   getSelectedCategory(id: number) {
     this.userService.selectedCategoryId = id;
+  }
+
+  resetUnreadMessage() {
+    this.socketService.unreadMessage = 0;
   }
 }

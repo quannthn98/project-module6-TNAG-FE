@@ -9,6 +9,8 @@ import {Notification} from '../../model/notification';
 import {NotificationService} from '../notification.service';
 import {OrderService} from '../order.service';
 import {AlertService} from '../alert.service';
+import {Message} from '../../model/message';
+import {MessageService} from '../message.service';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -18,6 +20,9 @@ const API_URL = `${environment.apiUrl}`;
 export class SocketService {
   stompClient: any;
   currentUser: UserToken;
+  messages: Message[] = [];
+  newMessage: Message;
+  unreadMessage = 0;
   orders: Order[] = [];
   notifications: Notification[] = [];
   notification: Notification;
@@ -25,6 +30,7 @@ export class SocketService {
   constructor(private authenticationService: AuthenticationService,
               private notificationService: NotificationService,
               private orderService: OrderService,
+              private messageService: MessageService,
               private alertService: AlertService) {
     this.currentUser = this.authenticationService.currentUserValue;
   }
@@ -50,7 +56,7 @@ export class SocketService {
         });
         this.notification = JSON.parse(data.body);
         if (this.notification.receiver.id === this.currentUser.id) {
-          this.alertService.alertSuccess('Bạn có 1 đơn hàng mới');
+          this.unreadMessage += 1;
           this.notifications.push(JSON.parse(data.body));
         }
         console.log(JSON.parse(data.body));
@@ -58,13 +64,44 @@ export class SocketService {
     });
   }
 
+  connectToChat(senderId?: number) {
+    const ws = new SockJS(`${API_URL}/ws`);
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.connect({}, frame => {
+      this.messageService.getMessages(senderId).subscribe((messages: any) => {
+        console.log(messages);
+        this.messages = messages;
+      });
+      this.stompClient.subscribe('/topic/message', data => {
+        this.newMessage = JSON.parse(data.body);
+        if (this.currentUser.id === this.newMessage.receiver.id || this.newMessage.sender.id === this.currentUser.id) {
+          this.messages.push(this.newMessage);
+        }
+      });
+    });
+  }
+
+
   disconnect() {
     if (this.stompClient != null) {
       this.stompClient.disconnect();
     }
   }
 
-  sendNotification(notification: Notification) {
+  sendNotification(message: string, senderId: number, receiverId: number) {
+    const notification = {
+      sender: {
+        id: senderId
+      },
+      receiver: {
+        id: receiverId
+      },
+      content: message
+    };
     this.stompClient.send('/app/notify', {}, JSON.stringify(notification));
+  }
+
+  sendMessage(message: Message) {
+    this.stompClient.send('/app/message', {}, JSON.stringify(message));
   }
 }
