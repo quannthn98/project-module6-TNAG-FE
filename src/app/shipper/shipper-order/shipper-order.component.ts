@@ -26,12 +26,11 @@ export class ShipperOrderComponent implements OnInit {
   ngOnInit() {
     this.getCreatedOrder();
     this.getShippingStatus();
-    this.socketService.connectToOrders()
   }
 
   getCreatedOrder() {
     this.orderService.getCreatedOrder().subscribe((data: any) => {
-      this.socketService.orders = data.content;
+      this.orders = data.content;
       console.log(this.orders);
     }, error => {
       this.alertService.alertError('Lỗi rồi đó');
@@ -61,6 +60,7 @@ export class ShipperOrderComponent implements OnInit {
   deliveryConfirm() {
     this.orderService.deliveryConfirmOrder(this.shippingStatus, this.pickedOrder.id).subscribe(() => {
       this.getCreatedOrder();
+      this.alertService.alertSuccess('Ok rồi bạn ơi');
     }, error => {
       this.alertService.alertError('Xác nhận sai rồi');
     });

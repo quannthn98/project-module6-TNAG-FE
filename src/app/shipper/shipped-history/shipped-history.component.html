@@ -37,8 +37,8 @@
                   <a class="btn btn-sm btn-outline-primary" (click)="getOrderDetail(i)" data-bs-toggle="modal"
                      data-bs-target="#staticBackdrop"><i
                     class="icofont-headphone-alt"></i> Chi tiết</a>
-                  <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModal"><i
-                    class="icofont-check-circled" (click)="getOrderDetail(i)"></i> Xác nhận đã giao hàng</a>
+                  <a class="btn btn-sm btn-success" *ngIf="o.orderStatus.name == 'SHIPPING'" data-toggle="modal" data-target="#exampleModal" (click)="getOrderDetail(i)"><i
+                    class="icofont-check-circled"></i> Xác nhận đã giao hàng</a>
                 </div>
                 <p class="mb-0 text-black text-primary pt-2"><span
                   class="text-black font-weight-bold"> Tổng:</span> VND {{o.totalPayment}}
@@ -94,6 +94,10 @@
           </tr>
           </tbody>
           <tr>
+            <td colspan="2">Tên người nhận:</td>
+            <td colspan="3">{{pickedOrder?.user?.username}}</td>
+          </tr>
+          <tr>
             <td colspan="2">Địa chỉ giao hàng:</td>
             <td colspan="3">{{pickedOrder.address.address}}</td>
           </tr>
@@ -115,10 +119,20 @@
         </button>
       </div>
       <div class="modal-body">
+        <label for="name">Tên người nhận</label>
+        <input class="form-control" id="name" readonly value="{{pickedOrder?.address?.customerName}}">
+      </div>
+      <div class="modal-body">
+        <label for="address">Địa chỉ</label>
+        <input class="form-control" id="address" readonly value="{{pickedOrder?.address?.address}}">
+      </div>
+      <div class="modal-body">
+        <label for="total">Tổng tiền</label>
+        <input class="form-control" id="total" readonly value="{{pickedOrder?.totalPayment}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delivered()">Đã giao hàng</button>
       </div>
     </div>
   </div>
