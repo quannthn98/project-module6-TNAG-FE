@@ -15,7 +15,7 @@ export class SearchcategoryComponent implements OnInit {
   userDto: Userdto[] = [];
   categoryId;
   nameCategory: string;
-
+  searchText;
 
   constructor(private httpClient: HttpClient, private userService: UserService, private categorySevice: CategoryService) {
     this.getAllCategories();
