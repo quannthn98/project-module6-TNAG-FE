@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent
+    component: MerchantListComponent
   },
   {
     path: 'merchant/:id/dish',

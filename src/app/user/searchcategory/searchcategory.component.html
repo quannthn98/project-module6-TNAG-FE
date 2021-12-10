@@ -75,14 +75,14 @@
               <div class="list-card-image">
                 <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i
                   class="icofont-heart"></i></a></div>
-                <a routerLink="/user/merchant/{{u.id}}">
-                  <img src="http://localhost:8080/{{u.thumbnail}}" class="img-fluid item-img">
+                <a routerLink="/user/merchant/{{u?.id}}">
+                  <img src="http://localhost:8080/{{u?.thumbnail}}" class="img-fluid item-img">
                 </a>
               </div>
               <div class="p-3 position-relative">
                 <div class="list-card-body">
                   <h6 class="mb-1"><a routerLink="/user/merchant/{{u.id}}" class="text-black">{{u.name}}</a></h6>
-                  <p class="text-gray mb-3">Địa Chỉ: {{u.address}}</p>
+                  <p class="text-gray mb-3">Địa Chỉ: {{u?.address}}</p>
                   <p class="text-gray mb-3 time"><span
                     class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
                     class="icofont-wall-clock"></i> 20–25 min</span></p>

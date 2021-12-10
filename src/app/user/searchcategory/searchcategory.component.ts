@@ -44,12 +44,25 @@ export class SearchcategoryComponent implements OnInit {
     this.categorySevice.getAll().subscribe((data: any) => {
       console.log(data);
       this.categories = data.content;
-      if (this.userService.selectedCategoryId !== undefined) {
-        this.categoryId = this.userService.selectedCategoryId;
+      if (this.userService.searchedMerchant.length !== 0) {
+        const searchedValue = this.userService.searchedMerchant;
+        for (let i = 0; i < this.userService.searchedMerchant.length; i++) {
+          const merchant = {
+            id: searchedValue[i].id,
+            name: searchedValue[i].merchantProfile.name,
+            address: searchedValue[i].merchantProfile.address,
+            thumbnail: searchedValue[i].merchantProfile.thumbnail
+          };
+          this.userDto.push(merchant);
+        }
       } else {
-        this.categoryId = this.categories[0].id;
+        if (this.userService.selectedCategoryId !== undefined) {
+          this.categoryId = this.userService.selectedCategoryId;
+        } else {
+          this.categoryId = this.categories[0].id;
+        }
+        this.getUserDtoByCategoryId();
       }
-      this.getUserDtoByCategoryId();
     }, error => {
       console.log(error);
     });
