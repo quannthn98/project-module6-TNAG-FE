@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../service/user.service';
 import {MerchantProfile} from '../../model/merchant-profile';
 import Swal from 'sweetalert2';
+import {SocketService} from '../../service/socket/socket.service';
 
 @Component({
   selector: 'app-merchant-pending',
@@ -14,10 +15,12 @@ export class MerchantPendingComponent implements OnInit {
   merchants: MerchantProfile[] = [];
   approvingMerchant: any;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private socketService: SocketService) {
   }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
     this.getMerchantPending();
   }
 
@@ -32,18 +35,18 @@ export class MerchantPendingComponent implements OnInit {
 
   getId(id: number) {
     this.id = id;
-    this.getMerchantById(this.id);
+    this.getMerchantByUserId(this.id);
   }
 
-  getMerchantById(id: number) {
-    this.userService.getMerchantById(id).subscribe((user: any) => {
+  getMerchantByUserId(id: number) {
+    this.userService.getMerchantByUserId(id).subscribe((user: any) => {
       this.approvingMerchant = user;
     });
   }
 
   approvalMerchant() {
     this.userService.approvalMerchant(this.id).subscribe(() => {
-      // this.router.navigate(['/admin/pending']);
+      this.socketService.sendNotification(`Đơn đăng ký Merchant của bạn đã được phê duyệt thành công, vui lòng đăng nhập lại để vào trang quản lý sản phẩm`, 1, this.id);
       this.getMerchantPending();
       this.sweetalert2();
     });
@@ -51,6 +54,7 @@ export class MerchantPendingComponent implements OnInit {
 
   blockMerchant() {
     this.userService.blockMerchant(this.id).subscribe(() => {
+      this.socketService.sendNotification(`Đơn đăng ký Merchant đã bị từ chối, lý do: thông tin của bạn chưa chính xác, vui lòng đọc lại hướng dẫn và các quy định khi đăng ký của hàng`, 1, this.id);
       this.getMerchantPending();
       this.sweetalert2();
     });

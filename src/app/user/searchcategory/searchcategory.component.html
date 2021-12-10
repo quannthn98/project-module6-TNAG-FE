@@ -7,18 +7,19 @@
   <div class="container">
     <div class="row d-none-m">
       <div class="col-md-12">
-        <div class="dropdown float-right">
-          <a class="btn btn-outline-info dropdown-toggle btn-sm border-white-btn" href="#" role="button"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sắp Xếp Theo: <span class="text-theme">Khoảng Cách</span> &nbsp;&nbsp;
-          </a>
-          <div class="dropdown-menu dropdown-menu-right shadow-sm border-0 ">
-            <a class="dropdown-item" href="#">Khoảng Cách</a>
-            <a class="dropdown-item" href="#">Không Có Phiếu Mua Hàng</a>
-            <a class="dropdown-item" href="#">Xếp Hạng</a>
-          </div>
-        </div>
-        <h4 class="font-weight-bold mt-0 mb-3">DANH MỤC<br><small class="h6 mb-0 ml-2">Tìm thấy {{userDto.length}} nhà hàng có loại đồ ăn: " {{nameCategory}}" bạn đang tìm
+        <!--        <div class="dropdown float-right">-->
+        <!--          <a class="btn btn-outline-info dropdown-toggle btn-sm border-white-btn" href="#" role="button"-->
+        <!--             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+        <!--            Sắp Xếp Theo: <span class="text-theme">Khoảng Cách</span> &nbsp;&nbsp;-->
+        <!--          </a>-->
+        <!--          <div class="dropdown-menu dropdown-menu-right shadow-sm border-0 ">-->
+        <!--            <a class="dropdown-item" href="#">Khoảng Cách</a>-->
+        <!--            <a class="dropdown-item" href="#">Không Có Phiếu Mua Hàng</a>-->
+        <!--            <a class="dropdown-item" href="#">Xếp Hạng</a>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <h4 class="font-weight-bold mt-0 mb-3">DANH MỤC<br><small class="h6 mb-0 ml-2">Tìm thấy {{userDto.length}} nhà
+          hàng có loại đồ ăn: "{{nameCategory}}" bạn đang tìm
         </small>
         </h4>
       </div>
@@ -49,17 +50,17 @@
                       <div class="form-group">
                         <i class="icofont-search"></i>
                         <input type="text" class="form-control"
-                               placeholder="Start typing to search...">
+                               placeholder="Tìm kiếm danh mục" [(ngModel)]="searchText" autocomplete="off"
+                               name="searchText">
                       </div>
                     </form>
-                    <div class="custom-control custom-checkbox" *ngFor="let c of categories; index as i">
-                      <div >
-                      <input (click)="changeCategory(c.id)" type="radio" name="category"  class="custom-control-input-blue" id="{{c.id}}" >
-                      <label class="custom-control-label" for="{{c.id}}">{{c.name}} </label>
+                    <div *ngFor="let c of categories | filter:searchText; index as i">
+                      <div>
+                        <input (click)="changeCategory(c.id)" class="custom-checkbox" type="radio" name="category"
+                               id="{{c.id}}">
+                        <label style="margin-left: 5px" for="{{c.id}}"> {{c.name}} </label>
                       </div>
                     </div>
-
-                    <div class="mt-2"><a href="#" class="link">See all</a></div>
                   </div>
                 </div>
               </div>
@@ -86,10 +87,10 @@
                     class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i
                     class="icofont-wall-clock"></i> 20–25 min</span></p>
                 </div>
-<!--                <div class="list-card-badge">-->
-<!--                  <span class="badge badge-success">OFFER</span> <small>65% off | Use Coupon-->
-<!--                  OSAHAN50</small>-->
-<!--                </div>-->
+                <!--                <div class="list-card-badge">-->
+                <!--                  <span class="badge badge-success">OFFER</span> <small>65% off | Use Coupon-->
+                <!--                  OSAHAN50</small>-->
+                <!--                </div>-->
               </div>
             </div>
           </div>
@@ -102,7 +103,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h5 class="m-0">Bạn có cửa hàng? <a href="login.html">Gia nhập với chúng tôi cùng cung cấp sản phẩm tốt nhất cho khách hàng</a></h5>
+        <h5 class="m-0">Bạn có cửa hàng? <a routerLink="/login">Gia nhập với chúng tôi cùng cung cấp sản phẩm tốt nhất
+          cho khách hàng</a></h5>
       </div>
     </div>
   </div>

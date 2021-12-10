@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {AuthenticationService} from '../../service/authentication.service';
+import {UserToken} from '../../model/userToken';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -7,8 +9,10 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./sidebar-admin.component.css']
 })
 export class SidebarAdminComponent implements OnInit {
+  currentUser: UserToken = {};
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
+    this.currentUser = authenticationService.currentUserValue;
   }
 
   ngOnInit() {

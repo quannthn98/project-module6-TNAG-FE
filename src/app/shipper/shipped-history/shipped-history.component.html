@@ -2,7 +2,7 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="orders" role="tabpanel"
          aria-labelledby="orders-tab">
-      <h4 class="font-weight-bold mt-0 mb-4">Đơn hàng đang chờ giao</h4>
+      <h4 class="font-weight-bold mt-0 mb-4">Lịch sử nhận hàng</h4>
       <ng-container *ngFor="let o of orders; index as i">
         <div class="bg-white card mb-4 order-list shadow-sm">
           <div class="gold-members p-4">
@@ -34,10 +34,11 @@
                   #{{o?.id}} <i class="icofont-clock-time ml-2"></i> {{o?.orderTime}}</p>
                 <hr>
                 <div class="float-right">
-                  <a class="btn btn-sm btn-outline-primary" (click)="getOrderDetail(i)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                  <a class="btn btn-sm btn-outline-primary" (click)="getOrderDetail(i)" data-bs-toggle="modal"
+                     data-bs-target="#staticBackdrop"><i
                     class="icofont-headphone-alt"></i> Chi tiết</a>
-                  <!--                    <a class="btn btn-sm btn-primary" href="detail.html"><i-->
-                  <!--                      class="icofont-refresh"></i> REORDER</a>-->
+                  <a class="btn btn-sm btn-success" *ngIf="o.orderStatus.name == 'SHIPPING'" data-toggle="modal" data-target="#exampleModal" (click)="getOrderDetail(i)"><i
+                    class="icofont-check-circled"></i> Xác nhận đã giao hàng</a>
                 </div>
                 <p class="mb-0 text-black text-primary pt-2"><span
                   class="text-black font-weight-bold"> Tổng:</span> VND {{o?.totalPayment}}
@@ -61,6 +62,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <h3>Chi tiết hóa đơn</h3>
         <table class="table table-striped">
           <thead>
           <tr>
@@ -74,7 +76,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let od of orderDetail; index as i">
-            <td>{{i+1}}</td>
+            <td>{{i + 1}}</td>
             <td>{{od?.dish.name}}</td>
             <td>{{od?.price}}</td>
             <td>{{od?.quantity}}</td>
@@ -84,13 +86,17 @@
           <tbody>
           <tr>
             <td colspan="4">Giảm giá</td>
-            <td> 0 </td>
+            <td> 0</td>
           </tr>
           <tr>
             <td colspan="4">Thanh toán</td>
             <td> {{totalPayment}} </td>
           </tr>
           </tbody>
+          <tr>
+            <td colspan="2">Tên người nhận:</td>
+            <td colspan="3">{{pickedOrder?.user?.username}}</td>
+          </tr>
           <tr>
             <td colspan="2">Địa chỉ giao hàng:</td>
             <td colspan="3">{{pickedOrder?.address.address}}</td>
@@ -103,4 +109,31 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xác nhận đã giao hàng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="name">Tên người nhận</label>
+        <input class="form-control" id="name" readonly value="{{pickedOrder?.address?.customerName}}">
+      </div>
+      <div class="modal-body">
+        <label for="address">Địa chỉ</label>
+        <input class="form-control" id="address" readonly value="{{pickedOrder?.address?.address}}">
+      </div>
+      <div class="modal-body">
+        <label for="total">Tổng tiền</label>
+        <input class="form-control" id="total" readonly value="{{pickedOrder?.totalPayment}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delivered()">Đã giao hàng</button>
+      </div>
+    </div>
+  </div>
+</div>
