@@ -29,12 +29,12 @@
                   </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 form-group">
-                  <input type="text" placeholder="Chọn món theo sở thích"
+                  <input type="text" [(ngModel)]="userService.searchValue" placeholder="Chọn món theo sở thích"
                          class="form-control form-control-lg">
                   <!-- <a class="locate-me" href="#"><i class="icofont-ui-pointer"></i> Locate Me</a> -->
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-12 form-group">
-                  <a href="listing.html" class="btn btn-primary btn-block btn-lg btn-gradient">Tìm
+                  <a (click)="searchMerchantByName()" class="btn btn-primary btn-block btn-lg btn-gradient">Tìm
                     kiếm</a>
 
                 </div>

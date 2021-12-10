@@ -18,6 +18,8 @@ const API_URL = `${environment.apiUrl}`;
 export class UserService {
   merchants: MerchantProfile[] = [];
   selectedCategoryId: number;
+  searchValue;
+  searchedMerchant: User[] = [];
 
   constructor(private http: HttpClient) {
   }
