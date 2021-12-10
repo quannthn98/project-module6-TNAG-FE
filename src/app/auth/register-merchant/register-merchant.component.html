@@ -50,7 +50,7 @@
                       </p>
                     </ng-container>
                   </div>
-                  <div class="form-label-group mb-4">
+                  <div class="form-label-group mb-2">
                     <input #openHours="ngModel" type="text" id="openHours" class="form-control"
                            [ngModel]="merchantInfo.openHours"
                            name="openHours" placeholder="Giờ mở cửa"
@@ -64,6 +64,7 @@
                       </p>
                     </ng-container>
                   </div>
+
                   <div class="form-label-group mb-4">
                     <input #description="ngModel" type="text" id="description" class="form-control"
                            [ngModel]="merchantInfo.description"
@@ -113,7 +114,8 @@
                   </div>
                   <div class="form-label mb-4">
                     <label class="form-label-group" for="thumbnail">Ảnh thumbnail cửa hàng</label>
-                    <input #thumbnail="ngModel" type="file" id="thumbnail" class="form-control" [ngModel]="merchantInfo.thumbnail"
+                    <input #thumbnail="ngModel" type="file" id="thumbnail" class="form-control"
+                           [ngModel]="merchantInfo.thumbnail"
                            name="thumbnail" placeholder="Ảnh thumbnail cửa hàng"
                            (change)="handleThumbnailInput($event)"
                            [ngClass]="[(thumbnail.valid) ? 'form-control is-valid' :((thumbnail.dirty || thumbnail.touched || formRegisterMerchant.submitted)? 'form-control is-invalid':'form-control')]"

@@ -11,6 +11,7 @@ import {OrderService} from '../order.service';
 import {AlertService} from '../alert.service';
 import {Message} from '../../model/message';
 import {MessageService} from '../message.service';
+import {User} from '../../model/user';
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -26,6 +27,7 @@ export class SocketService {
   orders: Order[] = [];
   notifications: Notification[] = [];
   notification: Notification;
+  shipper: User;
 
   constructor(private authenticationService: AuthenticationService,
               private notificationService: NotificationService,
@@ -80,7 +82,6 @@ export class SocketService {
       });
     });
   }
-
 
   disconnect() {
     if (this.stompClient != null) {

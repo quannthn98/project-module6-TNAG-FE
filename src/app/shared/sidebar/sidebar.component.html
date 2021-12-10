@@ -7,6 +7,24 @@
   <div class="sidebar">
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-header">THÔNG TIN</li>
+        <li class="nav-item">
+          <a routerLink="{{currenUser.id}}" class="nav-link">
+            <i class="nav-icon fas fa-store-alt"></i>
+            <p>
+              Thông tin cửa hàng
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/merchant/{{currenUser.id}}/order">
+            <!--          <a routerLink="merchant/order" class="nav-link">-->
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+              Đơn hàng
+            </p>
+          </a>
+        </li>
         <li class="nav-header">QUẢN LÝ CỬA HÀNG</li>
         <li class="nav-item">
           <a routerLink="/merchant" class="nav-link">
@@ -24,6 +42,7 @@
             </p>
           </a>
         </li>
+        <li class="nav-header">COUPON</li>
         <li class="nav-item">
           <a routerLink="coupon" class="nav-link">
             <i class="nav-icon fas fa-gift"></i>
@@ -40,23 +59,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a routerLink="{{currenUser.id}}" class="nav-link">
-            <i class="nav-icon fas fa-store-alt"></i>
-            <p>
-              Thông tin cửa hàng
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/merchant/{{currenUser.id}}/order">
-<!--          <a routerLink="merchant/order" class="nav-link">-->
-            <i class="nav-icon fas fa-file-invoice-dollar"></i>
-            <p>
-              Đơn hàng
-            </p>
-          </a>
-        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

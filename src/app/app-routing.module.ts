@@ -10,6 +10,8 @@ import {MerchantGuard} from './auth/helper/merchant-guard';
 import {LayoutUserDetailComponent} from './layout/layout-user-detail/layout-user-detail.component';
 import {RegisterShipperComponent} from './auth/register-shipper/register-shipper.component';
 import {LayoutShipperComponent} from './layout/layout-shipper/layout-shipper.component';
+import {ShipperGuard} from './auth/helper/shipper-guard';
+import {UserGuard} from './auth/helper/user-guard';
 
 const routes: Routes = [
   {
@@ -48,6 +50,7 @@ const routes: Routes = [
   {
     path: 'shipper',
     component: LayoutShipperComponent,
+    canActivate: [ShipperGuard],
     loadChildren: () => import('./shipper/shipper.module').then(module => module.ShipperModule)
   },
   {

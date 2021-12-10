@@ -63,14 +63,14 @@ export class CheckoutComponent implements OnInit {
 
   getCoupon() {
     this.couponService.findByInputCode(this.code).subscribe(data => {
-      if (data.merchantProfile.id != this.merchantProfile.id) {
-        this.alertService.alertError('Coupon không hợp lệ');
-      } else if (this.estimatePayment > this.coupon.discountCondition) {
+      if (data.merchantProfile.id !== this.merchantProfile.id) {
+        this.alertService.alertError('Mã giảm giá không hợp lệ');
+      } else if (this.estimatePayment > data.discountCondition) {
         this.coupon = data;
         this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
-        this.alertService.alertSuccess('Đã áp dụng coupon cho đơn hàng này');
+        this.alertService.alertSuccess('Đã áp dụng mã giảm gá cho đơn hàng này');
       } else {
-        this.alertService.alertError('Đơn hàng của bạn không đủ điều kiện sử dụng coupon này');
+        this.alertService.alertError('Đơn hàng của bạn không đủ điều kiện sử dụng mã giảm giá này');
       }
     });
   }

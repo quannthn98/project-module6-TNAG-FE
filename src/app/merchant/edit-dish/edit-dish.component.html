@@ -41,7 +41,7 @@
                       <div class="mb-3">
                         <label for="price" class="form-label">Giá:</label>
                         <input type="text" #price="ngModel" class="form-control" id="price"
-                               [ngModel]="dish?.price"
+                               [ngModel]="dish?.price | number"
                                [ngClass]="[(price.valid && (price.touched || price.dirty|| formEditDish.submitted)) ? 'form-control is-valid' :((price.dirty || price.touched || formEditDish.submitted)? 'form-control is-invalid':'form-control')]"
                                name="price" required>
                         <ng-container
