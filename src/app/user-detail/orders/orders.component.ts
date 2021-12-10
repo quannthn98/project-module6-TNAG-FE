@@ -34,5 +34,4 @@ export class OrdersComponent implements OnInit {
     this.discount = this.orders[index].coupon.discount;
   }
 
-
 }
