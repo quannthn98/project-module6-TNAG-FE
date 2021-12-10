@@ -20,7 +20,8 @@ export class ShipperRegisterComponent implements OnInit {
   profession: string;
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -49,6 +50,7 @@ export class ShipperRegisterComponent implements OnInit {
     formData.append('vehicleOwnershipCertificate', this.ownerCertificate);
     formData.append('profession', this.profession);
     this.userService.shipperRegister(formData).subscribe(data => {
+      this.alertService.alertSuccess('xong roi b oi');
       console.log(data);
     });
   }

@@ -87,7 +87,7 @@ export class UserService {
   }
 
   shipperRegister(registerForm): Observable<any> {
-    return this.http.post(`${API_URL}/usersư/register/shipper`, registerForm);
+    return this.http.post(`${API_URL}/users/register/shipper`, registerForm);
   }
 
   getUserByCategory(id: number): Observable<Userdto[]> {
