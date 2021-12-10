@@ -6,6 +6,7 @@ import {MerchantService} from '../../service/merchant.service';
 import {AuthenticationService} from '../../service/authentication.service';
 import {User} from '../../model/user';
 import {Router} from '@angular/router';
+import {SocketService} from '../../service/socket/socket.service';
 
 @Component({
   selector: 'app-register-merchant',
@@ -27,11 +28,13 @@ export class RegisterMerchantComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private merchantService: MerchantService,
               private authenticationService: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private socketService: SocketService) {
     this.user = authenticationService.currentUserValue;
   }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
     this.getAllCategories();
   }
 
@@ -60,6 +63,9 @@ export class RegisterMerchantComponent implements OnInit {
     formData.append('cover', this.cover);
     formData.append('thumbnail', this.thumbnail);
     this.merchantService.register(this.user.id, formData).subscribe(() => {
+      if (this.socketService.stompClient != null) {
+        this.socketService.sendNotification(`Có đơn đăng ký cửa hàng mới từ user ${this.user.username}`, this.user.id, 1);
+      }
       this.router.navigate(['/']);
     });
   }

@@ -38,20 +38,14 @@
               <tbody>
               <tr *ngFor="let d of dishes; index as i" data-bs-toggle="modal"
                   data-bs-target="#modalDetailDish" (click)="findDishById(d?.id)">
-                <th scope="row">{{i}}</th>
+                <th scope="row">{{i + 1}}</th>
                 <td>{{d?.name}}</td>
                 <td>{{d?.description}}</td>
                 <td>{{d?.status == true ? "Còn hàng" : "Hết hàng"}}</td>
               </tr>
               </tbody>
-              <tfoot>
-              <tr>
-                <td colspan="4">
-                  <button type="button" class="btn btn-secondary" [routerLink]="['/admin/merchant']">Quay lại</button>
-                </td>
-              </tr>
-              </tfoot>
             </table>
+            <button type="button" class="btn btn-outline-secondary ml-2 mb-2" [routerLink]="['/admin/merchant']">Quay lại</button>
           </div>
 
         </div>
