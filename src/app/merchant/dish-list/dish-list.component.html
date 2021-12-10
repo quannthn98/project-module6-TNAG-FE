@@ -18,11 +18,12 @@
         <div class="card">
           <div class="card-header border-0">
             <h3 class="card-title">Danh sách món ăn</h3>
-           <div class="float-right">
-             <form>
-               <input (input)="getAllDishByMerchant()" name="q" class="form-control" type="search" style="max-width: 300px" [(ngModel)]="searchText" placeholder="Tìm Kiếm Món Ăn">
-             </form>
-           </div>
+            <div class="float-right">
+              <form>
+                <input (input)="getAllDishByMerchant()" name="q" class="form-control" type="search"
+                       style="max-width: 300px" [(ngModel)]="searchText" placeholder="Tìm Kiếm Món Ăn">
+              </form>
+            </div>
           </div>
           <div class="card-body table-responsive p-0">
             <table class="table table-hover table-bordered">
@@ -42,11 +43,16 @@
                 <td>{{d?.name}}</td>
                 <td>{{d?.price | number}}</td>
                 <td>{{d?.description}}</td>
-                <td >{{d?.status == true ? "Còn hàng": "Hết hàng"}}</td>
+                <td>{{d?.status == true ? "Còn hàng" : "Hết hàng"}}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-success ml-2" routerLink="dish/edit/{{d.id}}"><i class="far fa-edit"></i></button>
-                  <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)"><i class="far fa-trash-alt"></i></button>
-                  <button type="button" class="btn btn-outline-info ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="findDishById(d.id)"><i class="fas fa-info-circle"></i></button>
+                  <button type="button" class="btn btn-outline-success ml-2" routerLink="dish/edit/{{d.id}}"><i
+                    class="far fa-edit"></i></button>
+                  <button type="button" class="btn btn-outline-danger ml-2" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal2" (click)="showConfirmDelete(d.id)"><i
+                    class="far fa-trash-alt"></i></button>
+                  <button type="button" class="btn btn-outline-info ml-2" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal3" (click)="findDishById(d.id)"><i
+                    class="fas fa-info-circle"></i></button>
                 </td>
               </tr>
               </tbody>
@@ -69,11 +75,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h5>Tên Món: {{dish?.name}}</h5>
-        <h6>Hình Ảnh: <img src="http://localhost:8080/{{dish?.image}}" width="50%" alt="Ảnh món"> </h6>
-        <h6>Mô tả: {{dish?.description}}</h6>
-        <h6>Quán Ăn: {{dish?.merchant?.merchantProfile?.name}} </h6>
-        <h6>Tình Trạng: {{dish?.status == true ? "Còn hàng" : "Hết hàng"}} </h6>
+        <div class="row">
+          <div class="col-6">
+            <h6>Hình Ảnh: </h6>
+            <img src="http://localhost:8080/{{dish?.image}}" class="img-thumbnail" width="50%" height="50%"
+                 alt="Ảnh món">
+          </div>
+          <div class="col-6">
+            <h5>Tên Món: {{dish?.name}}</h5>
+            <h6>Mô tả: {{dish?.description}}</h6>
+            <h6>Quán Ăn: {{dish?.merchant?.merchantProfile?.name}} </h6>
+            <h6>Tình Trạng: {{dish?.status == true ? "Còn hàng" : "Hết hàng"}} </h6>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -94,7 +109,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                <button (click)="deleteDish()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xóa</button>
+        <button (click)="deleteDish()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xóa</button>
       </div>
     </div>
   </div>
