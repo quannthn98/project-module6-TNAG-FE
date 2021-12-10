@@ -92,9 +92,9 @@ export class CheckoutComponent implements OnInit {
         console.log(data.merchantProfile);
         this.merchant = data;
         this.merchantProfile = data.merchantProfile;
-      this.couponService.getAllByMerchant(this.merchantProfile.id).subscribe((data) => {
-        this.coupons = data;
-      });
+        this.couponService.getAllByMerchant(this.merchantProfile.id).subscribe((data) => {
+          this.coupons = data;
+        });
       }, error => {
         console.log(error);
         alert(error);
