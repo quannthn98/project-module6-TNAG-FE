@@ -18,44 +18,58 @@
         <div class="card">
           <div class="card-header border-0">
             <h3 class="card-title">Thông tin cửa hàng của bạn</h3>
+            <button type="button" class="btn btn-outline-success float-right" routerLink="edit">
+              <i class="fas fa-edit"></i>
+            </button>
           </div>
-          <div class="card-body table-responsive p-0">
-            <table class="table table-striped table-valign-middle">
-              <thead>
-              <tr>
-                <th>Tên cửa hàng</th>
-                <th>Tên người đăng ký</th>
-                <th>Địa chỉ</th>
-                <th>Hotline</th>
-                <th>Giờ mở cửa</th>
-                <th>Tùy chọn</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  {{user.merchantProfile?.name}}
-                </td>
-                <td>
-                  {{user.userProfile?.fullName}}
-                </td>
-                <td>
-                  {{user.merchantProfile?.address}}
-                </td>
-                <td>
-                  {{user.merchantProfile?.hotline}}
-                </td>
-                <td>
-                  {{user.merchantProfile?.openHours}}
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary" routerLink="edit">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="card ">
+                  <div class="card-body">
+                    <h5>Ảnh đại diện cửa hàng</h5>
+                    <img style="width: 50%;height: 50%" src="http://localhost:8080/{{user?.merchantProfile?.avatar}}"
+                         class="card-img-top" alt="...">
+                    <hr>
+                    <h5>Ảnh bìa cửa hàng</h5>
+                    <img style="width: 50%;height: 50%" src="http://localhost:8080/{{user?.merchantProfile?.cover}}"
+                         class="card-img-top" alt="...">
+                    <hr>
+                    <h5>Ảnh thumbnail cửa hàng</h5>
+                    <img style="width: 50%;height: 50%" src="http://localhost:8080/{{user?.merchantProfile?.thumbnail}}"
+                         class="card-img-top" alt="...">
+                    <hr>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Tên cửa hàng</h5>
+                    <p>
+                      {{user.merchantProfile?.name}}
+                    </p>
+                    <h5>Tên người dùng đăng ký</h5>
+                    <p>
+                      {{user.userProfile?.fullName}}
+                    </p>
+                    <h5>Địa chỉ</h5>
+                    <p>
+                      {{user.merchantProfile?.address}}
+                    </p>
+                    <h5>Hotline</h5>
+                    <p>
+                      {{user.merchantProfile?.hotline}}
+                    </p>
+                    <h5>Giờ mở cửa</h5>
+                    <p>
+                      {{user.merchantProfile?.openHours}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -64,4 +78,3 @@
 </div>
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
-

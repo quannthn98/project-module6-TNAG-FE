@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
   shippingCost = 15000;
   orderForm: any;
   selectedAddressId: number;
-
+  coupons: Coupon[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private cartService: CartService,
@@ -49,6 +49,7 @@ export class CheckoutComponent implements OnInit {
       this.getMerchantById();
       this.getCartByMerchant();
       this.getUserDeliverAddress();
+      this.getAllCoupon();
     });
   }
 
@@ -56,10 +57,14 @@ export class CheckoutComponent implements OnInit {
     this.socketService.connectToNotify();
   }
 
+  getAllCoupon() {
+
+  }
+
   getCoupon() {
     this.couponService.findByInputCode(this.code).subscribe(data => {
-      if (data.merchantProfile.id != this.merchantProfile.id){
-         this.alertService.alertError('Coupon không hợp lệ')
+      if (data.merchantProfile.id != this.merchantProfile.id) {
+        this.alertService.alertError('Coupon không hợp lệ');
       } else if (this.estimatePayment > this.coupon.discountCondition) {
         this.coupon = data;
         this.totalPayment = this.estimatePayment + this.shippingCost - this.coupon.discount;
@@ -87,6 +92,9 @@ export class CheckoutComponent implements OnInit {
         console.log(data.merchantProfile);
         this.merchant = data;
         this.merchantProfile = data.merchantProfile;
+      this.couponService.getAllByMerchant(this.merchantProfile.id).subscribe((data) => {
+        this.coupons = data;
+      });
       }, error => {
         console.log(error);
         alert(error);
