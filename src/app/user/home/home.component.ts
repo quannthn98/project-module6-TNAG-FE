@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../service/user.service';
-import {MerchantProfile} from '../../model/merchant-profile';
 import {User} from '../../model/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,8 @@ import {User} from '../../model/user';
 export class HomeComponent implements OnInit {
   merchants: User[] = [];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private router: Router) {
     this.getAllMerchant();
   }
 
@@ -24,6 +25,13 @@ export class HomeComponent implements OnInit {
       console.log(this.merchants);
     }, error => {
       console.log(error);
+    });
+  }
+
+  searchMerchantByName() {
+    this.userService.findAllMerchantByName(this.userService.searchValue).subscribe((data: any) => {
+      this.userService.searchedMerchant = data.content;
+      this.router.navigateByUrl('/searchCategory');
     });
   }
 }

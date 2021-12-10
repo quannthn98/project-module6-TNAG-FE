@@ -120,7 +120,7 @@
                              alt="image">
                         <div class="media-body">
                           <ng-container *ngIf="d?.status == true">
-                            <h6 class=" float-right me-3 mt-2">{{d?.price}} VNĐ</h6>
+                            <h6 class=" float-right me-3 mt-2">{{d?.price | number}} VNĐ</h6>
                           </ng-container>
                           <h6 class="mb-1">{{d.name}}</h6>
                           <!--                          <p class="text-gray mb-0">150.000 (1kg)</p>-->
@@ -208,7 +208,7 @@
             <p class="mb-4 text-white">{{this.cartDetails.length}} sản phẩm</p>
             <div *ngFor="let c of cartDetails" class="bg-white rounded shadow-sm mb-2">
               <div class="gold-members p-2 border-bottom">
-                <p class="text-gray mb-0 float-right ml-2">{{c.price}}</p>
+                <p class="text-gray mb-0 float-right ml-2">{{c.price | number}}</p>
                 <span class="count-number float-right">
                 <ng-container *ngIf="c.dish.status == true">
                   <button (click)="addDishToCart(c.dish.id, '-')"
@@ -235,13 +235,12 @@
             <div class="mb-2 bg-white rounded p-2 clearfix">
               <img class="img-fluid float-left" src="assets/static/img/wallet-icon.png">
               <h6 class="font-weight-bold text-right mb-2">Tổng đơn: <span
-                class="text-danger">{{estimatePayment}}</span> vnđ</h6>
-              <h6 class="font-weight-bold text-right mb-2">Giảm giá: <span
-                class="text-danger">0</span> vnđ</h6>
-              <h6 class="font-weight-bold text-right mb-2">Thanh toán: <span
-                class="text-danger">{{estimatePayment}}</span> vnđ</h6>
+                class="text-danger">{{estimatePayment | number}}</span> vnđ</h6>
+<!--              <h6 class="font-weight-bold text-right mb-2">Giảm giá: <span-->
+<!--                class="text-danger">0</span> vnđ</h6>-->
+              <h6 class="font-weight-bold text-right mb-2">Tạm tính: <span
+                class="text-danger">{{estimatePayment | number}}</span> vnđ</h6>
               <!-- <p class="seven-color mb-1 text-right">Extra charges may apply</p> -->
-              <p class="text-black mb-0 text-right">Tiết kiệm 30.000 vnđ</p>
             </div>
             <button (click)="goToCheckout()"  class="btn btn-success btn-block btn-lg">
               Thanh toán

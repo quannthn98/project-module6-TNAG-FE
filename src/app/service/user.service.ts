@@ -18,6 +18,8 @@ const API_URL = `${environment.apiUrl}`;
 export class UserService {
   merchants: MerchantProfile[] = [];
   selectedCategoryId: number;
+  searchValue;
+  searchedMerchant: User[] = [];
 
   constructor(private http: HttpClient) {
   }
@@ -87,7 +89,7 @@ export class UserService {
   }
 
   shipperRegister(registerForm): Observable<any> {
-    return this.http.post(`${API_URL}/usersư/register/shipper`, registerForm);
+    return this.http.post(`${API_URL}/users/register/shipper`, registerForm);
   }
 
   getUserByCategory(id: number): Observable<Userdto[]> {

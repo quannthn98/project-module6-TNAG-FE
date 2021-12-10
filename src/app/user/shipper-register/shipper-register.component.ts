@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ShipperProfile} from '../../model/shipper-profile';
-import {UserToken} from '../../model/userToken';
 import {AuthenticationService} from '../../service/authentication.service';
 import {UserService} from '../../service/user.service';
-import {Router} from '@angular/router';
 import {AlertService} from '../../service/alert.service';
+import {SocketService} from '../../service/socket/socket.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shipper-register',
@@ -20,9 +20,15 @@ export class ShipperRegisterComponent implements OnInit {
   profession: string;
 
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private alertService: AlertService,
+              private socketService: SocketService,
+              private authenticationService: AuthenticationService,
+              private router: Router) {
+  }
 
   ngOnInit() {
+    this.socketService.connectToNotify();
   }
 
   handleDriverLicenseInput(event) {
@@ -49,6 +55,9 @@ export class ShipperRegisterComponent implements OnInit {
     formData.append('vehicleOwnershipCertificate', this.ownerCertificate);
     formData.append('profession', this.profession);
     this.userService.shipperRegister(formData).subscribe(data => {
+      this.alertService.alertSuccess('Đăng ký thành công, yêu cầu của bạn sẽ được phê duyệt trong 1 ngày làm việc');
+      this.socketService.sendNotification(`Đơn yêu cầu làm đối tác vận chuyển từ shipper ${this.authenticationService.currentUserValue.username}`, this.authenticationService.currentUserValue.id, 1);
+      this.router.navigateByUrl('/');
       console.log(data);
     });
   }
