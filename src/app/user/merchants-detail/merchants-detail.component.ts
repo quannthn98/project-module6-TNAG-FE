@@ -24,6 +24,7 @@ export class MerchantsDetailComponent implements OnInit {
   id: number;
   estimatePayment = 0;
   coupons: Coupon[] = [];
+  searchText: any;
 
   constructor(private userService: UserService,
               private router: Router,
@@ -96,5 +97,14 @@ export class MerchantsDetailComponent implements OnInit {
     } else {
       this.router.navigateByUrl(`/checkout/${this.id}`);
     }
+  }
+
+  getAllDishByMerchantVer2() {
+    this.dishService.getAllDish(this.id, this.searchText).subscribe((data: any) => {
+        this.dishes = data.content;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 }
