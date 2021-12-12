@@ -27,7 +27,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
         SharedModule,
         FormsModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyCP74ZUbCJ6zKeNqbh3LNej4nDX_VmtvNA'
+            apiKey: 'AIzaSyDsd83mCgGmImPHE28r6J1pYPGAicXSd-o'
         }),
         AgmDirectionModule,
         Ng2SearchPipeModule

@@ -51,8 +51,14 @@
         <ng-container *ngIf="currentUser != null">
           <li class="nav-item dropdown dropdown-cart" style="width: 200px">
             <a class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="rounded-pill mx-auto" style="height: 30px; width: 30px"
-                   src="https://i.pinimg.com/736x/b6/bb/1f/b6bb1f98d48a1402a1b33c6a6da0c276.jpg">
+              <ng-container *ngIf="currentUser.avatar === '' || currentUser.avatar === null || currentUser.avatar === undefined">
+                <img class="rounded-pill mx-auto" style="height: 30px; width: 30px"
+                     src="https://i.pinimg.com/736x/b6/bb/1f/b6bb1f98d48a1402a1b33c6a6da0c276.jpg">
+              </ng-container>
+              <ng-container *ngIf="currentUser.avatar">
+                <img class="rounded-pill mx-auto" style="height: 30px; width: 30px"
+                     src="http://localhost:8080/{{currentUser.avatar}}">
+              </ng-container>
               <span class="m-3 dropdown-toggle">{{currentUser.username}}</span>
               <!--          <span class="badge badge-success">5</span>-->
             </a>
